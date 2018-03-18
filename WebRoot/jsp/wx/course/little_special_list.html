@@ -1,0 +1,602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!-- 轮播 -->
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/swiper.min.css"/>
+	<link rel="stylesheet" href="../../../css/tanchu.css" />
+
+	<link rel="stylesheet" href="../../../css/wx/video/class_list2.css" type="text/css">
+	
+  </head>
+  
+  <body style="overflow-x:hidden; margin: 0px; ">
+  	  
+  	 	<!-- 轮播 -->
+		<div class="swiper-container" style="margin: 0px; padding: 0px; height: 160px;">
+		<ul class="swiper-wrapper" id="lunbo_list">
+			<!-- <li class="swiper-slide" >
+				<a href="http://www.baidu.com"  class="custom-url">
+					<img src="../../../js/lunbo/img/1.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+			  -->
+		</ul>
+		<div class="swiper-pagination"></div>
+	</div>
+	  <!-- 轮播 -->
+  	   
+     <div   id="div_video" class="top_box">
+     
+     </div>
+     
+     <div class="more" id="more"  onclick="get_more();">加载更多</div>
+     
+     
+       <div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>  
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+	<script type="text/javascript" src="../../../js/lunbo/js/swiper-3.2.5.min.js"></script>
+<script type="text/javascript" src="../../../js/lunbo/js/banner-swiper.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+  	
+//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+  var page_num =1;
+  var page_count =1;
+  
+  var share_ul="6";
+    
+  
+  
+  $(function(){
+	  $("#myload").show();
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			get_data(1); 
+		}
+		 
+	}
+  
+  
+
+  function get_more(){
+   	
+   	var page = page_num+1;
+   	
+   	get_data(page);
+  }
+  
+  /*初始化轮播*/
+  var pagi = null, time = null, loo = null;
+  var swiper;
+
+  function init_lunbo () {
+  	if ($(".swiper-wrapper .swiper-slide").length > 1) {
+  		pagi = ".swiper-pagination";
+  		time = "2500";
+  		loo = true;
+  	} else {
+  		pagi = null;
+  		time = null;
+  		loo = null;
+  	}
+  	
+  	swiper = new Swiper('.swiper-container', {
+  		pagination : pagi,
+  		paginationClickable : true,
+  		spaceBetween : 0,
+  		centeredSlides : true,
+  		autoplay : time,
+  		loop : loo,
+  		autoplayDisableOnInteraction : false
+  	});
+  } 
+  /*初始化轮播*/
+  	
+  	function get_data(page){
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'/course/wx_special123.do',
+  	  		dataType:"json",
+  	  		data:{"open_id":openid,"page":page},
+  	  		success: function(data){
+  	  		 $("#myload").hide();
+  	  		  //显示轮播 
+  	  		   
+  	  		  if(page_num==1){
+  	  			var lunbo_list = data[0].lunbo_list; 
+		  			if(lunbo_list.length > 0){ 
+		  				
+		  				$("#lunbo_list").show();
+		  				
+		  				var lunbo ="";
+		  				for(var i=0;i< lunbo_list.length;i++){
+		  					var n = lunbo_list[i].name; 
+	  	  					if(n.length > 10){
+	  	  						n = n.substring(0,10)+"...";
+	  	  					}
+
+		  					var link ="";
+		  					if(lunbo_list[i].link != null && lunbo_list[i].link !=""){ 
+		  						link =" href='"+lunbo_list[i].link+"' "; 
+		  					}
+		  					
+		  					var l ="<li class='swiper-slide'> <a class='custom-url' "+link+"> <img src='"+pt_path+lunbo_list[i].img+"'>"
+	  						+"<div>"+n+"<span>"+lunbo_list[i].cdate+"</span></div> </a> </li>";
+	  						
+							lunbo = lunbo+l; 
+		  				}
+		  				
+		  				$("#lunbo_list").html(lunbo);
+		  				
+		  				init_lunbo();
+		  				
+		  			}else{
+		  				
+		  				$("#lunbo_list").hide();
+		  			}  
+  	  			  
+  	  		  }
+  		  			
+  	  			
+  	  			var course=data[0].course_list;
+  	  			var user=data[0].user;
+  	  			var special=data[0].special.list;
+  	  			var introduce= "";     var a=""; var b="";
+  	  		page_num =data[0].special.pageNum;//当前页
+   			page_count =data[0].special.pageCount;//总页数
+   			
+   			 
+   			
+   			if(page_num >= page_count){
+   				$("#more").hide();
+   			}else{
+   				$("#more").show();
+   			}
+   		 
+  	  			if(user.role==0&&user.state==0){
+  	  			  
+  	  			var html2=""; var z=""; var zz=""; var zzz="";
+  	  				for(var i=0; i<special.length;i++){
+  	  					   
+  						if(special[i].special_name!= null){
+  					
+  							if(special[i].special_name.length>=8){
+  								introduce=special[i].special_name.substring(0,8)+"";
+  							 
+  							}else{
+  								
+  								introduce=special[i].special_name;
+  							}
+  	  					} 
+  						
+  						 
+  	  			
+  						
+  							
+  						var a="";
+  	  					
+  	  					if(special[i].isBuy!=1){
+  	  						
+  	  					if(special[i].special_name.length>=8){
+								
+								name_size="<h1 style='width:70%;'>"+special[i].special_name.substring(0,8)+" </h1>";
+							}else{
+								
+							name_size="<h1 style='width:70%;'>"+special[i].special_name+"</h1>";
+							}	
+  	  							
+  	  							 
+  	  							if(special[i].text.length>10){
+  	  								
+  	  								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+  	  							}else{
+  	  								a="<div class='b_numb'>"+special[i].text+"</div>";
+  	  							}
+  	  							
+  	  							
+  	  							z="<div class='b_numb'>"+special[i].teacher+"</div>";
+  		  						zz="<div style='display:block;float:right;width:30%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>￥"+toDecimal2(special[i].price/100)+"/年</div>";
+  		  						zzz="<div >时长:"+special[i].url.length+"节课</div>";
+  		  						
+  		  						html2+="<div class='column2' onclick='detail(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' special_type='"+special[i].type+"'  >"
+  		  						+"<div class='b_bg'>"
+  		  						+"<img src='"+special[i].img+"'>"
+  		  						 
+  		  						+"</div>"
+  		  						+"<div class='b_text'>"
+  		  						+"<div class='b_title'>"
+  		  						+""+name_size+"" 
+  		  						+""+zz+""
+  		  						+"<div class='clearfix'></div></div>" 		  						
+  		  						+""+a+""
+  		  						+""+z+""
+  		  						+""+zzz+""
+  		  						+"<div class='mes'>"								   		  										  							
+  		  						+"<div class='b_numb'  >"+special[i].order_count+"人订阅</div>"	
+  		  						+"<div class='clearfix'></div></div></div>"		
+  		  						+"<div class='clearfix'></div></div>";	
+  	  						
+  	  					}else if(special[i].isBuy==1){
+  	  						
+  	  					if(special[i].special_name.length>=8){
+							
+							name_size="<h1  style='width:70%;'>"+special[i].special_name.substring(0,8)+"  </h1>";
+						}else{
+							
+						name_size="<h1  style='width:70%;'>"+special[i].special_name+"</h1>";
+						}
+  								 
+  	  							/* z="<span style='background:#2dc158;'>已购买</span>"; */
+  	  							
+  	  						 
+						
+						if(special[i].text.length>10){
+							
+							a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+						}else{
+							a="<div class='b_numb'>"+special[i].text+"</div>";
+						}
+						
+							z="<div class='b_numb'>"+special[i].teacher+"</div>";
+	  						zz="<div style='display:block;float:right;width:30%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>￥"+toDecimal2(special[i].price/100)+"/年</div>";
+	  						zzz="<div >时长:"+special[i].url.length+"节课</div>";
+  		  						
+  		  						html2+="<div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' special_type='"+special[i].type+"'>"
+  		  						+"<div class='b_bg'>"
+  		  						+"<img src='"+special[i].img+"'>"
+  		  					/* 	+""+a+""
+  		  						+""+b+"" */
+  		  						+"</div>"
+  		  						+"<div class='b_text'   >"
+  		  						+"<div class='b_title'>"
+  		  						+""+name_size+""	
+  		  						+""+zz+""	
+  		  						+"<div class='clearfix'></div></div>"	
+  		  						+""+a+""
+  		  						+""+z+""
+		  						+""+zzz+""
+  		  						+"<div class='mes'>"								 		
+  		  				 		+"<div class='b_numb'  >"+special[i].order_count+"人订阅</div>"	
+  		  						+"<div class='clearfix'></div></div></div>"		
+  		  						+"<div class='clearfix'></div></div>";	
+  		  						
+  	  					}/* else if(special[i].is_free==-1){
+  	  						
+  	  					if(special[i].special_name.length>=8){
+							
+							name_size="<h1>"+special[i].special_name.substring(0,8)+" ...  </h1>";
+						}else{
+							
+						name_size="<h1>"+special[i].special_name+"</h1>";
+						}
+  		  						zz="<div class='price'>限时免费</div>";
+  		  						zzz="<div class='doc'>主讲："+special[i].teacher+"</div>";html2+="<div class='column2' onclick='free_sepcial(this);'special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' >"
+  		  						+"<div class='b_bg'>"
+  		  						+"<img src='"+special[i].img+"'>"
+  		  						+""+a+""
+  		  						+""+b+""
+  		  						+"</div>"
+  		  						+"<div class='b_text'   >"
+  		  						+"<div class='b_title'>"
+  		  						+""+name_size+""	  						 	
+  		  						+"<div class='clearfix'></div></div>"	
+  		  						+""+zz+""
+  		  						+""+zzz+""
+  		  						+"<div class='mes'>"								 
+  		  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  		  						+"<div class='b_numb'>"+special[i].date.substring(0,10)+"</div>"		
+  		  						+"<div class='view2'>"	
+  		  						+"<img src='../../../images/hot/view.png'></div>"	
+  		  						+"<div class='b_numb'>"+special[i].watch+"</div>"	
+  		  						+"<div class='clearfix'></div></div></div>"		
+  		  						+"<div class='clearfix'></div></div>";
+  		  	  			
+  	  					} */
+  					 
+  	  			}
+  	  			 
+  	  				 
+  	  			$("#div_video").append(html2);
+  	  				
+  	  		}else if(user.role==1&&user.state==0){
+  	  			
+  	  			var html="";
+  	  			var html2="";
+  	  				for(var i=0; i<special.length;i++){
+  	  					 
+  	  						var introduce= "";
+  	  				 
+  	  						if(special[i].introduce!= null){
+  	  					
+  	  						if(special[i].introduce.length>8){
+  	  							introduce=special[i].introduce.substring(0,12)+"...";
+  	  							 
+  	  						}else{
+  	  						introduce=special[i].introduce+"";
+  	  						}
+  	  					}  		 				
+  	  				 
+  	  				 
+  	  					/* if(special[i].is_xin==1){
+  								a="<div class='list'>新</div>";
+  							}	
+  							if(special[i].type==1){
+  								b="<div class='icon' style='background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+  								
+  							}else{    
+  								 
+  							b="<div class='icon' style='background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+  							
+  							} */
+  							var a="";	
+  							
+								if(special[i].special_name.length>=8){
+								
+								name_size="<h1 style='width:70%;'>"+special[i].special_name.substring(0,8)+"  </h1>";
+							}else{
+								
+							name_size="<h1 style='width:70%;'>"+special[i].special_name+"</h1>";
+							}
+  							
+								
+									if(special[i].text.length>10){
+  	  								
+  	  								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+  	  							}else{
+  	  								a="<div class='b_numb'>"+special[i].text+"</div>";
+  	  							}
+  							/* z="<span style='background:#2dc158;'>已购买</span>";
+  	  						zz="<div class='price'>开始学习</div>";
+  	  						zzz="<div class='doc'>主讲："+special[i].teacher+"</div>"; */
+  	  						
+  	  					z="<div class='b_numb'>"+special[i].teacher+"</div>";
+	  					 
+  	  				zz="<div style='display:block;float:right;width:30%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>已订阅</div>";
+  	  				zzz="<div >时长:"+special[i].url.length+"节课</div>";	 
+  	  					
+  							html2+="<div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' special_type='"+special[i].type+"'>"
+  	  						+"<div class='b_bg'>"
+  	  						+"<img src='"+special[i].img+"'>"
+  	  						/* +""+a+""
+  	  						+""+b+"" */
+  	  						+"</div>"
+  	  						+"<div class='b_text'   >"
+  	  						+"<div class='b_title'>"
+  	  						+""+name_size+""	
+  	  						+""+zz+""	
+  	  						+"<div class='clearfix'></div></div>"	
+		  	  					+""+a+""
+		  	  					+""+z+""
+		  						+""+zzz+""		
+  	  						+"<div class='mes'>"								   	  					 
+  	  									  							
+	  						+"<div class='b_numb'  >"+special[i].order_count+"人订阅</div>"
+  	  						+"<div class='clearfix'></div></div></div>"		
+  	  						+"<div class='clearfix'></div></div>";
+  	  					
+  	  				 
+  	  			}
+  	  				 
+  	  			$("#div_video").append(html2);
+  	  		}else if(user.role==3&&user.state==0){
+  	  			 
+  	  			var html2=""; var z=""; var zz=""; var zzz="";
+  	  				for(var i=0; i<special.length;i++){
+  	  					   
+  						if(special[i].special_name!= null){
+  					
+  							if(special[i].special_name.length>=8){
+  								introduce=special[i].special_name.substring(0,8)+"";
+  							 
+  							}else{
+  								introduce=special[i].special_name;
+  								
+  							}
+  	  					} 
+  						 
+  	  				  
+  	  					
+  	  					if(special[i].isBuy!=1){
+  	  						
+  	  						var a="";
+  	  						
+  	  					if(special[i].special_name.length>=8){
+							
+							name_size="<h1 style='width:70%;'>"+special[i].special_name.substring(0,8)+" </h1>";
+						}else{
+							
+						name_size="<h1 style='width:70%;'>"+special[i].special_name+"</h1>";
+						}
+  	  					
+  	  					if(special[i].text.length>10){
+							
+							a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+						}else{
+							a="<div class='b_numb'>"+special[i].text+"</div>";
+						}
+  	  					
+  	  					z="<div class='b_numb'>"+special[i].teacher+"</div>";
+						zz="<div style='display:block;float:right;width:30%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>￥"+toDecimal2(special[i].price/100)+"/年</div>";
+						zzz="<div >时长:"+special[i].url.length+"节课</div>";
+	  						
+  		  						html2+="<div class='column2' onclick='detail(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' special_type='"+special[i].type+"'>"
+  		  						+"<div class='b_bg'>"
+  		  						+"<img src='"+special[i].img+"'>"
+  		  					/* 	+""+a+""
+  		  						+""+b+"" */
+  		  						+"</div>"
+  		  						+"<div class='b_text'   >"
+  		  						+"<div class='b_title'>"
+  		  						+""+name_size+""	
+  		  						+""+zz+""	
+  		  						+"<div class='clearfix'></div></div>"	
+  		  						+""+a+""
+  		  						+""+z+""
+  		  						+""+zzz+""
+  		  						+"<div class='mes'>"								 
+  		  					/* 	+"<div class='view1'><img src='../../../images/hot/time.png'></div>" */	
+  		  						 	
+  		  						/* +"<div class='view2'>"	
+  		  						+"<img src='../../../images/hot/view.png'></div>"	 */
+  		  					+"<div class='b_numb'  >"+special[i].order_count+"人订阅</div>"	
+  		  						+"<div class='clearfix'></div></div></div>"		
+  		  						+"<div class='clearfix'></div></div>";	
+  	  						
+  	  					}else if(special[i].isBuy==1){
+  	  								var a="";
+  	  						
+							if(special[i].special_name.length>=8){
+							
+							name_size="<h1 style='width:70%;'>"+special[i].special_name.substring(0,8)+" </h1>";
+						}else{
+							
+						name_size="<h1 style='width:70%;'>"+special[i].special_name+"</h1>";
+						}		
+							
+							if(special[i].text.length>10){
+	  								
+	  								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+	  							}else{
+	  								a="<div class='b_numb'>"+special[i].text+"</div>";
+	  							}
+  								 
+							z="<div class='b_numb'>"+special[i].teacher+"</div>";
+							zzz="<div >时长:"+special[i].url.length+"节课</div>";
+		  				
+							zz="<div style='display:block;float:right;width:30%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>已订阅</div>";
+							
+  		  						html2+="<div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' special_type='"+special[i].type+"'>"
+  		  						+"<div class='b_bg'>"
+  		  						+"<img src='"+special[i].img+"'>"
+  		  					/* 	+""+a+""
+  		  						+""+b+"" */
+  		  						+"</div>"
+  		  						+"<div class='b_text'   >"
+  		  						+"<div class='b_title'>"
+  		  						+""+name_size+""	
+  		  						+""+zz+""	
+  		  						+"<div class='clearfix'></div></div>"	
+  		  						+""+a+""
+  		  						+""+z+""
+  		  						+""+zzz+""
+  		  						+"<div class='mes'>"								 
+  		  						 	
+  		  						 			  							
+		  						+"<div class='b_numb'  >"+special[i].order_count+"人订阅</div>"
+  		  						+"<div class='clearfix'></div></div></div>"		
+  		  						+"<div class='clearfix'></div></div>";	
+  		  						
+  	  					}
+  						 
+  	  			}
+  	  			
+  	  				 
+  	  				 
+  	  			$("#div_video").append(html2);
+  	  				
+  	  		}
+  	  			
+  	  	}
+  	  		
+  	  });
+  		
+  	}
+  	 
+  		
+  	function detail(obj){
+  		 
+  		var c_no=$(obj).attr("special_no");
+  		 
+  		 localStorage.setItem("c_no", c_no );
+  		//var special_type=$(obj).attr("special_type");
+  		 
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+  		 
+  			window.location.href=pt_path+'jsp/wx/course/free_little_special.html?v=12';
+  		 
+  		 
+	}
+  	
+  	function af(obj){
+  		
+  		var c_no=$(obj).attr("special_no");
+ 		 
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		var special_type=$(obj).attr("special_type");
+  		
+  			
+  		/* window.location.href=pt_path+'jsp/wx/course/new_af_special.html'; */
+  		
+  		 window.location.href=pt_path+'jsp/wx/course/af_little_special.html?v=1';
+  		
+  	}
+  	
+  	function free_sepcial(obj){
+ 		 
+  		var c_no=$(obj).attr("special_no");
+  		 
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+		window.location.href=pt_path+'jsp/wx/course/af_special.html?v=12';
+	}
+  	
+  //制保留2位小数，如：2，会在2后面补上00.即2.00    
+	function toDecimal2(x) {    
+	    var f = parseFloat(x);    
+	    if (isNaN(f)) {    
+	        return false;    
+	    }    
+	    var f = Math.round(x*100)/100;    
+	    var s = f.toString();    
+	    var rs = s.indexOf('.');    
+	    if (rs < 0) {    
+	        rs = s.length;    
+	        s += '.';    
+	    }    
+	    while (s.length <= rs + 2) {    
+	        s += '0';    
+	    }    
+	    return s;    
+	}
+  	
+  	</script>
+  
+</html>

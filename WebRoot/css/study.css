@@ -1,0 +1,35 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;}
+.top_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.top_box .top{width:92%;height:60px;margin:auto auto;}
+.top .head{width:14%;float:left;height:40px;margin-top:10px;}
+.top .head img{height:100%;display:block;}
+.top .name{width:40%;float:left;margin-left:2%;text-align:left;line-height:60px;color:#323232;font-size:17px;font-family:"创意简标宋";}
+
+.trailer{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;padding-top:6px;padding-bottom:6px;}
+.trailer .time{width:54px;height:54px;float:left;background:#a7c6dc;border-radius:50%;margin-left:4%;}
+.trailer .time img{width:60%;height:auto;display:block;margin-top:20%;margin-bottom:20%;margin-left:21%;}
+.trailer .shijian{width:70%;float:left;margin-left:5%;}
+.trailer .shijian .title01{width:100%;font-size:14px;color:#7e7e7e;line-height:24px;}
+.trailer .shijian .title02{width:100%;font-size:16px;color:#323232;line-height:30px;}
+
+.play_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.play_box .column{width:96%;margin-left:4%;border-bottom:1px solid #EEEEEE;padding-top:16px;padding-bottom:16px;}
+.play_box .column .a_bg{width:35%;float:left;border-radius:4px;}
+.play_box .column .a_bg img{width:100%;display:block;}
+.play_box .column .text{float:left;width:60%;margin-left:4%;}
+.play_box .column .text .title {width:100%;padding-bottom:6px;}
+.play_box .column .text .title .a_title{width:70%;float:left;font-size:16px;color:#323232;line-height:16px;text-align:left;}
+.play_box .column .text .title span{display:block;width:20%;float:left;margin-left:2%;background:#969696;font-size:10px;color:#fff;border-radius:4px;line-height:16px;text-align:center;}
+.play_box .column .text .s_time{width:100%;color:#969696;font-size:12px;line-height:20px;text-align:left;padding-bottom:6px;}
+.play_box .column .text .r_time{width:100%;padding-bottom:6px;}
+.play_box .column .text .r_time .icon{width:6%;float:left;}
+.play_box .column .text .r_time .icon img{width:100%;display:block;}
+.play_box .column .text .r_time h1{float:left;width:72%;margin-left:2%;color:#2DC158;font-size:12px;line-height:14px;text-align:left;}
+.play_box .column .text .button{width:100%;padding-top:6px;}
+.play_box .column .text .button span{display:block;float:left;width:32%;margin-right:10%;font-size:12px;color:#fff;background:#2DC158;border-radius:14px;text-align:center;line-height:20px;}

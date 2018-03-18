@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/subscribed.css" type="text/css">
+		 <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+		<link rel="stylesheet" href="../../../css/wx_menu.css">
+	</head>
+	<body>
+		 <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+		
+		<div class="sub">
+			<div class="title">
+				<span></span>
+				<h1>已订购课程</h1>
+				<div class="clearfix"></div>
+			</div>
+			
+			
+			<!-- <div style="margin-bottom:16px;border-top: 1px solid  #dcdcdc;border-bottom: 1px solid  #dcdcdc;line-height: 40px;text-align: center;width: 100%;float: left;">
+				<span style="width: 20%;color: #646464;float: left;display:block;"  onclick="show_all();"  id="span_1">全部</span>
+				<span style="width: 20%;color: #646464;float: left;display:block;"onclick="show_course();"  id="span_2">视频课程</span>
+				<span style="width: 20%;color: #646464;float: left;display:block;"onclick="show_voice();"  id="span_3">语音课程</span>
+				<span style="width: 20%;color: #646464;float: left;display:block;" onclick="show_special();"  id="span_4">专题</span>
+				<span style="width: 20%;color: #646464;float: left;display:block;" onclick="show_little();"  id="span_5">小专题</span>
+				<div class="clearfix"></div>
+			</div> -->
+			
+			<div id="all_list">
+				<!-- <div class="column2" >
+					<div class="b_bg">
+						<img src="../../../images/subscribed/bg_01.jpg">
+						<div class="list">新</div>
+						<div class="icon" style="background:url(../../../images/subscribed/video.png) no-repeat;background-size:100%;"></div>
+					</div>
+					<div class="b_text">
+						<div class="b_title">如何获得成功之道</div>
+						<p>尊重员工的价值：首先是在观念上改变对人才的看法：要尊重员工的个</p>
+						<div class="mes">
+							<div class="doc">主讲：陈平</div>
+							<div class="b_numb">2017.12.31</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div> -->
+			</div>
+			  
+		</div>
+		
+		<div class="more" id="more" onclick="get_more();">加载更多</div>
+		
+		<br><br><br><br><br><br>
+		
+		
+		 <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one"  onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy2.png"></div>
+			<div class="menu_cx menu_green">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x  ">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x ">我的</div>
+		</div>
+	</div>
+		
+	</body>
+ <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+	  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+	<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>  
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+  <script type="text/javascript">
+   
+ //var openid="ok4o7waQyK5dri1qmHs9fIxhJY58";
+  
+  var page_num =1;
+  var page_count =1;
+  
+  var share_ul="course_order";	
+   	
+  
+  
+  $(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			get_data(1);
+		}
+		 
+	}
+ 
+
+  function get_more(){
+   	
+   	var page = page_num+1;
+   	
+   	get_data(page);
+  }
+
+ function get_data(page){
+ 	 
+	  
+ 	$.ajax({
+   		type:"post",
+   		url: pt_path +'/top/query_order.do',
+   		dataType:"json",
+   		data:{"openid":openid,"page":page},
+   		success: function(data){
+   			
+   			if(data[0].user.head != null && data[0].user.head != ""){ 
+   				$("#head_img").attr("src",data[0].user.head);
+   			}else{ 
+   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+   			}
+   			
+   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+   			
+			if(data[0].user.role !=1){
+				$("#my_name").text(data[0].user.name);
+				$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+			}else {
+				$("#my_name").text(data[0].user.name);
+				
+				
+			}
+   			
+   			
+   			page_num =data[0].page_num;
+   			page_count =data[0].page_count;
+   			
+   			if(page_num >= page_count){
+   				$("#more").hide();
+   			}else{
+   				$("#more").show();
+   			}
+   			
+   			
+   			//show_all(page);
+   			
+   			
+   			var list =data[0].list;
+   			
+   			
+   			var html ="";
+   			
+   				if(list.length>0){
+   					
+
+   		   			for(var i=0; i<list.length;i++){
+   		   				
+   		   				
+   		   				var v="icon"; 
+   		   				if(list[i].type == 1 || list[i].type == 2){
+   		   					 v = "icon2 ";
+   		   				}
+   		   				 var info="";
+   		   				 
+   		   				 var date="";
+   		   				 if(data[0].user.role ==1){
+   		   					 info = list[i].special_name; 
+   		   					 date=list[i].date;
+   		   					 
+   		   					 if(date.length>0){
+   		   						 
+   		   						date= date.substring(0,10);
+   		   						
+   		   					 }
+   		   				 }else{
+   		   					info = list[i].c_name; 
+   		   					date=list[i].c_date;
+   		   				 if(date!="" && date.length>0){
+   								 
+   		   					date= date.substring(0,10);
+   							 }
+   		   				 }
+   		   				 
+   		   				if(info.length>10){
+   		   					info = info.substring(0,10)+""; 
+   		   				} 
+   		   				var t = list[i].text; 
+   		   				if(t.length>20){
+   		   					t = t.substring(0,20)+""; 
+   		   				}
+   		   				
+   		   				var o = " <div class='column2' cno='"+list[i].special_no+"' t='"+list[i].type+"' watch='"+list[i].watch+"'  onclick='detail(this);' > <div class='b_bg'> <img src='"+list[i].img+"'> "
+   							+" <div class='"+v+"' ></div> </div> <div class='b_text'> " 
+   							+"<div class='b_title'>"+info+"</div> <p>"+t+"</p>"
+   							+"<div class='mes'> <div class='doc'>主讲："+list[i].teacher+"</div> <div class='b_numb'>"+date+"</div>"
+   							+"<div class='clearfix'></div> </div> </div> <div class='clearfix'></div> </div> ";
+   		   				 
+   		   				html = html +o;
+   		   			}
+   		   			
+   		   			$("#all_list").append(html); 
+   					
+   				}else{
+   					
+   					html+="<div style='font-size:16px;height:30px;line-height:30px;margin-left:20px;'>暂无订阅</div>"
+   						$("#all_list").append(html); 
+   					
+   				}
+   			
+   			
+   		}
+ 	});
+ }
+ 
+ function detail(obj){
+	var c_no=$(obj).attr("cno"); 
+	
+	var type=$(obj).attr("t");
+	
+	var w = $(obj).attr("watch");
+	 
+	if(type == 0){
+		
+		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/course/is_pullof.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"type":type},
+	  		success: function(data){ 
+	  			var special=data[0].special;
+	  			var set_page=data[0].set_page;
+	  			
+					if(special!=null){
+	  				
+	  				if(special.state==1){
+	  					localStorage.setItem("c_no", c_no );
+	  					window.location.href=pt_path+'jsp/wx/course/af_special_voice.html';
+	  					
+	  				}else{
+	  					
+	  					window.location.href=set_page.html;
+	  				}
+	  				
+	  				
+	  			}
+	  			
+	  			
+	  		}
+	  		
+		});
+		
+		 
+		
+	}else if(type==1){
+		 
+		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/course/is_pullof.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"type":type},
+	  		success: function(data){ 
+	  			var special=data[0].special;
+	  			
+	  			
+	  			if(special!=null){
+	  				
+	  				if(special.state==1){
+	  					localStorage.setItem("c_no", c_no );
+	  					window.location.href=pt_path+'jsp/wx/course/af_special.html';
+	  					
+	  				}else{
+	  					
+	  					window.location.href=set_page.html;
+	  				}
+	  				
+	  				
+	  			}
+	  			
+	  			
+	  		}
+	  		
+		});
+		
+	}else{
+		
+	 
+		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/course/is_pullof.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"type":type},
+	  		success: function(data){ 
+	  			var special=data[0].special;
+	  			
+	  			if(special!=null){
+	  				
+	  				if(special.state==1){
+	  					localStorage.setItem("c_no", c_no );
+	  					localStorage.setItem("watch", w );
+	  					window.location.href=pt_path+'jsp/wx/course/af_special.html';
+	  					
+	  				}else{
+	  					
+	  					window.location.href=set_page.html;
+	  				}
+	  				
+	  				
+	  			}
+	  			
+	  			
+	  		}
+	  		
+		});
+		
+		
+	}
+}
+ 
+ 
+ function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+	}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+		
+	}
+	
+	
+function go_personal(){
+		
+		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+	}
+	
+	function go_my_order(){
+		
+		 
+		window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+		
+	}
+	
+function go_vip(){
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+	}
+
+function go_top(){
+	 
+	 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+}
+
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+  
+  
+  function show_all(page){
+	  
+	  /* 	document.getElementById("span_1").style.color="#2dc158";
+	  	document.getElementById("span_2").style.color="#646464";
+	  	document.getElementById("span_3").style.color="#646464";
+	  	document.getElementById("span_4").style.color="#646464";
+	  	document.getElementById("span_5").style.color="#646464"; */
+	  
+	  $.ajax({
+	   		type:"post",
+	   		url: pt_path +'/top/query_order.do',
+	   		dataType:"json",
+	   		data:{"openid":openid,"page":page},
+	   		success: function(data){
+	   			
+	   			var list =data[0].list;
+	   			
+	   			
+	   			
+	   			var html ="";
+	   			
+	   			if(data[0].user.role !=1){
+	   				
+	   				for(var i=0; i<list.length;i++){
+		   		 		
+		   				var v="icon"; 
+		   				if(list[i].type == 1 || list[i].type == 2){
+		   					 v = "icon2 ";
+		   				}
+		   				 
+		   				var info = list[i].c_name; 
+		   				if(info.length>10){
+		   					info = info+""; 
+		   				} 
+		   				var t = list[i].text; 
+		   				if(t.length>20){
+		   					t = t.substring(0,20)+""; 
+		   				}
+		   				
+		   				var o = " <div class='column2' cno='"+list[i].c_no+"' t='"+list[i].type+"' watch='"+list[i].watch+"'  onclick='detail(this);' > <div class='b_bg'> <img src='"+list[i].img+"'> "
+							+" <div class='"+v+"' ></div> </div> <div class='b_text'> " 
+							+"<div class='b_title'>"+info+"</div> <p>"+t+"</p>"
+							+"<div class='mes'> <div class='doc'>主讲："+list[i].teacher+"</div> <div class='b_numb'>"+list[i].c_date+"</div>"
+							+"<div class='clearfix'></div> </div> </div> <div class='clearfix'></div> </div> ";
+		   				 
+		   				html = html +o;
+		   			}
+		   			
+		   			$("#all_list").append(html);
+	   			}else{
+	   				
+	   				
+	   				
+	   			}
+	   		   
+	   			
+	   		}
+	 	});
+	  
+  }
+  
+  </script>
+</html>

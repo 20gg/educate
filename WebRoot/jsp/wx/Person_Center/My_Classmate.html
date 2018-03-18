@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+   <link rel="stylesheet" href="../../../css/wx_menu.css">
+    
+	<link rel="stylesheet" href="../../../css/wx/personal/circle.css?v=0.1" type="text/css">
+	
+	<style type="text/css">
+	.yaoqing{background:#fff;width:100%;margin:auto auto;color:#2dc158;font-size:16px;line-height:50px;text-align:center;margin-top:10px;position:relative;}
+	.yaoqing .arrow{float:right;width:3%;position:absolute;top:40%;right:3%;}
+	.yaoqing .arrow img{display:inherit;width:100%;} 
+	</style>
+
+  </head>
+  <body>
+  
+   <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+	<div class="yaoqing" onclick="into_in();">邀请同学
+			<div class="arrow">
+				<img src="../../../img/wx/arrow2.png">
+			</div>
+			<div class="clearfix"></div>
+	</div>
+	
+	
+	<div class="b_link">
+		<div class="title">
+			<div class="publish_left"> 
+				<span></span>
+				<h1>同学成员</h1> 
+				<div class="clearfix"></div>
+			</div>  
+			<div class="publish">
+				<h3>奖学金</h3>
+				<h4>学分</h4>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	
+	<div class="tl">
+			<div class="column">
+				<div class="b_bg">
+					<img id="head_img2" src="../../images/vedio/touixiang1.png">
+				</div>
+				<div class="b_text">
+					<div class="b_title">
+						<div class="a_t" id="my_name2">书童要考公务员</div>
+						<div class="b_t">
+							<h3 id="jxj1"></h3>
+							<h4 id="xf1"></h4>							
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="time">我自己</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>			
+		</div>
+		<!-- 
+		<div class="tl" id="top">
+			<div class="column">
+				<div class="b_bg">
+					<img id="head_img3" src="../../images/vedio/touixiang1.png">
+				</div>
+				<div class="b_text">
+					<div class="b_title">
+						<div class="a_t" id="my_name3">书童要考公务员</div>
+						<div class="b_t">
+							<h3  id="jxj2"></h3>
+							<h4 id="xf2"></h4>						
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="time">我的上级</div>
+				</div>
+				<h1 id="yxq">有效期至2018.08.11</h1>
+				<div class="clearfix"></div>
+			</div>			
+		</div>  -->
+	
+	<div id="all_list" style="margin-bottom: 90px;">
+	
+		<!-- <div class="tl">
+			<div class="column">
+				<div class="b_bg">
+					<img src="../../images/vedio/touixiang1.png">
+				</div>
+				<div class="b_text">
+					<div class="b_title">
+						<div class="a_t">书童要考公务员</div>
+						<div class="b_t">
+							<h3>12312元</h3>
+							<h4>12312分</h4>							
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="time">我的下级</div>
+				</div>
+				<h1>有效期至2018.08.11</h1>
+				<div class="clearfix"></div>
+			</div>			
+		</div> -->
+		
+	</div>
+	 
+	 
+	  <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one"  onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x  ">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me2.png"></div>
+			<div class="menu_x menu_green">我的</div>
+		</div>
+	</div>
+  
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>  
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>   
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>  
+  <script type="text/javascript">
+	//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+	
+	
+	var share_ul="my_classmate";
+	
+	
+	$(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			  test_1(); 
+		}
+		 
+	}
+	
+	
+	function  test_1(){
+		
+		 $.ajax({
+			  type:"post",
+		  		url: pt_path +'/user/show_my_classmate.do',
+		  		dataType:"json",
+		  		data:{"open_id":openid},
+		  		success: function(data){
+		  			 
+		  			if(data[0].user.head != null && data[0].user.head != ""){ 
+		   				$("#head_img").attr("src",data[0].user.head);
+		   			}else{ 
+		   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+		   			}
+		   			
+		   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+		   			
+					if(data[0].user.role!=1){
+						$("#my_name").text(data[0].user.name);
+						$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+					}else  {
+						$("#my_name").text(data[0].user.name);
+					}
+		   			
+	  				
+	  				if(data[0].user.head != null && data[0].user.head != ""){
+			  			$("#head_img2").attr("src",data[0].user.head );
+			  		} 
+	  				
+	  				$("#my_name2").text(data[0].user.name); 
+	  				$("#xf1").text(data[0].user.score+"分");
+	  				$("#jxj1").text(data[0].user.scholarship/100+"元");
+	  				
+	  			/* 	if(data[0].top_map.top != null){
+	  					if(data[0].top_map.top.head != null && data[0].top_map.top.head != ""){
+	  			  			$("#head_img3").attr("src",data[0].top_map.top.head );
+	  			  		} 
+	  	  				
+	  	  				$("#my_name3").text(data[0].top_map.top.name); 
+	  	  				$("#xf2").text(data[0].top_map.top.score+"分");
+	  	  				$("#jxj2").text(data[0].top_map.top.scholarship/100+"元");
+	  	  				
+	  	  				var yxq = data[0].user.p1_date; 
+	  	  				if(data[0].user.p2_date != null){
+	  	  					yxq = data[0].user.p2_date;
+	  	  				} 
+	  	  				$("#yxq").text("有效期至:"+yxq);
+	  	  				
+	  	  				$("#top").show();
+	  	  				
+	  				}else{
+	  					$("#top").hide();
+	  				} */
+	  				 
+	  				var list = data[0].xia_ji;
+	  				
+	  				var html ="";
+	  				for(var i=0;i<list.length;i++){
+	  					
+	  					var img = "../../images/vedio/touixiang1.png";
+	  					
+	  					if(list[i].head != null && list[i].head.head != ""){
+	  						img = list[i].head;
+	  					}
+	  					
+	  					var yxq = list[i].p1_date; 
+	  	  				if(list[i].p2_date != null){
+	  	  					yxq = list[i].p2_date;
+	  	  				} 
+	  					
+	  					var a="<div class='tl'> <div class='column'> <div class='b_bg'> <img src='"+img+"'> </div>"
+							+"<div class='b_text'> <div class='b_title'> <div class='a_t'>"+list[i].name+"</div>"
+							+"<div class='b_t'> <h3>"+list[i].scholarship/100+"元</h3> <h4>"+list[i].score+"分</h4> <div class='clearfix'></div> </div>"
+							+"<div class='clearfix'></div> </div> <div class='time'>我的邀请</div> </div>"
+							+"<div class='tran'><h1>有效期至"+yxq+"</h1><span  onclick='go_detail(\""+list[i].open_id+"\")';  '>详情</span></div>  <div class='clearfix'></div> </div>	 </div>";
+	  					
+	  					html = html +a;
+	  				}
+	  				
+	  				$("#all_list").html(html);
+		  			 
+		  		}
+			  
+		  });
+		
+	}
+
+  
+  
+  
+  function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+	}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+		
+	}
+	
+	function go_my_order(){
+		
+		 
+		window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+		
+	}
+	
+	
+function go_personal(){
+		
+		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+	}
+	
+function go_vip(){
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+	}
+	
+function go_top(){
+	 
+	 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+}
+
+function into_in(){
+	
+	//localStorage.setItem("openid", openid );
+	window.location.href=pt_path+'jsp/wx/Scholarship/Invitation.html';
+	
+}
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+
+function go_detail(open_id){
+	
+	localStorage.setItem("xia_open_id", open_id );
+	window.location.href=pt_path+'jsp/wx/Person_Center/subordinate.html';
+}
+   </script>
+</html>

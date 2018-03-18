@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>toload.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+   
+
+  </head>
+  
+  <body>
+  	<div id="div_1"></div>
+  	<div id="div_2"></div>
+  </body>
+  
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>
+   <script type="text/javascript" src="../../../js/path.js"></script>
+  <script type="text/javascript">
+  var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";	
+  
+	//var c_no="1507794389780";
+  var c_no="";
+  	$(function(){
+  		c_no=Get_String("c_no");
+  		$.ajax({
+				type:"post",
+				dataType:"json",
+				url:pt_path+"user/to_load.do",
+				data : {"openid":openid,"c_no":c_no},
+				success : function(data){
+				
+				 
+				var	dy = data[0].dy;
+	  			 var  sc = data[0].sc;
+	  			if(data[0].user.role == 1){
+	  				dy =1;
+	  			}
+	  				if(dy > 0){
+	  					localStorage.setItem("c_no", c_no);
+	  				$("#div_1").load(""+pt_path+"jsp/wx/course/af_special.html?v=1");
+	  				}else{
+	  					localStorage.setItem("c_no", c_no);
+	  					$("#div_2").load(""+pt_path+"jsp/wx/course/free_special.html?v=1");
+	  				
+	  				}
+	  			
+	  			
+				}
+		 });
+  		
+  		
+  		
+  	
+  	});
+  	
+  function Get_String(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);
+	    if ( r != null ){
+	       return unescape(r[2]);
+	    }else{
+	       return null;
+	    } 
+} 	
+  
+  </script>
+  
+</html>

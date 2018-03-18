@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="../../../css/wx_menu.css">
+    
+
+  </head>
+  <style type="text/css">
+  	.vip_up{
+  	
+  	width: 30%;float:left;border-radius:30px;width:65px;background:#4CAF50;padding:1px 10px;text-align:center;color:#fff;line-height: 30px;margin-top: 10px;
+  	}
+  	.button_css{
+  	 width:100px;background:#4CAF50;border:0px;border-radius:30px;color:#fff;line-height: 30px;margin-top: 20px;
+  		
+  	}
+  	
+  	.yuan_css{
+  	width:40px;height:40px;border-radius:50px;background-color:#4CAF50;color:#fff;float: left;
+  	margin-top: 13px;line-height: 40px;
+  	}
+  
+  </style>
+  
+  <body style="margin: 0px;">
+    	<div style='width: 100%;float:left;border-bottom:10px solid #f2f2f2;padding-bottom: 5px;' id='html_1'>
+    	
+    	
+    	   
+    	</div>
+    	
+    	<div style='width:100%;'>
+    		<img src='../../../img/wx/scholarship.png' style='width: 100%'>
+    	</div>
+    
+   
+    <div style='width: 100%;float:left;text-align: center;' id='html_2'>
+    	
+    		   
+    	</div>
+    	
+    	<div style='text-align: center;' onclick='go_invitation();'><button class='button_css'>立即邀请</button></div>	
+    	
+       
+      
+      	<div style='width: 100%;float:left;text-align: center;margin-top: 10px;border-bottom:10px solid #f2f2f2;padding-bottom: 9px;' id="html_3">
+    	
+    	<!-- <div style='width: 47%;float:left;line-height: 30px;'> 已邀请普通学员:3位</div>
+    	<div style='width: 1%;float:left;line-height: 30px;  '>|</div>
+    	<div  style='width: 47%;float:left;line-height: 30px; color:#4CAF50' >已邀请VIP学员:3位</div> -->	   
+    	</div>
+      
+      
+      <div style="border-bottom:1px solid #f2f2f2;padding-bottom: 9px;">&nbsp;&nbsp;&nbsp;
+      <span style="color:#4CAF50;line-height: 30px;margin-left: 10px;">|</span>&nbsp;&nbsp;&nbsp;奖学金明细   
+  	</div>
+      
+      <div id='html_4'>
+      
+      </div>
+      
+  
+        <div style="margin-top:30px;line-height:40px;border-bottom:1px solid #f2f2f2; text-align: center;">加载更多</div>	
+      
+      
+  <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money2.png"></div>
+			<div class="menu_x menu_green" >奖学金</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x">我的</div>
+		</div>
+	</div>
+	
+      
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript">
+  var openid="123456";
+  
+  	$(function(){
+  		
+  	$.ajax({
+  		type:"post",
+  		url: pt_path +'/user/shcolarship_info.do',
+  		dataType:"json",
+  		data:{"open_id":openid},
+  		success: function(data){
+  			var user=data[0].user;
+  			 
+  			var bottom_member=data[0].bottom_member;//是一个list
+  			var course_order=data[0].course_order;//是一个list		
+  			var vip=0;  var ordinary=0;//普通学生
+  			var cont=0;
+  			var config_s=data[0].config_s;
+  			var html1="";
+  			var html2="";
+  			var html3="";
+  			var html4="";
+  			 
+  			var li_lv=config_s.percentage*100;
+  			
+  			html1+="<div style='width: 30%;float:left;line-height: 30px;'> <img src='"+user.head+"' style='width:36px;height:36px;border-radius:18px;margin-top:10px;margin-left:5px;'></div>"
+  		    	+"<div style='width: 40%;float:left;line-height: 30px;margin-top: 10px;text-align:center;'>"+user.name+"</div>"
+  		    	+"<div  class='vip_up' onclick='go_vip();' >会员升级</div>";
+  			
+  			$("#html_1").html(html1);
+  			
+  			html2="<div style='width: 30%;float:left;line-height: 30px;margin-left: 20px;'> 我的奖学金:</div>"
+  		    	+"<div style='width: 20%;float:left;line-height: 30px; color:#F4B56A;'>"+user.scholarship+".00</div>"
+  		    	+"<div  style='width: 30%;float:left;line-height: 30px; color:#4CAF50' onclick='go_sort();' >排行榜>></div>";
+  			$("#html_2").html(html2);
+  			
+  			 
+  			if(user!=null&&openid==user.open_id){
+  				 
+  					 
+  					for(var i=0;i<bottom_member.length;i++){
+  						
+  						if(bottom_member[i].role==0){
+  							ordinary++;
+  							 
+  						}else{
+  							vip++;
+  								}	
+  					}
+  					html3+="<div style='width: 47%;float:left;line-height: 30px;'> 已邀请普通学员:"+ordinary+"位</div>"
+				    	+"<div style='width: 1%;float:left;line-height: 30px;  '>|</div>"
+						+"<div  style='width: 47%;float:left;line-height: 30px; color:#4CAF50' >已邀请VIP学员:"+vip+"位</div>	 ";				
+  					$("#html_3").html(html3);
+  					
+  				if(course_order!=null&&course_order!=""){
+  					 
+  					 
+  					for(var x=0;x<course_order.length;x++){
+  						
+  					 
+  						var rebate=(course_order[x].pay_money)/li_lv;
+  						cont++;
+  								 
+  								
+  	  							html4+=" <div style='float: left;width: 100%;line-height: 31px;text-align: center;border-bottom:1px solid #f2f2f2;'><div class='yuan_css'>"+cont+"</div>"
+  	  						      
+  	  						+" <div style='width:60%;float:left;'>"+course_order[x].name+"购买"+course_order[x].c_name+"  <br>消费金额<span style='color:#E52F60;'>￥"+course_order[x].pay_money+"</span></div>"
+  	  						      
+  	  						+" <div style='width: 20%;color: #F4B56A;float:left;margin-top: 11px;'>+"+rebate+"</div></div>";
+  	  						   							
+  						 				
+  					}$("#html_4").html(html4);
+  					
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  	});	
+  		
+  		
+  	});
+  	
+  	function go_scholarship(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+  	}
+  	
+  	function go_sort(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Scholarship/scholarship_sort.html';
+  	}
+  	
+  	function go_taolun(){
+  		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+  		
+  	}
+  	
+  	function go_personal(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+  	}
+  	
+  	function go_invitation(){
+  		
+  		localStorage.setItem("openid", openid );
+  	window.location.href=pt_path+'jsp/wx/Scholarship/Invitation.html';
+  		
+  	}
+  	function go_my_order(){
+		
+		 
+		window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+		
+	}
+  	
+  	function go_taolun(){
+  		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+  		
+  	}
+  	
+  	function go_vip(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+  	}
+  </script>
+  
+</html>

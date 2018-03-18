@@ -1,0 +1,35 @@
+ul{
+	margin:0;
+	padding:0 0 0px 0px;
+}
+
+.container{ 
+	overflow:hidden;
+	padding: 0px;
+}
+ 
+.mySlideshow .animated{
+	position:absolute;
+}
+
+.mySlideshow li a img {width: 100%; height: 160px;}
+
+.mySlideshow li a div{ height: 36px; line-height: 36px; background: rgba(0,0,0,0.6);
+ color: #fff; position: relative;top: -36px; z-index: 100; padding-left: 10px; font-size: 14px; padding-right: 10px;}
+ 
+.mySlideshow li a div span{float: right;}
+ 
+.one{
+	background:url("../img/post/taolun1.jpg") ; background-size: 100% 100%;
+}
+
+.two{
+	background:url("../img/post/taolun1.jpg") ; background-size: 100% 100%;
+}
+
+.three{
+	background:url("../img/post/taolun1.jpg") ; background-size: 100% 100%;
+}
+
+.lb_img{width: 100%;height: 160px;}
+ 

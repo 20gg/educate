@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+     <link rel="stylesheet" href="../../../css/tanchu.css" />
+     <link rel="stylesheet" href="../../../css/touxiang.css" />
+
+  </head>
+  <style type="text/css">
+  	body{
+  	background-color: #F6F7F9;
+  	margin: 0px;
+  	
+  	}
+  	
+  	.city_no_choose{
+	
+  	}
+
+  .div_2{
+  text-align: center;color: green;background-color: #fff;font-size: 20px;line-height: 40px;
+  }
+  
+  .load_tc_back{
+  width:100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left: 0;
+	  z-index: 10001;
+	  overflow:hidden;
+	display:-webkit-flex;
+	-webkit-justify-content:center;
+	-webkit-align-items:center;
+	background:rgba(0,0,0,0.6);
+  
+  }
+  .tc_ts_div{
+	width: 90%;background-color: #fff; border: 1px solid #ccc
+}
+  .tc_ts_div_head {
+	
+	width: 100%; height: 36px; line-height: 36px;  text-align: center;color:#2CC159; 
+}
+
+.tc_ts_div_msg { 
+	width: 100%; height: 50px; line-height: 40px; text-align: center;
+}
+.tc_ts_div_button {
+	
+	width: 100%; height: 40px; line-height: 40px;border-top: 1px solid #ccc; text-align: center;
+}
+
+.tc_ts_div_sure {
+	width: 100px; height: 30px;  border:0px;background-color: #fff;color:#2CC159;
+			    font-size: 16px;  
+}
+.tc_ts_div_sure2 {
+	width: 110px; height: 30px;  border:0px;background-color: #fff;color:#2CC159;
+			    font-size: 13px;
+}
+  
+  </style>
+  
+  <body >
+  
+  <div   class="div_2">
+     			<p style="color:#2CC159">课后练习</p>
+     	</div>
+  	<div style="margin-left: 15px;margin-right: 15px;border-radius:10px;">
+     	
+     
+     	<div	id="div_exercise"  >
+     	
+     		 
+     	</div>
+     
+     </div>
+     
+     
+     <div style="text-align: center;display: none;" id="sss" >
+     
+     	<button   style="border-radius:6px;background-color:#2CC159;border: 0px;width: 200px;margin-top:40px;margin-bottom: 10px;line-height: 40px; height:40px;  color:#fff; font-size: 18px;"  onclick="sub();" id="button_id">提交</button>
+     </div>
+     
+     
+     <div class="load_tc_back" style="display: none;"  id="myts">
+ 
+ 	<div class="tc_ts_div" style="border-radius:6px;width:80%;" >
+ 		<div class="tc_ts_div_head" style="padding-top:4px;padding-bottom:4px;">
+			<label >提交成功</label>
+			 
+		</div> 
+		<div class="tc_ts_div_msg" id="ts_msg" style="color:#323232;line-height:50px;">
+		
+		</div> 
+		<div class="tc_ts_div_msg" id="ts_msg2" style="color:#323232;line-height:50px;"></div>
+		<div class="tc_ts_div_button" >
+			 <button class="tc_ts_div_sure" onclick="go_top();"  >随便逛逛</button> 
+			 <button class="tc_ts_div_sure2" onclick="share_show();" style="border-left:1px solid #dcdcdc;">分享我的成绩</button>
+		</div> 
+ 	</div>
+ 
+ </div>
+ 
+ <div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+ 
+<!--  <div class="menu_style" id="menu_id" style="background-color: #fff;">
+  	<div class=" menu_css"><img src='../../../img/wx/home-page.png' style="width: 25px;height: 25px;"><br>首页</div>	
+  	<div class=" menu_css"  onclick="discuss();"><img src='../../../img/wx/discuss.png' style="width: 25px;height: 25px;"><br>评论</div>		
+  	<div class=" menu_css"><img src='../../../img/wx/order.png' style="width: 25px;height: 25px;"><br>订阅</div>		
+  	<div class=" menu_css" onclick="collection();" id="collect_id"><img src='../../../img/wx/collect.png' style="width: 25px;height: 25px;"><br>收藏</div>
+  	</div> -->
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script> 
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>  
+<script type="text/javascript" src="../../../js/wx/ex_wx.js"></script>  
+<script type="text/javascript">
+  	
+  	var c_no="";
+  	//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ"; 
+  
+  var share_note ="学管理  上到答！";
+  
+  var share_url ="";
+  
+  var share_ul="exercise";	
+  var top_openid ="";
+  
+  
+  $(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			  get_discuss(); 
+		}
+		 
+	}
+  
+	
+	function   get_discuss(){
+		
+		 c_no = localStorage.getItem("c_no");
+	  		if(c_no==null){
+	  			c_no= Get_String("c_no");
+	  		}
+	  	 		
+	  	  
+	  	 top_openid = Get_String("share_id");
+	  	  
+	  	 
+	  	if(openid != null){
+	  		
+	  		$.ajax({
+	  	  		type:"post",
+	  	  		url: pt_path +'/course/show_exercise.do',
+	  	  		dataType:"json",
+	  	  		data:{"c_no":c_no,"open_id":openid},
+	  	  		success: function(data){
+	  	  			
+	  	  			/* if(data[0].course.type == 1){
+	  	  				share_url = "http://www.daodaketang.com/educate/jsp/wx/course/course_Detail.html?c_no="+c_no;
+	  	  			}else if(data[0].course.type == 0){
+	  	  				share_url = "http://www.daodaketang.com/educate/jsp/wx/course/bf_voice.html?c_no="+c_no;
+	  	  			} */
+	  	  			
+	  	  			
+	  	  		share_url="http://www.daodaketang.com/educate/jsp/pt/a_edit/show/1495714795.html";
+	  	  			
+	  	  		/* 	if(data[0].special.kind==1){
+	  	  			share_url = "http://www.daodaketang.com/educate/jsp/wx/course/special.html";
+	  	  			}else{
+	  	  				
+	  	  			share_url = "http://www.daodaketang.com/educate/jsp/wx/course/little_special_list.html";
+	  	  			} */
+	  	  			
+	  	  			if("success"==data[0].result){
+	  	  				
+	  	  				var count=data[0].count;
+	  	  					
+	  	  				if(count>0){
+	  	  					
+	  	  				$("#sss").show();
+	  	  					var e_log=data[0].e_log;
+	  	  					
+	  	  					var list=e_log.record;
+	  	  					
+	  	  					if(list.length>0){
+	  	  						var cc=0;
+	  	  						for(var l=0;l<list.length;l++){
+	  	  							
+	  	  							if(list[l].is_ok==1){
+	  	  								cc++;
+	  	  							}
+	  	  						}
+	  	  				var	share_note= "恭喜您在上次测试中获得"+cc*5+"分";
+	  	  			 
+	  	  				ts_show("恭喜您在上次次测试中获得 <span style='color:#2dc158'>"+cc*5+"</span>分,");
+	  	  				 
+	  	  				$("#ts_msg2").html("下次再接再接再厉！");
+	  	  			 
+	  	  						
+	  	  					}
+	  	  					
+	  	  				
+	  	  				}else{
+	  	  					
+	  	  				var exercise=data[0].exercise_list.list;
+  	  					var html="";
+  	  					if(exercise==null||exercise==""){
+  	  					
+  	  					html="<div>该专题还没有试卷！请耐心等待！</div>";
+  	  					
+  	  				$("#div_exercise").html(html);	
+  	  				}else{
+  	  				$("#sss").show();
+  	  				for(var i=0;i<exercise.length;i++){
+	  					var xh = i+1;
+	  							html +="<div style='margin-top:22px;padding-left:10px;padding-right:10px;border-radius:6px;background-color:#fff;line-height:30px;'><div name='all_problem' code='"+i+"' p_id='"+exercise[i].p_id+"'>"+xh+". "+exercise[i].problem+": </div>" 
+	  							+" <div style='padding-top:4px;padding-bottom:4px;border-bottom: 1px dashed #dcdcdc;'><span  class='city_no_choose'><img src='../../../img/wx/gou_01.png' check='0' val='A' name='problem_"+i+"'   onclick='choose_it(this);' style='width: 16px;height: 16px;margin-left: 10px; '></span> "+exercise[i].A+"</div>"
+			     				+"<div style='padding-top:4px;padding-bottom:4px;border-bottom: 1px dashed #dcdcdc;'><span><img src='../../../img/wx/gou_01.png' val='B' check='0' name='problem_"+i+"'  onclick='choose_it(this);'  style='width: 16px;height: 16px;margin-left: 10px; '></span> "+exercise[i].B+"</div>"
+			     				+"<div style='padding-top:4px;padding-bottom:4px;border-bottom: 1px dashed #dcdcdc;'><span><img src='../../../img/wx/gou_01.png' val='C' check='0' name='problem_"+i+"'  onclick='choose_it(this);'  style='width: 16px;height: 16px;margin-left: 10px; '></span> "+exercise[i].C+"</div>	"
+			     				+"<div style='padding-top:4px;padding-bottom:4px;'><span><img src='../../../img/wx/gou_01.png' val='D' check='0' name='problem_"+i+"'   onclick='choose_it(this);' style='width: 16px;height: 16px;margin-left: 10px; '></span> "+exercise[i].D+" 	</div></div> ";		 						
+	  					}
+	  							
+	  			$("#div_exercise").html(html);	
+  	  					
+  	  				}
+	  	  					
+	  	  				} 
+	  	  				
+	 	  				   
+	  	  				
+	  	  			}else{
+	  	  				alert("专题不存在");
+	  	  			}
+	  	  			
+	  	  			
+	  	  			
+	  	  		}
+	  	  		
+	  	  	});
+	  		set_top();
+	  	}
+		
+	}
+  
+				
+  			
+  	function choose_it(obj) {
+		var name = $(obj).attr("name");
+		 
+		
+		var arr = document.getElementsByName(name); 	
+		for(var i=0;i<arr.length;i++){
+			$(arr[i]).attr("src","../../../img/wx/gou_01.png");
+			$(arr[i]).attr("check","0");
+		}
+		$(obj).attr("src","../../../img/wx/gou_02.png");
+		$(obj).attr("check","1");
+			
+	}	
+  	
+  	
+  	function set_top(){
+  		
+  		 if(top_openid != null && top_openid != ""){
+  			 $.ajax({
+  					type:"post",
+  					dataType:"json",
+  					url:pt_path+"top/set_top.do",
+  					data : {"openid":openid,"top_openid":top_openid},
+  					success : function(data){
+  						
+  					}
+  			 });
+  		 } 
+  	}
+	
+	function ts_show(msg){
+	
+	$("#ts_msg").html(msg);
+	$("#myts").show();
+}
+
+function close_it(){
+	$("#myts").hide();
+}
+	
+function sub(){
+	 
+	var allproblem=document.getElementsByName("all_problem");
+	
+	var is_ok =1;
+	var no_code="";		
+	
+	var answer_arr = [];
+		  
+	for(var i=0;i<allproblem.length;i++){
+		
+		var code = $(allproblem[i]).attr("code");
+		var p_id = $(allproblem[i]).attr("p_id");
+			
+		var arr=document.getElementsByName("problem_"+code);
+		
+		var val="";
+		var num = 0;
+		
+		for(var j=0;j<arr.length;j++){
+		
+		  	if($(arr[j]).attr("check") == 1){
+		  		val = $(arr[j]).attr("val");
+		  		num ++;
+		  	}	
+		}
+		
+		if(num < 1){
+			is_ok = 0; 
+			no_code = code;
+		}
+		
+		var o ={"p_id":p_id,"val":val};	
+		
+		answer_arr.push(o); 
+	}
+	
+	if(is_ok == 0){
+		
+		var ppp ="";
+		
+		for(var i=0;i<allproblem.length;i++){
+			if($(allproblem[i]).attr("code") == no_code){
+				ppp="请回答问题"+$(allproblem[i]).text();
+			}
+		}
+		
+		//提示
+		$("#button_id").tips({
+			side : 1,
+			msg : '答案不能为空',
+			bg : '#2CC159',
+			time : 1
+		});
+	 
+		
+		return false;
+	}	
+	
+	var s_obj = {"answer_arr":answer_arr};
+			
+	var c_no = localStorage.getItem("c_no");
+	$.ajax({
+	type:"POST",
+	url:pt_path +'/course/checkexercise.do',
+	data:{"answer":JSON.stringify(s_obj),"c_no":c_no,"open_id":openid},
+	dataType:"json",
+	success:function(data){
+			if("success"==data[0].result){
+			//var count=data[0].count.all_size;
+			var ok_size=data[0].count.ok_size;
+			 
+			var score=ok_size*5;
+			 
+			share_note= "恭喜您在本次测试中获得"+score+"分";
+			
+			ts_show("恭喜您在本次测试中获得 <span style='color:#2dc158'>"+score+"</span>分,");
+			$("#ts_msg2").html("下次再接再接再厉！");
+				
+				
+						 
+						
+			} 
+		}
+			
+	});
+}
+
+function go_top(){
+	 
+	window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+}
+
+function close_share(){
+	$("#myshare").hide();
+}
+function share_show(){
+	$("#myshare").show();
+}
+
+function Get_String(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if ( r != null ){
+       return unescape(r[2]);
+    }else{
+       return null;
+    } 
+} 
+</script>
+</html>

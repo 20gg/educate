@@ -1,0 +1,525 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  
+	<link rel="stylesheet" href="../../../css/tanchu.css" /> 	
+	<link rel="stylesheet" href="../../../css/wx/video/little_class.css" type="text/css">
+  </head>
+  
+  <body>
+  
+  
+  		<div class="video" style='height:300px;'>
+			<img src="" id="img_id"  style="width:100%;height: 100%">
+		</div>
+  
+    
+    <div class='jianjie' id="top_video">
+			<h1 id="specia_names"> </h1>
+			<p id="specia_introdecues"> </p>
+			<div class='tb'>
+				<div class='dy'>
+					<h1 id="order_counts"></h1>
+					<h2>已订阅</h2>
+				</div>
+				<div class='ks'>
+					<h1 id="length_size"></h1>
+					<h2>课时</h2>
+				</div>
+				<div class='clearfix'></div>
+			</div>
+		</div>
+     <div  class='cont'> 
+     
+    <div class='title'><span></span><h1>课程内容</h1><div class='clearfix'></div></div>
+     
+     <div id="other_video"  style='width:100%;margin:auto auto;'></div>
+     
+     </div>
+    
+   	
+   		<div class='zj'>
+			<div class='title'>
+				<span></span>
+				<h1 >主讲介绍</h1>
+				<div class='clearfix'></div>
+			</div>
+			<h2 id="teacher_s">  </h2>			 
+		</div>
+		
+		
+		<div class='zj'>
+			<div class='title'>
+				<span></span>
+				<h1>适宜人群</h1>
+				<div class='clearfix'></div>
+			</div>
+			<h2 id="fit_people"> </h2>
+			 
+		</div>
+		
+		<div class='zj'>
+			<div class='title'>
+				<span></span>
+				<h1>课程详情</h1>
+				<div class='clearfix'></div>
+			</div>
+			<p id="special_tt"></p>
+		</div>
+   
+   <br> <br> <br> <br>
+       <div  id="bottom_id"  style="position: fixed; bottom:0px; width: 100%;z-index:10000;padding-bottom:0px;">
+  	
+  	</div>
+  	
+  	
+<div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+  </body>
+   <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+ <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript">
+  var c_no="";
+   
+  var top_openid ="";
+  
+  var share_ul="5";
+  
+  var get_share_ul="";
+  $(function() {
+	  c_no = Get_String("c_no");  
+	  get_share_ul = Get_String("share_ul");
+	 
+
+	 top_openid = Get_String("share_id");
+		 
+		if(c_no == null || c_no == ""){
+			c_no = localStorage.getItem("c_no");
+		 }else{
+			 localStorage.setItem("c_no", c_no);
+		 }
+		
+		
+		
+ });  
+  
+  </script> 
+  <script type="text/javascript" src="../../../js/wx/wx_sq2.js"></script>  
+ <script type="text/javascript" src="../../../js/wx/wx_me.js?v=3"></script>  
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+  <script type="text/javascript">
+	// var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";	
+	//var c_no="1500898226562";
+	
+ function Get_String(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);
+	    if ( r != null ){
+	       return unescape(r[2]);
+	    }else{
+	       return null;
+	    } 
+} 
+
+var dy = 0;
+var sc = 0;
+
+var share_url = "http://www.daodaketang.com/educate/jsp/wx/course/free_special.html?c_no=";
+
+var share_title_name="";
+var share_title_main="";
+var share_title_img="";
+
+	
+	 
+  	var watch=localStorage.getItem("watch");
+	var url_c=[];
+	
+	(function ajaxWatch(){
+		c_no=localStorage.getItem("c_no");
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/watched2.do',
+  	  		
+  	  		data:{id:c_no},
+  	  		dataType:"text"
+  	  		
+  		});
+  		
+  	})();
+	
+$(function() {
+	 
+	$("#myload").show();
+	wx_page_init();
+	
+	
+});
+
+function set_top(){
+	
+	 if(top_openid != null && top_openid != ""){
+		 $.ajax({
+				type:"post",
+				dataType:"json",
+				url:pt_path+"top/set_top.do",
+				data : {"openid":openid,"top_openid":top_openid,"share_ul":get_share_ul},
+				success : function(data){
+					
+				}
+		 });
+	 } 
+}
+  		
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		
+		 
+		 
+	  		$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/special_detail.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"watch":watch,"open_id":openid},
+	  		success: function(data){
+	  			
+	  			$("#myload").hide();
+	  			
+	  			dy = data[0].dy;
+	  			sc = data[0].sc;
+	  			if(data[0].user.role == 1){
+	  				dy =1;
+	  			}
+	  			
+	  			if(dy > 0){
+				setTimeout(function(){
+  		  				
+  		  				location=location;
+  		  			}, 100);
+	  				window.location.href=pt_path+'jsp/wx/course/af_little_special.html';
+	  			}
+	  			
+	  			var special=data[0].special;
+	  			
+	  			
+	  			
+	  			share_title_name=special.share_title;
+	  			var str_bule=special.introduce2;
+	  			
+	  			var str_sharee_img=special.sharee_img;
+	  			
+	  			
+	  				if(str_sharee_img==null ||str_sharee_img==""){
+	  					share_title_img="http://www.daodaketang.com/educate/img/logo.jpg";
+	  				}else{
+	  					
+	  					share_title_img=str_sharee_img;
+	  				}
+	  			
+	  			
+	  			if(str_bule==null || str_bule==""){
+	  				share_title_main="学管理 上到答";
+	  			}else{
+	  				
+	  				if(str_bule.length>30){
+	  					share_title_main=str_bule.substring(0,30);
+	  				}else{
+	  					share_title_main=str_bule;
+	  				}
+	  				
+	  			}
+	  			
+	  			
+	  			
+	  			
+	  			var user=data[0].user;
+	  			var text="";
+	  			
+	  				var html="";      
+	  				var html2=""; 
+	  				 
+	  				var html6="";
+	  				
+					var tt = special.text;
+	  				
+					var buy_img=special.buy_img;
+  					if(buy_img==null|| buy_img==""){
+  						buy_img=special.img;	  						
+  					}
+	  				 
+	  			   			
+	  			if(c_no==special.special_no){
+	  				if(user.role==0&&user.state==0  || user.role==3 && user.state==0){
+	  					
+	  					text=special.text;
+	  					
+	  					if(text.length>25){
+	  						text.substring(0,25);
+	  					}
+	  				
+	  					$("#img_id").attr("src",special.img);
+	  					 	
+	  					
+	  					$("#specia_names").text(special.special_name);
+	  					
+	  					$("#specia_introdecues").text(text);
+	  					
+	  					$("#order_counts").text(special.order_count);
+	  					 
+	  					
+	  					$("#length_size").text(special.url.length);
+	  					
+	  					
+	  					$("#teacher_s").text(special.teacher);
+	  					
+	  					$("#fit_people").text(special.fit_people);
+	  					$("#special_tt").text(special.text);
+	  							
+	  					 var op=0;
+	  					
+	  					url_c=special.url;
+	  						  
+	  					/* if(ccourse_list != null && ccourse_list.length > 0){
+	  						for (var j=0;j<ccourse_list.length;j++){
+	  							
+	  							 op++;
+	  							
+	  							html2+=
+	  							"<div class='cl' onclick='free_video(this);'code='"+j+"'  special_type='"+special.type+"'  special_no='"+special.special_no+"' watch='"+special.watch+"'>"
+	  							+"<h1>"+op+".第0"+op+"讲丨"+ccourse_list[j].c_name+"0"+op+"</h1><div class='time'><img src='../../../images/sanjiao.jpg'>"
+	  							+"<h2>"+formatSeconds(ccourse_list[j].time)+"/</h2><h3>"+ccourse_list[j].watch+"次学习</h3><div class='clearfix'></div></div></div>";
+	  							
+	  							 
+		  						 
+		  					  }$("#other_video").html(html2);
+	  					} */
+	  					
+	  					if(c_no == special.special_no ){
+	  						
+	  						var time_list=special.time_list;
+	  							
+	  						var viedo_time="";
+	  						 
+	  						 
+	  				
+									if(time_list.length>0){
+										for(var ss=0;ss<time_list.length;ss++){
+											viedo_time=time_list[ss].time;
+											
+											op++;
+				  							
+				  							html2+=
+				  							"<div class='cl' onclick='free_video(this);'   special_type='"+special.type+"'  special_no='"+special.special_no+"' watch='"+special.watch+"'>"
+				  							+"<h1>"+op+".第0"+op+"讲丨"+special.special_name+"</h1><div class='time'><img src='../../../images/sanjiao.jpg'>"
+				  							+"<h2>"+formatSeconds(viedo_time)+"/</h2><h3>"+special.watch+"次学习</h3><div class='clearfix'></div></div></div>";
+				  							
+										}
+	  							}else{
+	  								
+	  								html2+="<div style='font-size:13px;color:#888'>该视频正在加载中请稍等十分钟</div>"
+			  						
+			  							
+	  							}
+								 
+		  					  $("#other_video").html(html2);
+	  					}
+	  					html6="<div class='footer' style='padding-bottom:0px;width:100%;bottom:0px;'>"
+	  						+"<div style='width:50%;border-radius:0px;' class='free'onclick='free_video(this);'code='0'   special_no='"+special.special_no+"' watch='"+special.watch+"'>免费试看</div>"
+	  						+"<div style='width:50%;border-radius:0px;' class='buy' onclick='pay_menoy(this);' special_no='"+special.special_no+"'>订阅 :￥"+toDecimal2(special.price/100)+"/年</div>"
+	  						+"<div class='clearfix'></div></div>";
+	  					 
+	  					  $("#bottom_id").html(html6);
+	  				}
+	  						
+	  			}	  				
+	  			  
+	  		}
+		
+	  });
+	  		
+	  		
+	  		set_top();
+	  		
+	}
+	
+}
+	
+	/*  var is_zk =1;
+		function zhanka(obj){
+	  		var text=$(obj).attr("val");
+	  		 
+	  		if(is_zk ==0){
+	  			$("#a_id").html("收起详情");
+	  			
+	  			$("#go_kai").html("<div style='padding:2% 2%;color:#9F9F9F;'>"+text+"</div>");
+	  			
+	  			is_zk = 1;
+	  		}else{
+	  			$("#a_id").text("专题详情");
+	  			
+	  			if(text.length > 10){
+	  				text = text.substring(0,10)+"...";
+  				}
+	  			
+	  			$("#go_kai").html("<div style='padding:2% 2%;color:#9F9F9F;'>"+text+"</div>");
+	  			
+	  			is_zk = 0;
+	  		}	
+	  	} */
+	  	 
+	  	function detail(obj){
+			var code = $(obj).attr("code");
+	  		
+	  		var path = url_c[code];
+	  		
+	  		 
+	  		localStorage.setItem("path", path );
+	  		
+	  		
+	  		var c_no=$(obj).attr("special_no");
+	  		 
+	  		localStorage.setItem("c_no", c_no );
+			
+	  		var watch=$(obj).attr("watch");
+	  		
+	  		localStorage.setItem("watch", watch);
+	  		
+	  		
+			window.location.href=pt_path+'jsp/wx/course/special_Detail_too.html';
+		}
+	  	
+	  	function free_video(obj){
+			 	
+	  		var code = $(obj).attr("code");
+	  		var path = url_c[code];
+	  		
+	  		  
+	  		localStorage.setItem("path", path );
+	  		
+	  		localStorage.setItem("c_no", c_no );
+			 
+	  		localStorage.setItem("watch", watch);
+	  		 
+	  			
+	  					window.location.href=pt_path+'jsp/wx/course/bf_little_sp.html?v=123';	  					
+	  				
+			
+		}
+ 	 function add_study(see_time,is_end){
+		
+	}  	
+ 	  function close_share(){
+ 			$("#myshare").hide();
+ 		}
+ 	function share_show(){
+ 		 
+ 		  
+ 			$("#myshare").show();
+ 		}
+ 	
+ 	 function pay_menoy(obj){
+		 var special_no=$(obj).attr("special_no");
+		 
+		  localStorage.setItem("special_no", special_no);
+		  if(dy < 1){
+			  window.location.href=pt_path+"wxpay/into_buy.do?c_no="+special_no+"&openid="+openid+"&kind=2";
+		  }else{
+			  window.location.href=pt_path+'jsp/wx/course/af_special.html';
+		  }
+		 
+			 
+		 }
+ 	 
+ 	
+  	//制保留2位小数，如：2，会在2后面补上00.即2.00    
+ 	function toDecimal2(x) {    
+ 	    var f = parseFloat(x);    
+ 	    if (isNaN(f)) {    
+ 	        return false;    
+ 	    }    
+ 	    var f = Math.round(x*100)/100;    
+ 	    var s = f.toString();    
+ 	    var rs = s.indexOf('.');    
+ 	    if (rs < 0) {    
+ 	        rs = s.length;    
+ 	        s += '.';    
+ 	    }    
+ 	    while (s.length <= rs + 2) {    
+ 	        s += '0';    
+ 	    }    
+ 	    return s;    
+ 	}
+  	
+  	
+ 	/**
+
+ 	* 将秒数换成时分秒格式
+
+ 	* 整理：www.jbxue.com
+
+ 	*/
+
+ 	  
+
+ 	function formatSeconds(value) {
+
+ 	    var theTime = parseInt(value);// 秒
+
+ 	    var theTime1 = 0;// 分
+
+ 	    var theTime2 = 0;// 小时
+
+ 	    if(theTime > 60) {
+
+ 	        theTime1 = parseInt(theTime/60);
+
+ 	        theTime = parseInt(theTime%60);
+
+ 	            if(theTime1 > 60) {
+
+ 	            theTime2 = parseInt(theTime1/60);
+
+ 	            theTime1 = parseInt(theTime1%60);
+
+ 	            }
+
+ 	    }
+
+ 	        var result = ""+parseInt(theTime)+"秒";
+
+ 	        if(theTime1 > 0) {
+
+ 	        result = ""+parseInt(theTime1)+"分"+result;
+
+ 	        }
+
+ 	        if(theTime2 > 0) {
+
+ 	        result = ""+parseInt(theTime2)+"小时"+result;
+
+ 	        }
+
+ 	    return result;
+
+ 	}
+  </script>
+</html>

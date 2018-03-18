@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+      <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="../../css/wx/buy_online/personal_mes.css" type="text/css">
+  
+  
+  
+  </head>
+  
+  <style type="text/css">
+  
+  
+  	.div_2{
+  	width:100%;
+  	float:left;
+  	color: blue; border-bottom: solid 2px #f4f4f4;
+  	 line-height: 40px;
+  	  
+  	 
+  	}
+  	
+  	.button_css{
+  		color:white;
+  		position:fixed;bottom:0px;left:0px;
+  		background-color: #4876FF;
+  		width: 100%;
+  		line-height: 50px;
+  	}
+  
+  </style>
+  
+  <body style="overflow-x: hidden;">
+  
+   
+   		<div class="top_box" >
+			
+			<div class="row">
+				<div class="col1">姓名</div>
+				<div class="col2">
+				<input  type="text" placeholder="请填写您的姓名" style="border: none;padding-top: 15px;"  id="name">
+				
+				</div>
+				<div class="clearfix"></div> 
+			</div>
+			<div class="row" >
+				<div class="col1">手机</div>
+				<div class="col2">
+				
+				<input   placeholder="请填写您的手机" style="border: none;padding-top: 15px;" id="phone">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col1">公司</div>
+				<div class="col2">
+				<input   placeholder="请填写您的公司" style="border: none;padding-top: 15px;" id="company">				
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="row" style="border:none;padding-top: 15px;">
+				<div class="col1">职称</div>
+				<div class="col2">
+			<input   placeholder="请填写您的职位" style="border: none;padding-top: 15px;" id="job">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+		</div>
+		<div class="button" onclick="join_vip();">
+			<span id="join_button" >立即加入</span>
+		</div>
+   	
+   
+  		
+  	
+  	   
+  </body>
+<script type="text/javascript" src="../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../js/wx/wx_public.js"></script>
+<script type="text/javascript" src="../../js/wx/wx_pay.js"></script>
+<script type="text/javascript" src="../../js/jquery.tips.js"></script>
+<script type="text/javascript">
+ // var openid="oLir8jsYupMTLDJnaWjdVC-l7OJE";
+  
+   $(function() {
+	   
+	   alert(openid);
+	 
+	 var top_openid = Get_String("share_id");
+	 
+	 if(top_openid == null){
+		 top_openid = openid;
+	 }
+	 	
+	 $.ajax({
+			type:"post",
+			dataType:"json",
+			url:pt_path+"top/set_top.do",
+			data : {"openid":openid,"top_openid":top_openid},
+			success : function(data){
+				var user=data[0].user;
+				
+				if(user.u_name != null){
+					$("#name").val(user.u_name);
+				}
+				if(user.phone != null){
+					$("#phone").val(user.phone);
+				}
+				if(user.company != null){
+					$("#company").val(user.company);
+				}
+				if(user.job != null){
+					$("#job").val(user.job);
+				}
+			
+				if(user.role==1){
+					
+					 
+					
+					$("#join_button").hide();
+				}else{
+					$("#join_button").show();
+				}
+				
+			}
+			
+			
+		});
+	 
+});
+    
+  
+function Get_String(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);
+	    if ( r != null ){
+	       return unescape(r[2]);
+	    }else{
+	       return null;
+	    } 
+}
+
+ 
+function join_vip() {
+ 		
+ 			$("#join_button").attr("disabled", true);
+ 		
+ 			var name=$("#name").val();
+ 			var phone=$("#phone").val();
+ 			var company=$("#company").val();
+ 			var job=$("#job").val();
+ 		
+ 			 		
+ 			if(name==null||name==""){
+			$("#name").tips({
+				side : 3,
+				msg : '请输入姓名',
+				bg : '#2dc158',
+				time :3
+			});
+			
+			$("#join_button").attr("disabled", false);
+			return false;
+		}	
+ 			
+ 			if(phone==null||phone=="" || isPhone(phone) == false){
+			$("#phone").tips({
+				side : 3,
+				msg : '请输入手机',
+				bg : '#2dc158',
+				time :2
+			});
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+
+ 			if(company==null||company==""){
+			$("#company").tips({
+				side : 3,
+				msg : '请输入公司',
+				bg : '#2dc158',
+				time :2
+			});
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+	
+ 			if(job==null||job==""){
+			$("#job").tips({
+				side : 3,
+				msg : '请输入职位',
+				bg : '#2dc158',
+				time :2
+			});
+			
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+ 			
+		 $.ajax({
+			type:"post",
+			dataType:"json",
+			url:pt_path+"wxpay/buy_vip.do",
+			data : {"openid":openid,"name":name,"phone":phone,"company":company,"job":job},
+			success : function(data){
+				
+				if(data[0].back_code == 1){
+					
+					//order_id = ;
+					//kind = 2;
+					
+					into_pay(data[0].order_id,2);
+					
+				}else{
+					alert("申请vip失败！");
+				}
+				
+			}
+		 });
+ 		  
+}
+ 	
+function isPhone (string) {    
+	var pattern = /^1[34578]\d{9}$/;    
+	if (pattern.test(string)) {        
+	    return true;    
+	}else{
+		return false;
+	}  
+}
+  
+   
+</script>
+  
+</html>

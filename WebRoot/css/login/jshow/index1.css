@@ -1,0 +1,404 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #494949;
+    font-size: 12px;
+    font-family: "微软雅黑";
+}
+
+ul li{
+    font-style: normal;
+    list-style-type: none;
+}
+a:visited {
+    color: #494949;
+    text-decoration: none;
+}
+a:link {
+    color: #494949;
+    text-decoration: none;
+}
+a, img, input {
+    outline: none;
+}
+b, i {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-style: normal;
+}
+.container {
+    padding: 50px 0 0 10px;
+    position: relative;
+    width:1000px;
+}
+/***待办事项 start*******/
+.toDo {
+    border: 1px solid #d7d7d7;
+    overflow: hidden;
+    background: #fff;
+    padding-left:0;
+}
+
+.toDo li {
+    float: left;
+    width: 195px;
+    height: 70px;
+    padding-top: 70px;
+    border-left: 1px solid #d7d7d7;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+li.toDo li:first-child {
+    border-left: 0!important;
+}
+.toDop1 {
+    width: 40px;
+    height: 37px;
+    background: url(img/toDo.png) no-repeat 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -42px 0 0 -20px;
+}
+.toDo .font {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    text-align: center;
+    line-height: 16px;
+    padding: 0 5px;
+    border-radius: 8px;
+    background: #ff7100;
+    color: #fff;
+}
+.toDop2 {
+    width: 40px;
+    height: 37px;
+    background: url(./img/toDo.png) no-repeat 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -42px 0 0 -20px;
+    background-position: -60px 0;
+}
+.toDop6 {
+    width: 40px;
+    height: 37px;
+    background: url(./img/toDo.png) no-repeat 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -42px 0 0 -20px;
+    background-position: -238px ;
+}
+.toDop5 {
+    width: 40px;
+    height: 37px;
+    background: url(./img/toDo.png) no-repeat 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -42px 0 0 -20px;
+    background-position: -298px 0;
+}
+.toDo .title {
+    color: #222;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 35px;
+}
+.toDo .text {
+    color: #999;
+    display: block;
+}
+
+/***企业钱余额***/
+.userInfo {
+    width: 998px;
+    background: #fff;
+    border: 1px solid #ced7da;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.userAcco {
+    padding: 13px 0px 10px 30px;
+    position: relative;
+    width: 185px;
+    float: left;
+}
+.userAcco .step {
+    padding-left: 60px;
+    background: url(./img/cashIcon.png) no-repeat 0 0;
+}
+.userAcco i {
+    font-size: 16px;
+}
+.userAcco .red {
+     display: block;
+     font-weight: normal;
+     padding: 7px 0;
+ }
+.userAcco b {
+    display: block;
+    font-size: 18px;
+}
+.red {
+    color: #fa0008;
+}
+.userAcco .btn {
+    background: #ff8106;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 10px;
+    width: 155px;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+.userAcco .btn:hover {
+    background: #ff4e02;
+}
+.userLcol {
+    line-height: 32px;
+    padding: 10px 25px 10px 0;
+    border-right: 1px solid #e1e1e1;
+    border-left: 1px solid #e1e1e1;
+    width: 450px;
+    float: left;
+}
+.userLcol ul {
+    float: left;
+    height: 92px;
+}
+.userLcol li {
+    display: inline-block;
+    padding-left: 30px;
+    width: 185px;
+}
+.userLcol i {
+    color: #494949;
+}
+.userCounts {
+    float: right;
+    width: 295px;
+}
+.userCounts .title {
+    line-height: 30px;
+    position: relative;
+    height: 30px;
+    font-size: 14px;
+    margin-top: 3px;
+}
+.userCounts .noticeIcon {
+    background: url(./img/notice2.png) no-repeat 0 0;
+    width: 19px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    left: 2px;
+    margin-right: 5px;
+}
+.userCounts .more {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 12px;
+}
+.userCounts .more:hover{
+    color:red;
+}
+.userCounts .list {
+    line-height: 24px;
+    padding-top: 1px;
+}
+.userCounts ul li.top a {
+     color: Red;
+ }
+ul{
+    padding-left:0;
+}
+.blank10 {
+    height: 10px;
+    font-size: 1px;
+    clear: both;
+    overflow: hidden;
+}
+
+/****流程图******/
+.flowChart {
+    padding: 10px 0 0 20px;
+    border: 1px solid #dedede;
+    background: #fff;
+    overflow: hidden;
+}
+.flowChart .menu {
+    position: relative;
+    z-index: 995;
+    background: url(./img/flowChart2.png) no-repeat 0 37px;
+    height: 80px;
+    overflow: hidden;
+}
+.flowChart .menu li {
+    height: 80px;
+    overflow: hidden;
+    display: inline-block;
+    width: 135px;
+}
+.flowChart .menu .title1 {
+    width: 135px;
+    padding-right: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+.flowChart .menu .fci1 {
+    left: 10px;
+    width: 135px;
+    display:block;
+}
+.flowChart .menu span {
+    background: url(./img/flowChart2.png) no-repeat 0 -53px;
+    position: absolute;
+    bottom: -75px;
+    height: 38px;
+    z-index: 1;
+}
+.flowChart .menu li i {
+    font-size: 15px;
+    font-style: normal;
+    display: inline-block;
+    padding-top: 10px;
+    color: #939da6;
+    z-index: 9;
+    height: 80px;
+    left: 70px;
+    position: absolute;
+}
+.flowChart .menu .title1 i {
+    left: 50px;
+}
+.flowChart .menu .title2 {
+    width: 135px;
+    padding-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 95px;
+}
+.flowChart .menu .fci2 {
+    left: -95px;
+    width: 270px;
+    display: none;
+}
+.flowChart .menu .title2 i {
+    left: 80px;
+}
+.flowChart .menu .title3 {
+    width: 135px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 240px;
+}
+.flowChart .menu .fci3 {
+    left: -240px;
+    width: 405px;
+    display: none;
+}
+.flowChart .menu .title4 {
+    width: 135px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 380px;
+}
+.flowChart .menu .fci4 {
+    left: -380px;
+    width: 540px;
+    display: none;
+}
+.flowChart .menu .title5 {
+    width: 135px;
+    padding-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 515px;
+}
+.flowChart .menu .fci5 {
+    left: -515px;
+    width: 675px;
+    display: none;
+}
+.flowChart .menu .title6 {
+    width: 135px;
+    padding-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 655px;
+}
+.flowChart .menu .fci6 {
+    left: -655px;
+    width: 810px;
+    display: none;
+}
+.flowChart .menu .title7 {
+    width: 135px;
+    padding-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 790px;
+}
+.flowChart .menu .fci7 {
+    left: -790px;
+    width: 945px;
+    display: none;
+}
+
+.flowChart .cont {
+    width: 938px;
+    overflow: hidden;
+    padding: 0px 20px 30px 20px;
+    display: none;
+}
+.flowChart .cont li {
+    float: left;
+    margin-top: 10px;
+    height: 30px;
+}
+.flowChart .cont li a {
+    width: 120px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 5px;
+    background: #f3f9fb;
+    border: 1px solid #c9d9de;
+    display: inline-block;
+    color: #333;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 2px;
+}
+.flowChart .point2 {
+    width: 13px;
+    height: 30px;
+    background: url(./img/pane_2.png) no-repeat 0 12px;
+    display: inline-block;
+    margin: 0px 14px;
+}

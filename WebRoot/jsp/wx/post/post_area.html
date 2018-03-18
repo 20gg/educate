@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+		 
+		<title>到答课堂</title>
+		
+		<link rel="stylesheet" href="../../../css/wx/discuss/discuss.css" type="text/css"> 
+		 <!-- 轮播 -->
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/swiper.min.css"/>
+	    
+	    <link rel="stylesheet" href="../../../css/wx_menu.css"> 
+	     <link rel="stylesheet" href="../../../css/post.css"> 
+	    <link rel="stylesheet" href="../../../css/tanchu.css" />
+	    
+ 
+		
+	</head>
+	<body style="overflow-x: hidden;">
+		 <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+ 
+				<img id="role_img" src="../../../img/role/role0.png"> 
+			</div>
+		 
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+		<!-- 轮播 -->
+		<div class="swiper-container">
+		<ul class="swiper-wrapper" id="lunbo_list">
+			<!-- <li class="swiper-slide" >
+				<a href="http://www.baidu.com"  class="custom-url">
+					<img src="../../../js/lunbo/img/1.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+			  -->
+		</ul>
+		<div class="swiper-pagination"></div>
+	</div>
+	  <!-- 轮播 -->
+			  
+		<div class="b_link">
+			<div class="title">
+				<span></span>
+				<h1>讨论内容</h1>
+				<div class="publish">
+					<div class="img">
+						<img src="../../../images/discuss/pen.png">
+					</div>
+					<h2 id="forbit" onclick="show_add();">发表评论</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		
+		<div id="all_post" >
+			<!-- <div class="tl">
+			<div class="column">
+				<div class="b_bg">
+					<img src="../../../images/vedio/touixiang1.png">
+				</div>
+				<div class="b_text">
+					<div class="b_title">书童要考公务员</div>
+					<div class="time">2017.04.27</div>
+				</div>
+				<h1>国家公务员考试申论基础强化</h1>
+				<p>很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！</p>
+				<div class="view2">
+					<img src="../../../images/discuss/zan.png" >
+					<div class="b_numb1">123123</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>		
+			</div> -->
+		</div> 
+		 
+		<div class="more" id="jia_zai" onclick="jia_zai();">加载更多</div>
+		<br><br><br><br>
+		<!-- 菜单 -->
+	<div class="wx_menu_page" >
+		<div class="wx_menu_one" onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl2.png"></div>
+			<div class="menu_x menu_green">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x">我的</div>
+		</div>
+	</div> 
+	
+		
+		<!-- 弹出 -->
+<div class="post_tc_back" style="display: none;" id="add_page">
+	<div class="tc_page">
+		<div class="tc_head"><label>发布话题</label>
+		<span style="float: right;" onclick="close_add();"> x</span>
+		</div>
+		<div class="tc_title">
+		 	<input type="text" id="add_title" placeholder="请输入标题" maxlength="24"
+		 	 style="height: 22px;outline: none;-moz-appearance:none;  -webkit-appearance:none;  border: 1px solid #ddd;" >
+		</div>
+		<div class="tc_context">
+			<textarea id="add_context" placeholder="请输入话题内容" maxlength="200" style="outline: none;-moz-appearance:none;  
+    -webkit-appearance:none;border: 1px solid #ddd; "></textarea>
+		</div> 
+		<div class="tc_foot">
+		<div class="tc_foot_a"><button class="tc_but2" onclick="aite();">@导师</button></div>
+			<div class="tc_foot_a"><button id="tip" class="tc_but1" onclick="commit_add();">确定</button></div>
+			
+		</div>
+	</div> 
+</div>
+
+ <div class="load_tc_back" style="display: none;" id="myload">
+	<div class="load_tc_page">
+		<div class="load_tc_img">
+		</div>
+	</div>
+</div> 
+		
+		
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+
+<script type="text/javascript" src="../../../js/lunbo/js/swiper-3.2.5.min.js"></script>
+<script type="text/javascript" src="../../../js/lunbo/js/banner-swiper.js"></script> 
+
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js?v=2"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>   
+<script type="text/javascript">
+ 
+
+//var openid ="ok4o7waQyK5dri1qmHs9fIxhJY58";
+ 	var share_ul="post_area";
+$(function() { 
+	var t1 = window.setInterval(doRefresh,1000); 
+	 
+});
+
+  function doRefresh()
+{
+	var needRefresh = sessionStorage.getItem("need-refresh");
+   
+    if(needRefresh){
+        sessionStorage.removeItem("need-refresh");
+        
+        location.reload();
+    }
+   
+}  
+ 
+ 
+var page_num =1;
+var page_count =1;
+
+var is_load = false;
+
+function close_add(){
+	$("#add_page").hide();
+	$("body").scrollTop(0);
+}
+
+function show_add() {
+	$("#add_title").val("");
+	$("#add_context").val("");
+	$("#add_page").show();
+	
+	 $("body").scrollTop(0);
+}
+
+$(function () {
+    var needRefresh = localStorage.getItem("need-refresh");
+    if(needRefresh){
+    	localStorage.removeItem("need-refresh");
+    	 var ram = Math.random();
+    	 location.href = pt_path +"/jsp/wx/post/post_area.html?p="+ram; 
+       // location.reload();
+    }
+});
+
+$(document).ready(function(){
+	
+	wx_page_init();
+});
+
+
+function wx_page_init(){
+	
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		get_post(1);
+	}
+	 
+}
+
+/*初始化轮播*/
+var pagi = null, time = null, loo = null;
+var swiper;
+
+function init_lunbo () {
+	if ($(".swiper-wrapper .swiper-slide").length > 1) {
+		pagi = ".swiper-pagination";
+		time = "2500";
+		loo = true;
+	} else {
+		pagi = null;
+		time = null;
+		loo = null;
+	}
+	
+	swiper = new Swiper('.swiper-container', {
+		pagination : pagi,
+		paginationClickable : true,
+		spaceBetween : 0,
+		centeredSlides : true,
+		autoplay : time,
+		loop : loo,
+		autoplayDisableOnInteraction : false
+	});
+} 
+/*初始化轮播*/
+
+function get_post(page){
+	
+
+	
+	//$("#myload").show();
+	 
+	 $.ajax({
+  		type:"post",
+  		url: pt_path +"/area/query_post_page.do",
+  		dataType:"json",
+  		data:{"openid":openid,"page":page},
+  		success: function(data){
+  			
+  			
+  			
+  			if(page == 1){
+  			//显示轮播 
+  	  			var lunbo_list = data[0].lunbo_list; 
+  	  			if(lunbo_list.length > 0){ 
+  	  				
+  	  				$("#lunbo_list").show();
+  	  				
+  	  				var lunbo ="";
+  	  				for(var i=0;i< lunbo_list.length;i++){
+  	  					
+  	  					var link ="";
+  	  					if(lunbo_list[i].link != null && lunbo_list[i].link !=""){ 
+  	  						link =" href='"+lunbo_list[i].link+"' "; 
+  	  					}
+  	  					
+  	  					var n = lunbo_list[i].name; 
+  	  					if(n.length >10){
+  	  						n = n.substring(0,10)+"...";
+  	  					}
+  	  					
+  	  					var l ="<li class='swiper-slide'> <a class='custom-url' "+link+"> <img src='"+pt_path+lunbo_list[i].img+"'>"
+  						+"<div>"+n+"<span>"+lunbo_list[i].cdate+"</span></div> </a> </li>";
+  						
+  						lunbo = lunbo+l; 
+  	  				}
+  	  				
+  	  				$("#lunbo_list").html(lunbo);
+  	  				
+  	  				init_lunbo();
+  	  				
+  	  			}else{
+  	  				
+  	  				$("#lunbo_list").hide();
+  	  			}
+  			} 
+  			
+  			
+  			if(data[0].user.head != null && data[0].user.head != ""){ 
+   				$("#head_img").attr("src",data[0].user.head);
+   			}else{ 
+   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+   			}
+   			
+   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+   			
+   			$("#my_name").text(data[0].user.name);
+   			
+			if(data[0].user.role!=1){ 
+				$("#my_name").after("<a class='top_span' onclick='go_vip();'>会员升级</a>"); 
+			} 
+   			 
+  			
+  			//禁言
+  			if(data[0].user.forbit == null || data[0].user.forbit == 0){
+  				$("#forbit").show();
+  			}else if( data[0].user.forbit == 1){
+  				$("#forbit").hide();
+  			}
+  			
+  			page_num = data[0].page_num;
+  			page_count = data[0].page_count;
+  			
+  			if(page_num >= page_count){
+  				$("#jia_zai").hide();
+  			}else{
+  				$("#jia_zai").show();
+  			}
+  			
+  			if(data[0].post_list != null && data[0].post_list.length > 0 ){
+  				
+  				var list =  data[0].post_list; 
+  				var html =""; 
+  				for(var i=0;i<list.length;i++){
+  					
+  					var img = "../../../img/post/head.png";
+  					
+  					if(list[i].head != null && list[i].head !=""){
+  						img =list[i].head; 
+  					}
+  					
+  					 var z_c ="b_numb1";
+  					 var z_i ="../../../img/post/zan1.png";
+  					 
+  					 var dp="../../../img/post/vv.png";
+  					 
+  					 if(list[i].zan_state == 1){
+  						  z_c ="b_numb2";
+  	  					  z_i ="../../../img/post/zan2.png";
+  					 }
+  					 
+  					 var zzz = list[i].zan;
+  					 if(zzz <= 0){
+  						zzz = 0; 
+  					 }
+  					
+  					var p="<div  class='tl'> <div class='column'><div pid='"+list[i]._id+"' onclick='into_post(this);'>"
+  						+"<div class='b_bg'> <img src='"+img+"'></div>"
+  						+"<div class='b_text'> <div class='b_title'>"+list[i].name+"</div> <div class='time'>"+list[i].ctime+"</div> </div>"
+  						+"<h1>"+list[i].title+"</h1> <p>"+list[i].context+"</p> </div>"
+  						+"<div class='view2' style='width:17%'> <span class='"+z_c+"' id='zan_num"+i+"'>"+zzz+"</span>"
+  						+"<img pid='"+list[i]._id+"' code='"+i+"' onclick='zan(this);' zan='"+list[i].zan_state+"' src='"+z_i+"'>" 												
+  						+"</div>"
+  						+"<div class='view2'style='width:17%'> <span class='"+z_c+"' >点评</span>"
+  						+"<img   pid='"+list[i]._id+"' onclick='into_post(this);' src='"+dp+"'>"
+  						
+  						+"</div>"
+  						
+  						+"<div class='clearfix'></div> </div> </div>";
+  					
+  					 
+	  				
+  					html = html+p;
+  				}
+  				
+  				$("#all_post").append(html);
+  				
+  			}
+  			
+  			
+  			$("#myload").hide(); 
+  		}
+	 });
+	  
+}
+
+
+function jia_zai(){
+	
+	var p = Number(page_num) + 1;
+	
+	if(p <= page_count){
+		get_post(p);
+	}
+}
+
+function commit_add(){
+	
+	var title = $("#add_title").val();
+	
+	if(title == ""){
+		$("#tip").tips({
+			side : 1,
+			msg : "请输入标题！",
+			bg : '#2CC159',
+			time : 1
+		});
+		
+		return false;
+	}
+	 
+	var context = $("#add_context").val();
+	
+	if(context == ""){
+		$("#tip").tips({
+			side : 1,
+			msg : "请输入话题内容！",
+			bg : '#2CC159',
+			time : 1
+		});
+		
+		return false;
+	}
+	
+	$("#myload").show();
+	
+	 $.ajax({
+ 		type:"post",
+ 		url: pt_path +"/area/add_post.do",
+ 		dataType:"json",
+ 		data:{"openid":openid,"title":title,"context":context},
+ 		success: function(data){
+ 			
+ 			if(data[0].back_code == 200){
+ 				$("#myload").hide();
+ 				
+ 				location.href = pt_path +"/jsp/wx/post/post_area.html"; 
+ 			}
+ 		}
+	 });
+	
+}
+
+
+function zan(obj){
+	 
+	var zan = $(obj).attr("zan");
+	
+	var _id = $(obj).attr("pid");  
+	var code = $(obj).attr("code"); 
+	var num = $("#zan_num"+code).text();
+	
+	if(zan == 0){
+		 
+		var n = Number(num)+1; 
+		$("#zan_num"+code).text(n); 
+		$("#zan_num"+code).attr("class","b_numb2"); 
+		
+		$(obj).attr("zan",1); 
+		$(obj).attr("src","../../../img/post/zan2.png");
+		
+		$.ajax({
+	 		type:"post",
+	 		url: pt_path +"/area/zan_post.do",
+	 		dataType:"json",
+	 		data:{"post_id":_id,"kind":1,"openid":openid},
+	 		success: function(data){
+	 			
+	 		}
+		});
+	}else{
+		var n = Number(num)-1; 
+		
+		if(n< 0){
+			n = 0;
+		}
+			
+		$("#zan_num"+code).text(n); 
+		$("#zan_num"+code).attr("class","b_numb1"); 
+			
+		$(obj).attr("zan",0); 
+		$(obj).attr("src","../../../img/post/zan1.png");
+			 
+		 
+		
+		$.ajax({
+	 		type:"post",
+	 		url: pt_path +"/area/zan_post.do",
+	 		dataType:"json",
+	 		data:{"post_id":_id,"kind":2,"openid":openid},
+	 		success: function(data){
+	 			
+	 		}
+		});
+	}
+}
+
+function into_post(obj){
+	
+	var post_id = $(obj).attr("pid"); 
+	localStorage.setItem("post_id", post_id);
+	
+	 var ggg = ggg_num();
+	
+	location.href = pt_path +"/jsp/wx/post/post_log.html?ggg="+ggg; 
+}
+
+function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+}
+function go_personal(){
+	
+	window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+}
+function go_my_order(){
+	
+	 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+	
+}
+
+function go_vip(){
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+	}
+	
+function go_top(){
+	
+	window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+}
+
+function ggg_num(){
+	 
+	var num = Math.random()*1000 + 1000;
+	return parseInt(num, 10);
+}
+
+
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+
+
+	function aite(){
+		var title = $("#add_title").val();
+		
+		if(title == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入标题！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		 
+		var context = $("#add_context").val();
+		
+		if(context == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入话题内容！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		
+		
+		var  is_at="0";
+		
+		$("#myload").show();
+		
+		 $.ajax({
+	 		type:"post",
+	 		url: pt_path +"/area/add_post.do",
+	 		dataType:"json",
+	 		data:{"openid":openid,"title":title,"context":context,"is_at":is_at},
+	 		success: function(data){
+	 			
+	 			if(data[0].back_code == 200){
+	 				$("#myload").hide();
+	 				
+	 				location.href = pt_path +"/jsp/wx/post/post_area.html"; 
+	 			}
+	 		}
+		 });
+		
+		
+	}
+
+
+
+</script>
+  
+
+</html>

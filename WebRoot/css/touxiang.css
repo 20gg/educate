@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+
+html,body{
+	margin: 0px;
+	padding: 0px;
+	
+}
+
+.touxiang{
+ 	
+ 	width:36px;height:36px;border-radius:18px;
+}
+
+.vip_up{
+  	
+  	width: 30%;float:left;border-radius:30px;width:65px;background:#4CAF50;padding:1px 10px;text-align:center;color:#fff;line-height: 30px;margin-top: 20px;
+  	}
+  	
+  	.menu_css{
+
+	width: 25%;float: left;font-size: 12px;
+
+  }
+
+.menu_style{
+	position: relative;
+    bottom: 0px;
+    border-top: 1px solid #dcdcdc;
+	width: 100%;
+	float: left;
+	line-height: 25px;
+	text-align: center; 
+	padding-top: 5px;
+	
+}
+  
+	.background_css{
+	
+	position:absolute;top:120px; background-color: #5C5954;color:#fff;width:280px;line-height:20px;
+	
+	}
+	
+	.background_css2{
+	position:absolute;top:120px;right:2px;background-color: #5C5954;color:#fff;line-height: 20px;
+	}

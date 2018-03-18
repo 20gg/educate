@@ -1,0 +1,33 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;}
+.video{width:100%;margin:auto auto;}
+.video img{width:100%;display:block;}
+
+.cont2{width:100%;background:#fff;margin:auto auto;}
+.cont2 .b_title{width:100%;margin:auto auto;}
+.cont2 .b_title span{width:6%;height:1px;background:#2dc158;float:left;margin-top:29px;margin-left:27%;}
+.cont2 .b_title h1{width:30%;float:left;color:#323232;line-height:56px;text-align:center;font-size:16px;}
+.cont2 .sort{width:100%;background:#f6f7f9;color:#91969a;line-height:44px;text-align:left;}
+.cont2 .sort .img{float:left;width:4%;height:4%;margin-top:14px;margin-left:3%;}
+.cont2 .sort .img img{width:100%;display:block;}
+.cont2 .sort h1{float:left;margin-left:2%;font-size:14px;}
+.cont2 .sort .update{float:left;margin-left:4%;font-size:14px;}
+
+.cont2 .col{width:94%;margin:auto auto;margin-top:20px;line-height:18px;border-bottom:1px solid #eee;padding-bottom:16px;}
+.cont2 .col .left{width:85%;float:left;height:0px;padding-bottom:12%;position:relative;}
+.left .name{float:left;width:100%;font-size:15px;text-align:left;color:#646464;margin-bottom:10px;}
+.left .time{float:left;width:34%;font-size:12px;text-align:left;color:#888888;position:absolute;bottom:0px;}
+.left .length{float:left;width:34%;font-size:12px;text-align:left;color:#888888;position:absolute;bottom:0px;left:34%;}
+.left .a_play{float:left;width:30%;font-size:12px;text-align:left;color:#2DC158;position:absolute;bottom:0px;right:0px;}
+
+.cont2 .col .right{width:12%;float:right;height:0px;padding-bottom:12%;position:relative;}
+.cont2 .col .right img{width:100%;height:100%;position:absolute;}
+
+.footer{width:92%;margin:auto auto;text-align: center;padding-top:16px;padding-bottom:16px;}
+.footer .free{float:left;width:46%;background:#fff;line-height:46px;color:#646464;font-size:16px;}
+.footer .buy{float:right;width:46%;background:#2DC158;line-height:46px;color:#ffffff;font-size:16px;}

@@ -1,0 +1,517 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<link rel="stylesheet" href="../../../css/tanchu.css" />
+
+	<link rel="stylesheet" href="../../../css/wx/video/list.css" type="text/css">
+	
+  </head>
+  
+  <style type="text/css">
+  
+  .more{background:#fff;width:100%;margin:auto auto;border-top:1px solid #eee;border-bottom:1px solid #eee;color:#888;font-size:16px;line-height:50px;text-align:center;}
+  
+  </style>
+  
+  <body style="overflow-x:hidden; margin: 0px; ">
+  	  
+  	
+	
+  	   
+     <div   id="div_video" class="other">
+     
+     </div>
+     
+     <div class="more" id="more"  onclick="get_more();">加载更多</div>
+     
+      <div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>  
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+	
+<script type="text/javascript">
+  	
+//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+  var page_num =1;
+  var page_count =1;
+  
+  var share_ul="6";
+  
+  
+  
+  $(function(){
+	  $("#myload").show();
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+		 	get_data(1); 
+		}
+		 
+	}
+    
+  
+
+  function get_more(){
+   	
+   	var page = page_num+1;
+   	
+   	get_data(page);
+  }
+   
+  	function get_data(page){
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'/course/wx_special44.do',
+  	  		dataType:"json",
+  	  		data:{"open_id":openid,"page":page},
+  	  		success: function(data){
+  	  		 $("#myload").hide();
+  	  		  
+  	  		    
+  	  			var course=data[0].course_list;
+  	  			var user=data[0].user;
+  	  			var special=data[0].special.list;
+  	  			var introduce= "";     var a=""; var b="";
+  	  		page_num =data[0].special.pageNum;//当前页
+   			page_count =data[0].special.pageCount;//总页数
+   			
+   			 
+   			
+   			if(page_num >= page_count){
+   				$("#more").hide();
+   			}else{
+   				$("#more").show();
+   			}
+   				var kind=""; var teacher="";   var zxc="";
+   				
+   			
+   				
+   		
+   		 
+  	  			if(user.role==0&&user.state==0){
+  	  			  
+  	  			var html2=""; var z=""; var zz=""; var zzz="";
+  	  				
+  	  			if(special.length>0){
+  	  			for(var i=0; i<special.length;i++){
+ 					   
+						if(special[i].special_name!= null){
+					
+							if(special[i].special_name.length>=18){
+								introduce=special[i].special_name.substring(0,18)+"...";
+							 
+							}else{
+								
+								introduce=special[i].special_name;
+							}
+	  					} 
+						
+				 	if(special[i].kind==1){
+					kind="<div class='time'>视频专题</div>";
+					zxc="";
+					teacher="<div class='doc'>主讲:"+special[i].teacher+"</div>";
+					}else{
+				kind="<div class='time'>视频小课题</div>";
+				zxc="<div style='width:100%;color:#323232;font-size:14px;line-height:20px;text-align:left;position:absolute;bottom:64px;'>时长：50分/"+special[i].url.length+"节课</div>";
+				teacher="<div class='doc'>"+special[i].teacher+"</div>";
+				}
+							
+						var a="";
+	  					
+	  					if(special[i].isBuy!=1){
+	  						
+	  					if(special[i].special_name.length>=25){
+							
+							name_size=" "+special[i].special_name.substring(0,25)+"  ";
+						}else{
+							
+						name_size=" "+special[i].special_name+" ";
+						}	
+	  						
+	  							/* z="<span style='background:#cccccc;'>未购买</span>"; */
+	  							 
+	  							if(special[i].text.length>15){
+	  								
+	  								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+	  							}else{
+	  								a="<div class='b_numb'>"+special[i].text+"</div>";
+	  							}
+	  							
+	  						 
+	  					
+	  				html2+=" <div class='column2' onclick='detail(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"'  kind='"+special[i].kind+"' >"
+	  				+"<div class='b_bg'><img src='"+special[i].img+"'>	<div class='time_bg'></div>"+kind+"</div>"	
+	  				+"<div class='b_text' ><div class='title'><div class='b_title'>"+name_size+"</div><div class='price'>￥"+toDecimal2(special[i].price/100)+"</div>"	
+	  				+"<div class='clearfix'></div></div>"+zxc+" "+teacher+"<div class='mes' style='bottom: -5px;'>"
+	  				+"<div class='view1'><img src='../../../images/hot/clock.png'></div><div class='b_numb' style='font-size:9px;'>"+special[i].date.substring(0,10)+"</div><div class='view2'>"
+	  				+"<img src='../../../images/hot/view.png'></div><div class='b_numb'style='font-size:10px;'>1234</div><div class='b_numb1'style='font-size:10px;'>"+special[i].order_count+"人订阅</div>"
+	  				+"<div class='clearfix'></div></div></div><div class='clearfix'></div></div> ";
+	  				
+	  					 
+	  					
+	  					}else if(special[i].isBuy==1){
+	  						
+	  					if(special[i].special_name.length>=25){
+						
+						name_size=" "+special[i].special_name.substring(0,25)+"  ";
+					}else{
+						
+					name_size=" "+special[i].special_name+" ";
+					}
+								 
+	  						 
+	  							
+	  						 
+					
+					if(special[i].text.length>15){
+						
+						a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+					}else{
+						a="<div class='b_numb'>"+special[i].text+"</div>";
+					}
+					
+				
+		  					html2+=" <div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"'>"
+	  				+"<div class='b_bg'><img src='"+special[i].img+"'>	<div class='time_bg'></div>"+kind+"</div>"	
+	  				+"<div class='b_text'><div class='title'><div class='b_title'>"+name_size+"</div><div class='price'>已订阅</div>"	
+	  				+"<div class='clearfix'></div></div>"+zxc+" "+teacher+"<div class='mes' style='bottom: -5px;'>"
+	  				+"<div class='view1'><img src='../../../images/hot/clock.png'></div><div class='b_numb' style='font-size:9px;'>"+special[i].date.substring(0,10)+"</div><div class='view2'>"
+	  				+"<img src='../../../images/hot/view.png'></div><div class='b_numb' style='font-size:10px;'>1234</div><div class='b_numb1' style='font-size:10px;'>"+special[i].order_count+"人订阅</div>"
+	  				+"<div class='clearfix'></div></div></div><div class='clearfix'></div></div> ";
+	  						
+		  					
+		  						
+	  					}
+					 
+	  			}
+	  			 
+	  				 
+	  			$("#div_video").append(html2);
+  	  				
+  	  			}else{
+  	  				var html2="<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无语音专题</span>";
+  	  			 
+  	  			$("#div_video").append(html2);
+  	  			}	
+  	  				
+  	  				
+  	  		}else if(user.role==1&&user.state==0){
+  	  			
+  	  		if(special.length>0){
+  	  		var html2="";
+				for(var i=0; i<special.length;i++){
+					 
+						var introduce= "";
+				 
+						if(special[i].introduce!= null){
+					
+						if(special[i].introduce.length>12){
+							introduce=special[i].introduce.substring(0,12)+"";
+							 
+						}else{
+						introduce=special[i].introduce+"";
+						}
+					}  		 		 
+						if(special[i].special_name.length>=25){
+						
+						name_size=" "+special[i].special_name.substring(0,25)+"  ";
+					}else{
+						
+					name_size=" "+special[i].special_name+" ";
+					}
+						
+							if(special[i].kind==1){
+				kind="<div class='time'>视频专题</div>";
+				zxc="";
+				teacher="<div class='doc'>主讲:"+special[i].teacher+"</div>";
+				}else{
+			kind="<div class='time'>视频小课题</div>";
+			zxc="<div style='width:100%;color:#323232;font-size:14px;line-height:20px;text-align:left;position:absolute;bottom:64px;'>时长：50分/"+special[i].url.length+"节课</div>";
+			teacher="<div class='doc'>"+special[i].teacher+"</div>";
+			}
+						
+						
+							if(special[i].text.length>15){
+								
+								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+							}else{
+								a="<div class='b_numb'>"+special[i].text+"</div>";
+							}
+					
+						 
+					
+						html2+=" <div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"'>"
+				+"<div class='b_bg'><img src='"+special[i].img+"'>	<div class='time_bg'></div>"+kind+"</div>"	
+				+"<div class='b_text'><div class='title'><div class='b_title'>"+name_size+"</div><div class='price'>已订阅</div>"	
+				+"<div class='clearfix'></div></div>"+zxc+" "+teacher+"<div class='mes'style='bottom: -5px;'>"
+				+"<div class='view1'><img src='../../../images/hot/clock.png'></div><div class='b_numb'style='font-size:9px;'>"+special[i].date.substring(0,10)+"</div><div class='view2'>"
+				+"<img src='../../../images/hot/view.png'></div><div class='b_numb' style='font-size:10px;'>1234</div><div class='b_numb1' style='font-size:10px;'>"+special[i].order_count+"人订阅</div>"
+				+"<div class='clearfix'></div></div></div><div class='clearfix'></div></div> ";
+					
+				 
+			}
+				 
+			$("#div_video").append(html2);
+  	  		}else{
+  	  			
+  	  		var html2="<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无语音专题</span>";
+	  			 
+	  			$("#div_video").append(html2);
+  	  		}
+  	  			
+  	  		}else if(user.role==3&&user.state==0){
+  	  			 
+  	  			if(special.length>0){
+  	  				
+  	  			var html2=""; var z=""; var zz=""; var zzz="";
+	  				for(var i=0; i<special.length;i++){
+	  					   
+						if(special[i].special_name!= null){
+					
+							if(special[i].special_name.length>=18){
+								introduce=special[i].special_name.substring(0,18)+"";
+							 
+							}else{
+								introduce=special[i].special_name;
+								
+							}
+	  					} 
+						 
+	  				  
+	  					
+	  					if(special[i].isBuy!=1){
+	  						
+	  						var a="";
+	  						
+	  					if(special[i].special_name.length>=25){
+						
+						name_size=" "+special[i].special_name.substring(0,25)+"  ";
+					}else{
+						
+					name_size=" "+special[i].special_name+" ";
+					}
+	  					
+	  					
+	  						if(special[i].kind==1){
+					kind="<div class='time'>视频专题</div>";
+					zxc="";
+					teacher="<div class='doc'>主讲:"+special[i].teacher+"</div>";
+					}else{
+				kind="<div class='time'>视频小课题</div>";
+				zxc="<div style='width:100%;color:#323232;font-size:14px;line-height:20px;text-align:left;position:absolute;bottom:64px;'>时长：50分/"+special[i].url.length+"节课</div>";
+				teacher="<div class='doc'>"+special[i].teacher+"</div>";
+				}
+	  					
+	  					if(special[i].text.length>15){
+						
+						a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+					}else{
+						a="<div class='b_numb'>"+special[i].text+"</div>";
+					}
+	  					
+	  					zz="<div style='display:block;float:left;width:40%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>￥"+toDecimal2(special[i].price/100)+"/年</div>";
+					zzz="<div style='margin-top:15px;'><span style='font-size:11px;color:#888;border-radius:14px;border:1px solid #ddd;padding:5px;'>已更新"+special[i].url.length+"集,持续更新中</span></div>";
+		  						
+		  			html2+=" <div class='column2' onclick='detail(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"' kind='"+special[i].kind+"'>"
+	  				+"<div class='b_bg'><img src='"+special[i].img+"'>	<div class='time_bg'></div>"+kind+"</div>"	
+	  				+"<div class='b_text'><div class='title'><div class='b_title'>"+name_size+"</div><div class='price'>￥"+toDecimal2(special[i].price/100)+"</div>"	
+	  				+"<div class='clearfix'></div></div>"+zxc+" "+teacher+"<div class='mes' style='bottom: -5px;'>"
+	  				+"<div class='view1'><img src='../../../images/hot/clock.png'></div><div class='b_numb' style='font-size:9px;'>"+special[i].date.substring(0,10)+"</div><div class='view2'>"
+	  				+"<img src='../../../images/hot/view.png'></div><div class='b_numb' style='font-size:10px;'>1234</div><div class='b_numb1' style='font-size:10px;'>"+special[i].order_count+"人订阅</div>"
+	  				+"<div class='clearfix'></div></div></div><div class='clearfix'></div></div> ";
+	  						
+	  					}else if(special[i].isBuy==1){
+	  								var a="";
+	  						
+						if(special[i].special_name.length>=25){
+						
+						name_size=" "+special[i].special_name.substring(0,25)+"   ";
+					}else{
+						
+					name_size=" "+special[i].special_name+" ";
+					}		
+						
+						if(special[i].text.length>15){
+  								
+  								a="<div class='b_numb'>"+special[i].text.substring(0,15)+"</div>";
+  							}else{
+  								a="<div class='b_numb'>"+special[i].text+"</div>";
+  							}
+								 
+
+
+						zz="<div style='display:block;float:left;width:40%;font-size:14px;color:#ffa42f;border-radius:4px;line-height:16px;text-align:center;'>已订阅</div>";
+						zzz="<div style='margin-top:15px;'><span style='font-size:11px;color:#888;border-radius:14px;border:1px solid #ddd;padding:5px;'>已更新"+special[i].url.length+"集,持续更新中</span></div>";
+		  						
+		  			html2+=" <div class='column2' onclick='af(this);' special_no='"+special[i].special_no+"' watch='"+special[i].watch+"'>"
+	  				+"<div class='b_bg'><img src='"+special[i].img+"'>	<div class='time_bg'></div>"+kind+"</div>"	
+	  				+"<div class='b_text'><div class='title'><div class='b_title'>"+name_size+"</div><div class='price'>已订阅</div>"	
+	  				+"<div class='clearfix'></div></div>"+zxc+" "+teacher+"<div class='mes' style='bottom: -5px;'>"
+	  				+"<div class='view1'><img src='../../../images/hot/clock.png'></div><div class='b_numb' style='font-size:9px;'>"+special[i].date.substring(0,10)+"</div><div class='view2'>"
+	  				+"<img src='../../../images/hot/view.png'></div><div class='b_numb' style='font-size:10px;'>1234</div><div class='b_numb1' style='font-size:10px;'>"+special[i].order_count+"人订阅</div>"
+	  				+"<div class='clearfix'></div></div></div><div class='clearfix'></div></div> ";
+		  						
+	  					}
+						 
+	  			}
+	  			
+	  				 
+	  				 
+	  			$("#div_video").append(html2);
+  	  				
+  	  			}else{
+  	  	  			
+  	    	  		var html2="<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无语音专题</span>";
+  	  	  			 
+  	  	  			$("#div_video").append(html2);
+  	    	  		}
+  	  			
+  	  			
+  	  				
+  	  		}
+  	  			
+  	  	}
+  	  		
+  	  });
+  		
+  	}
+  	 
+  		
+  	function detail(obj){
+  		 
+  		var c_no=$(obj).attr("special_no");
+  		 
+  		 localStorage.setItem("c_no", c_no );
+  		
+  		 var kind=$(obj).attr("kind");
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		if(kind==1){
+  		window.location.href=pt_path+'jsp/wx/course/special_voice_too.html';
+  		
+  		}else{
+  		
+  		window.location.href=pt_path+'jsp/wx/course/special_voice_too.html';
+  		
+  		}
+  		
+		
+	}
+  	
+  	function af(obj){
+  		
+  		var c_no=$(obj).attr("special_no");
+ 		 
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		window.location.href=pt_path+'jsp/wx/course/af_special_voice.html';
+  	}
+  	
+  	function free_sepcial(obj){
+ 		 
+  		var c_no=$(obj).attr("special_no");
+  		 
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+		window.location.href=pt_path+'jsp/wx/course/af_special.html';
+	}
+  	
+  //制保留2位小数，如：2，会在2后面补上00.即2.00    
+	function toDecimal2(x) {    
+	    var f = parseFloat(x);    
+	    if (isNaN(f)) {    
+	        return false;    
+	    }    
+	    var f = Math.round(x*100)/100;    
+	    var s = f.toString();    
+	    var rs = s.indexOf('.');    
+	    if (rs < 0) {    
+	        rs = s.length;    
+	        s += '.';    
+	    }    
+	    while (s.length <= rs + 2) {    
+	        s += '0';    
+	    }    
+	    return s;    
+	}
+	
+		//分钟转化成时分秒
+
+	function formatSeconds(value) {
+
+	 	    var theTime = parseInt(value);// 秒
+
+	 	    var theTime1 = 0;// 分
+
+	 	    var theTime2 = 0;// 小时
+
+	 	    if(theTime > 60) {
+
+	 	        theTime1 = parseInt(theTime/60);
+
+	 	        theTime = parseInt(theTime%60);
+
+	 	            if(theTime1 > 60) {
+
+	 	            theTime2 = parseInt(theTime1/60);
+
+	 	            theTime1 = parseInt(theTime1%60);
+
+	 	            }
+
+	 	    }
+
+	 	        var result = ""+parseInt(theTime)+"秒";
+
+	 	        if(theTime1 > 0) {
+
+	 	        result = ""+parseInt(theTime1)+"分"+result;
+
+	 	        }
+
+	 	        if(theTime2 > 0) {
+
+	 	        result = ""+parseInt(theTime2)+"小时"+result;
+
+	 	        }
+
+	 	    return result;
+
+	 	}
+  	
+  	</script>
+  
+</html>

@@ -1,0 +1,195 @@
+.goodsmodal{
+	position: fixed;width: 100%;height: 100%;z-index: 998;background: transparent;margin: 0;padding: 0;
+	top:0;left:0
+}
+.bgcover{
+	position: absolute;width: 100%;height: 100%;z-index: 999;background-color: #222;opacity: 0.6;
+}
+.imgmain{
+	position: absolute;width:800px;background: #ffffff;border-radius: 5px;margin-left: 5%;height: 550px;z-index:1000;top:20px;padding: 12px;
+
+}
+.imgarea{
+	position: relative;
+	width: 100%;
+	overflow-y:auto;
+	height: 400px
+}
+.imgtitle{
+	position: relative;color: #222;font-size: 15px;border-bottom: 1px solid #f0f0f0;line-height: 36px;
+}
+.closeimg{
+	position: absolute;right: 20px;font-size: 20px;
+	color: #222222;
+}
+.closeimg:hover{
+	color: red;
+	cursor: pointer;
+}
+.weiimg{
+	position: absolute;
+	bottom: 50px;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	background: #F0F0F0;
+	line-height: 70px;
+}
+
+.obtn{
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	width:100px;
+	cursor: pointer;
+}
+.obtn:hover{
+	opacity:0.8
+}
+.addbtning{
+
+	
+	line-height:30px;
+	background:#189eff;
+	color:white;
+	float:left;
+	margin-top: 20px;
+	position: relative;
+	display:inline-block;
+	left: 20px;
+	
+}
+.addbtning:hover{
+	background: #0086e5;
+}
+.oneimg,.onedir{
+	position: relative;
+	border: 1px solid #F0F0F0;
+	display: inline-block;
+	margin-left: 20px;
+	margin-top: 20px;
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+	
+	border-radius: 3px ;
+}
+
+
+
+
+.onedir img{
+	width: 60%;
+	margin-left: 20%;
+	margin-top:20% ;
+}
+.oneimg img
+{
+	width: 100%;
+	
+}
+.oneimg span{
+	background: #666666;
+	opacity: 0.8;
+	color: #FFFFFF;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+.oneimg.checkon,.onedir.checkon{
+	border: 2px solid #0086E5;
+}
+.onedir:hover,.oneimg:hover{
+	border: 2px solid #0086E5;
+}
+
+.checkon .arrow {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 0px;
+	height: 0px;
+	border: 12px solid;
+	border-color: transparent #2b7dbc #2b7dbc transparent;
+}
+
+.checkon .arrowfont:before {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: -8px;
+	left: -2px;
+	z-index: 999;
+	content: "\2714";
+	font-size: 16px;
+	font-weight:700;
+	color: #fff;
+}
+.pagebtns{
+ position: relative;
+ right: 10px;
+ line-height: 30px;
+ top: 20px;
+ float:right;
+}
+.pagebtns .fpage{
+	width: auto;
+	min-width: 30px;
+	font-size: 11px;
+	color: #888;
+	max-width: 100px;
+	display: inline-block;
+	margin-left: 5px;
+	text-align: center;
+}
+.fpage.fbtn{
+	width:50px;
+	background: #FFFFFF;
+	border: 1px solid #999999;
+	border-radius: 5px;
+	height: 30px;
+	line-height: 30px;
+}
+.fpage.fbtn:hover{
+	background: #999999;
+	color: #FFFFFF;
+}
+.choosebtn{
+	line-height:35px;
+	background:#189eff;
+	color:white;
+	bottom: 5px;
+	position: absolute;
+	left: 20px;
+	font-size: 15px;
+	border-radius: 3px;
+}
+.cancelbtn{
+	line-height:35px;
+	background:#999999;
+	color:white;
+	
+	bottom: 5px;
+	position: absolute;
+	left: 130px;
+	font-size: 15px;
+	border-radius: 3px;
+}
+.delbtning{
+	line-height:35px;
+	background:red;
+	color:white;
+	
+	bottom: 5px;
+	position: absolute;
+	left: 240px;
+	font-size: 15px;
+	border-radius: 3px;
+}
+#filediv{
+	display: none
+}

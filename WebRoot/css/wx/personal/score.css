@@ -1,0 +1,49 @@
+body,p,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;padding-bottom:20px;}
+
+.top_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.top_box .top{width:92%;height:60px;margin:auto auto;}
+.top .head{width:14%;float:left;height:40px;margin-top:10px;}
+.top .head img{height:100%;display:block;border-radius:50%;}
+.top .name{float:left;margin-left:2%;text-align:left;line-height:60px;color:#323232;font-size:17px;font-family:"创意简标宋";}
+.top .lel{width:4%;float:left;margin-left:2%;margin-top:24px;}
+.top .lel img{display:block;height: 20px;  margin-top: -5px;}
+.top span{display:block;float:right;width:26%;height:30px;margin-top:10px;margin-top:15px;border-radius:15px;text-align:center;line-height:30px;font-size:14px;color:#fff;background:#2dc158;}
+
+
+.a_link{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;padding-top:16px;}
+.a_link .title{width:94%;margin:auto auto;}
+.a_link .title span{float:left;width:3px;height:20px;display:block;background:#2DC158;}
+.a_link .title h1{float:left;margin-left:3%;line-height:20px;font-size:17px;color:#323232;}
+.a_link .mes{width:94%;margin:auto auto;border-top:1px solid #eee;margin-top:16px;padding-top:16px;padding-bottom:16px;}
+.a_link .mes .name{float:left;}
+.a_link .mes .name h1{float:left;line-height:26px;font-size:13px;text-align:left;color:#969696;}
+.a_link .mes .name h2{float:left;line-height:26px;font-size:13px;text-align:left;color:#646464;}
+.a_link .mes .mc{float:left;margin-left:4%;}
+.a_link .mes .mc h1{float:left;line-height:26px;font-size:13px;text-align:left;color:#969696;}
+.a_link .mes .mc h2{float:left;line-height:26px;font-size:13px;text-align:left;color:#646464;}
+.a_link .mes .score{float:right;margin-left:2%;}
+.a_link .mes .score h3{float:left;line-height:26px;font-size:13px;text-align:left;color:#ffa42f;}
+
+
+.top_b{width:100%;background:#fff;margin:auto auto;}
+.top_b .top{width:92%;height:50px;margin:auto auto;line-height:50px;text-align:center;color:#2DC158;font-size:16px;}
+
+.a_top{width:92%;margin:auto auto;padding-top:16px;padding-bottom:16px;border-bottom:1px solid #eee;}
+.a_top .head{width:10%;float:left;height:0px;padding-bottom:10%;position:relative;}
+.a_top .head img{width:100%;height:100%;position:absolute;border-radius:50%;}
+.a_top .head .icon1{position:absolute;left:0px;top:0px;width:100%;height:100%;background:url(../../../images/burse/123_03.png) no-repeat;background-size:100%;color:#fff;font-size:8px;text-align:center;line-height:16px;}
+.a_top .head .icon2{position:absolute;left:0px;top:0px;width:100%;height:100%;background:url(../../../images/burse/123213_07.png) no-repeat;background-size:100%;color:#fff;font-size:8px;text-align:center;line-height:16px;}
+.a_top .right{width:86%;margin-left:4%;float:left;height:0px;padding-bottom:10%;position:relative;}
+.a_top .name{float:left;width:60%;line-height:16px;margin-left:2%;text-align:left;color:#323232;font-size:16px;position:absolute;left:0px;top:32%;}
+.a_top .price{width:30%;float:right;margin-left:2%;font-size:16px;text-align:right;color:#ffa42f;line-height:16px;margin-top:24px;position:absolute;right:0px;bottom:24%;}
+
+.more{background:#fff;width:100%;margin:auto auto;border-top:1px solid #eee;border-bottom:1px solid #eee;color:#888;font-size:16px;line-height:50px;text-align:center;}
+
+
+

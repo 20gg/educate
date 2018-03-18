@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	
+   <title>格勤教育后台管理系统</title>
+    <script src="../../js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/path.js" ></script>
+<script type="text/javascript" src="../../js/jquery.tips.js"></script>
+    
+    <link rel="stylesheet" href="../../css/login.css" type="text/css">
+     <script type="text/javascript">
+
+function check_login()
+{
+	 var name=$("#user_name").val();
+	 var passwd=$("#password").val();
+			 if(name==""||name==null )
+			 {   
+				   
+				 tip_error("user_name","请填写用户名");
+					return false;	 
+			 }
+			 if(passwd==""||passwd==null )
+			 {   
+				  
+					 tip_error("password","请填写密码");
+					return false;
+				 
+			 }
+			 
+	 	
+			 $.ajax({
+					type : "post",
+					dataType : "json",
+					url : pt_path + "login/login.do", 
+					data:{"name":name,"passwd":passwd}, 
+					success:function(data){
+						 
+						if(1==data[0].error){  
+							 
+							location.href = pt_path+"jsp/pt/pt_index.html"; 
+							
+						}else if(2==data[0].error){
+							tip_error("password","密码不正确");
+								 
+						}else if(3==data[0].error){
+									 
+							tip_error("user_name","用户名不存在或已被冻结");
+						}
+					}
+				
+			    });
+	 
+			 	
+}
+
+function tip_error(id_name,msg) {
+	
+	$("#"+id_name).tips({
+		side :2,
+		msg :msg,
+		bg : '#233342',
+		time :2
+	});
+}
+</script>
+  </head>
+  
+  <body>
+    
+		<div class="main">
+			<div class="top">
+				<h1>格勤教育后台管理系统</h1>
+				<span style="background:#6792e2;"></span>
+				<span style="background:#fcc74c;"></span>
+				<span></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="middle">
+				<div class="logo">
+					<img src="../../img/logo.png">
+				</div>
+				<div class="a_box">
+					<div class="name">
+						<img src="../../img/name.png">
+					</div>
+					<input placeholder="请输入用户名" type="text" id="user_name" maxlength="24">
+					<div class="clearfix"></div>
+				</div>
+				<div class="a_box">
+					<div class="name">
+						<img src="../../img/word.png">
+					</div>
+					<input placeholder="请输入密码" type="text" id="password" onfocus="this.type='password'"	 maxlength="24">
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="bottom" id="login" onclick="check_login();">登&nbsp;录</div>
+		</div>
+  </body>
+
+
+
+</html>

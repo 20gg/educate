@@ -1,0 +1,35 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;}
+.video{width:100%;margin:auto auto;}
+.video img{width:100%;display:block;}
+
+.cont{width:100%;background:#fff;margin:auto auto;padding-bottom:16px;}
+.cont .b_title{width:100%;margin:auto auto;}
+.cont .b_title span{width:6%;height:1px;background:#2dc158;float:left;margin-top:29px;margin-left:27%;}
+.cont .b_title h1{width:30%;float:left;color:#323232;line-height:56px;text-align:center;font-size:16px;}
+.cont .detail{width:92%;margin:auto auto;}
+.cont .title{float:left;width:60%;font-size:18px;color:#444;line-height:30px;text-align:left;}
+.cont h1{width:34%;float:left;color:#646464;font-size:14px;line-height:30px;text-align:right;}
+.cont .arrow{width:4%;float:right;margin-top:12px;}
+.cont .arrow img{width:100%;display:block;}
+.cont p{width:92%;margin:auto auto;color:#969696;font-size:14px;line-height:20px;margin-top:10px;}
+.price_box{width:100%;border-top:1px solid #eee;margin:auto auto;background:#fff;}
+.price_box .price{float:left;width:46%;margin-left:4%;text-align:left;line-height:50px;color:#ff962f;font-size:16px;}
+.price_box .nub{float:right;width:46%;margin-right:4%;text-align:right;line-height:50px;color:#ff962f;font-size:16px;}
+
+.cont2{width:100%;background:#fff;margin:auto auto;padding-bottom:16px;margin-top:10px;}
+.cont2 .b_title{width:100%;margin:auto auto;}
+.cont2 .b_title span{width:6%;height:1px;background:#2dc158;float:left;margin-top:29px;margin-left:27%;}
+.cont2 .b_title h1{width:30%;float:left;color:#323232;line-height:56px;text-align:center;font-size:16px;}
+.cont2 p{width:92%;margin:auto auto;color:#969696;font-size:14px;line-height:20px;margin-top:10px;}
+.cont2 .col{width:92%;margin:auto auto;margin-top:10px;padding-bottom:10px;line-height:18px;}
+.cont2 .col span{float:left;width:10%;border:1px solid #646464;color:#646464;border-radius:4px;font-size:12px;text-align:center;}
+.cont2 .col .name{float:left;width:60%;margin-left:2%;font-size:14px;text-align:left;color:#646464;}
+.cont2 .col .time{float:right;width:27%;font-size:14px;text-align:right;color:#888888;}
+
+.share{width:100%;background:#2DC158;margin:auto auto;text-align:center;line-height:50px;color:#fff;font-size:16px;}

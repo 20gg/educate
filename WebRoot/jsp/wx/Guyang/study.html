@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/study.css" type="text/css">
+	</head>
+	<body>
+		<div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+		<div class="trailer" onclick="into_yg();">
+			<div class="time">
+				<img src="../../../images/study/Trailer.png">
+			</div>
+			<div class="shijian">
+				<div class="title01" id="yg_note"></div>
+				<div class="title02" id="yg_name"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="play_box" id="all_list">
+			<!-- <div class="column">
+				<div class="a_bg">
+					<img src="../../../images/study/img1.png">		
+				</div>
+				<div class="text">
+					<div class="title">
+						<div class="a_title">淘宝摄影那点事儿</div>
+						<span>未购买</span>
+						<div class="clearfix"></div>					
+					</div>
+					<div class="s_time">上次学习时间：2017.05.09</div>
+					<div class="r_time">
+						<h1>已学习30秒</h1>
+					</div>
+					<div class="button">
+						<span>去答题</span>
+						 
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div> -->
+			 
+		</div>
+		
+		<div class="more" id="more" onclick="get_more();">加载更多</div>
+		
+		<br><br><br><br>
+		
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript"> 
+//var openid ="ok4o7waQyK5dri1qmHs9fIxhJY58";
+ 
+var page_num =1;
+var page_count =1;
+
+var yg_time ="";
+var yg_link ="";
+ 	
+var share_ul="study";
+
+
+$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		get_data(1);
+	}
+	 
+}
+ 
+
+function get_more(){
+ 	
+ 	var page = page_num+1;
+ 	
+ 	get_data(page);
+}
+
+function get_data(page){
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/study/query_study.do',
+  		dataType:"json",
+  		data:{"openid":openid,"page":page},
+  		success: function(data){
+  			
+  			if(data[0].user.head != null && data[0].user.head != ""){ 
+   				$("#head_img").attr("src",data[0].user.head);
+   			}else{ 
+   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+   			}
+   			
+   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+   			
+			if(data[0].user.role!=1){
+				$("#my_name").text(data[0].user.name);
+				$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+				
+				$("#yg_note").text("预告："+data[0].yg.time_note);
+				
+				var y_n = data[0].yg.name;
+				if(y_n.length>50){
+					y_n = y_n.substring(0,49)+"..."; 
+				} 
+				$("#yg_name").text(y_n);
+				
+				yg_time = data[0].yg.time;
+				yg_link = data[0].yg.link;
+	  			
+	  			
+	  			page_num =data[0].page_num;
+	  			page_count =data[0].page_num;
+	  			
+	  			if(page_num >= page_count){
+	  				$("#more").hide();
+	  			}else{
+	  				$("#more").show();
+	  			}
+	  			
+	  			var list =data[0].list;
+	  			var html ="";
+	  			var kk="";
+	  			
+	  			 
+	  			
+	  			for(var i=0; i<list.length;i++){
+	  				
+	  				var info = list[i].c_name;
+	  				
+	  				if(info != null ){
+	  					if(info.length>8){
+	  	  					info = info.substring(0,8)+"..."; 
+	  	  				}
+	  	  				
+	  	  				var sp =" class='hui' ";
+	  	  				
+	  	  				var b ="未购买";
+	  	  				if(list[i].is_buy == 1){
+	  	  					 b ="已购买"; 
+	  	  					sp =" class='gre' ";
+	  	  				} 
+	  	  				var jx ="";
+	  	  				if(list[i].state == 1){
+	  	  					jx =" <span style='background:#ffa42f;'  c_no='"+list[i].c_no+"' t='"+list[i].type+"' onclick='into_c(this);'  isbuy='"+list[i].is_buy+"' >继续学习</span> ";
+	  	  				}
+	  	  				
+	  	  				var ss ="去答题";  
+	  	  				var cc="上次学习时间："+list[i].c_date;
+	  	  				
+	  	  				var tt = "已学习"+formatSeconds(list[i].see_time)+"";
+	  	  				
+	  	  				
+	  	  				
+	  	  				if(list[i].state == 2){
+	  	  					tt="播放结束";
+	  	  				}
+	  	  				
+	  	  				if(list[i].state == 3){
+	  	  					ss ="已答题";
+	  	  					tt="学习结束";
+	  	  				}
+	  	  				
+	  	  					if(list[i].type==1){
+	  	  					kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+							
+						}else if(list[i].type==0){    
+							 
+							kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+						
+						}else if(list[i].type==2){
+							kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+					
+						}
+	  	  				
+	  	  				var but2 = "";
+	  	  				
+	  	  				if(list[i].type < 2){
+	  	  					but2 =" <span onclick='into_e(this);' c_no='"+list[i].c_no+"' s='"+list[i].state+"'>"+ss+"</span> ";
+	  	  				}
+	  	  				 
+	  	  				
+	  	  				var a = "<div class='column'> <div class='a_bg'> <img src='"+list[i].img+"'>"+kk+" </div>"
+	  					+"<div class='text'> <div class='title'> <div class='a_title'>"+info+"</div> <span "+sp+">"+b+"</span> <div class='clearfix'></div> </div>"
+	  					+"<div class='s_time'>"+cc+"</div> <div class='r_time'> <h1>"+tt+"</h1> </div>"
+	  					+"<div class='button'>  "+but2+jx+" <div class='clearfix'></div> </div> </div> <div class='clearfix'></div> </div>";
+	  					
+	  	  				html = html+a;
+	  				}
+	  				  
+	  			}
+	  			
+	  			$("#all_list").append(html);
+			}else{
+				$("#my_name").text(data[0].user.name);
+				
+				$("#yg_note").text("预告："+data[0].yg.time_note);
+				
+				var y_n = data[0].yg.name;
+				if(y_n.length>50){
+					y_n = y_n.substring(0,49)+"..."; 
+				} 
+				$("#yg_name").text(y_n);
+				
+				yg_time = data[0].yg.time;
+				yg_link = data[0].yg.link;
+	  			
+	  			
+	  			page_num =data[0].page_num;
+	  			page_count =data[0].page_num;
+	  			
+	  			if(page_num >= page_count){
+	  				$("#more").hide();
+	  			}else{
+	  				$("#more").show();
+	  			}
+	  			
+	  			var list =data[0].list;
+	  			var html ="";
+	  			var kk="";
+	  			
+	  			 var is_buy="1";
+	  			
+	  			for(var i=0; i<list.length;i++){
+	  				
+	  				var info = list[i].c_name;
+	  				
+	  				if(info != null ){
+	  					if(info.length>8){
+	  	  					info = info.substring(0,8)+"..."; 
+	  	  				}
+	  	  				
+	  	  				var sp =" class='hui' ";
+	  	  				
+	  	  				var b ="已购买";
+	  	  				 
+	  	  					 
+	  	  					sp =" class='gre' ";
+	  	  				 
+	  	  				var jx ="";
+	  	  				if(list[i].state == 1){
+	  	  					jx =" <span style='background:#ffa42f;'  c_no='"+list[i].c_no+"' t='"+list[i].type+"' onclick='into_c(this);'  isbuy='"+is_buy+"' >继续学习</span> ";
+	  	  				}
+	  	  				
+	  	  				var ss ="去答题";  
+	  	  				var cc="上次学习时间："+list[i].c_date;
+	  	  				
+	  	  				var tt = "已学习"+formatSeconds(list[i].see_time)+"";
+	  	  				
+	  	  				
+	  	  				
+	  	  				if(list[i].state == 2){
+	  	  					tt="播放结束";
+	  	  				}
+	  	  				
+	  	  				if(list[i].state == 3){
+	  	  					ss ="已答题";
+	  	  					tt="学习结束";
+	  	  				}
+	  	  				
+	  	  					if(list[i].type==1){
+	  	  					kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+							
+						}else if(list[i].type==0){    
+							 
+							kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+						
+						}else if(list[i].type==2){
+							kk="<div class='icon' style='position:absolute;right:5%;bottom:5%;width:24px;height:24px;opacity:0.6;background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+					
+						}
+	  	  				
+	  	  				var but2 = "";
+	  	  				
+	  	  				if(list[i].type == 2){
+	  	  					but2 =" <span onclick='into_e(this);' c_no='"+list[i].c_no+"' s='"+list[i].state+"'>"+ss+"</span> ";
+	  	  				}
+	  	  				 
+	  	  				
+	  	  				var a = "<div class='column'> <div class='a_bg'> <img src='"+list[i].img+"'>"+kk+" </div>"
+	  					+"<div class='text'> <div class='title'> <div class='a_title'>"+info+"</div> <span "+sp+">"+b+"</span> <div class='clearfix'></div> </div>"
+	  					+"<div class='s_time'>"+cc+"</div> <div class='r_time'> <h1>"+tt+"</h1> </div>"
+	  					+"<div class='button'>  "+but2+jx+" <div class='clearfix'></div> </div> </div> <div class='clearfix'></div> </div>";
+	  					
+	  	  				html = html+a;
+	  				}
+	  				  
+	  			}
+	  			
+	  			$("#all_list").append(html);
+			}
+			
+			
+  			
+  		}
+	});
+}
+
+function into_e(obj) {
+	
+	var c_no=$(obj).attr("c_no");
+	
+	var s=$(obj).attr("s");
+	
+	if(s < 3){
+		localStorage.setItem("c_no", c_no );
+		
+		window.location.href=pt_path+'jsp/wx/exercise/exercise.html?v=4'; 
+	}
+	 
+}
+ 
+function go_vip(){
+	 window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+}
+
+function into_c(obj) {
+	
+	var c_no=$(obj).attr("c_no"); 
+	
+	var type=$(obj).attr("t");
+	var isbuy=$(obj).attr("isbuy");
+	 
+			
+		
+	
+			if(type == 0&&isbuy==1){
+				
+				$.ajax({
+		  			type:"post",
+			  		url: pt_path +'/course/is_pullof.do',
+			  		dataType:"json",
+			  		data:{"c_no":c_no,"type":type},
+			  		success: function(data){ 
+			  			var course=data[0].course;
+			  			var set_page=data[0].set_page;
+			  			
+			  			if(course!=null){
+			  				
+			  				if(course.state==1){
+			  					localStorage.setItem("c_no", c_no );
+			  					window.location.href=pt_path+'jsp/wx/course/buy_voice.html';
+			  					
+			  				}else{
+			  					
+			  					window.location.href=set_page.html;
+			  				}
+			  				
+			  				
+			  			}
+			  			
+			  			
+			  		}
+			  		
+				});
+				
+				 
+				
+			}else if(type==0&&isbuy!=1){
+				$.ajax({
+		  			type:"post",
+			  		url: pt_path +'/course/is_pullof.do',
+			  		dataType:"json",
+			  		data:{"c_no":c_no,"type":type},
+			  		success: function(data){ 
+			  			var course=data[0].course;
+			  			
+			  			if(course!=null){
+			  				
+			  				if(course.state==1){
+			  					localStorage.setItem("c_no", c_no );
+			  					window.location.href=pt_path+'jsp/wx/course/bf_voice.html';
+			  					
+			  				}else{
+			  					
+			  					window.location.href=set_page.html;
+			  				}
+			  				
+			  				
+			  			}
+			  			
+			  			
+			  		}
+			  		
+				});
+				 
+			}
+		
+		
+		if(type==1&&isbuy==1){
+			
+			$.ajax({
+	  			type:"post",
+		  		url: pt_path +'/course/is_pullof.do',
+		  		dataType:"json",
+		  		data:{"c_no":c_no,"type":type},
+		  		success: function(data){ 
+		  			var course=data[0].course;
+		  			
+		  			if(course!=null){
+		  				
+		  				if(course.state==1){
+		  					localStorage.setItem("c_no", c_no );
+		  					window.location.href=pt_path+'jsp/wx/course/buy_course.html';
+		  					
+		  				}else{
+		  					window.location.href=set_page.html;
+		  				}
+		  				
+		  				
+		  			}
+		  			
+		  			
+		  		}
+		  		
+			});
+		
+	
+			}else if(type==1&&isbuy!=1){
+				
+				$.ajax({
+		  			type:"post",
+			  		url: pt_path +'/course/is_pullof.do',
+			  		dataType:"json",
+			  		data:{"c_no":c_no,"type":type},
+			  		success: function(data){ 
+			  			var course=data[0].course;
+			  			
+			  			if(course!=null){
+			  				
+			  				if(course.state==1){
+			  					localStorage.setItem("c_no", c_no );
+			  					window.location.href=pt_path+'jsp/wx/course/course_Detail.html';
+			  					
+			  				}else{
+			  					
+			  					window.location.href=set_page.html;
+			  				}
+			  				
+			  				
+			  			}
+			  			
+			  			
+			  		}
+			  		
+				});
+				
+				
+			}
+		
+		
+		
+		if(type==2&&isbuy==1){
+			
+			$.ajax({
+	  			type:"post",
+		  		url: pt_path +'/course/is_pullof.do',
+		  		dataType:"json",
+		  		data:{"c_no":c_no,"type":type},
+		  		success: function(data){ 
+		  			var special=data[0].special;
+		  			
+		  			if(special!=null){
+		  				
+		  				if(special.state==1){
+		  					localStorage.setItem("c_no", special.special_no);
+		  					//localStorage.setItem("watch", w );
+		  					 window.location.href=pt_path+'jsp/wx/course/af_special.html';
+		  					
+		  				}else{
+		  					
+		  					window.location.href=set_page.html;
+		  				}
+		  				
+		  				
+		  			}
+		  			
+		  			
+		  		}
+		  		
+			});
+		
+		
+	}else if(type==2&&isbuy!=1){
+		
+		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/course/is_pullof.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"type":type},
+	  		success: function(data){ 
+	  			var special=data[0].special;
+	  			
+	  			if(special!=null){
+	  				
+	  				if(special.state==1){
+	  					
+	  					localStorage.setItem("c_no", special.special_no);
+	  					//localStorage.setItem("watch", w );
+	  					window.location.href=pt_path+'jsp/wx/course/free_special.html';
+	  					
+	  				}else{
+	  					
+	  					window.location.href=set_page.html;
+	  				}
+	  				
+	  				
+	  			}
+	  			
+	  			
+	  		}
+	  		
+		});
+		
+		
+	}
+}
+
+function into_yg(){
+	 window.location.href=yg_link;
+}
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+
+//秒值转换为时分秒字符串
+function formatSeconds(value) { 
+	
+	var theTime = parseInt(value);// 秒 
+	var theTime1 = 0;// 分 
+	var theTime2 = 0;// 小时 
+	
+	 
+	if(theTime >= 60) { 
+		theTime1 = parseInt(theTime/60); 
+		theTime = parseInt(theTime%60); 
+	 
+		if(theTime1 >= 60) { 
+			theTime2 = parseInt(theTime1/60); 
+			theTime1 = parseInt(theTime1%60); 
+		} 
+	} 
+	
+	var result = ""+parseInt(theTime)+"";
+	
+	if(result.length == 1){
+		result = "0"+result;
+	}
+	
+	if(theTime1 >= 0) {  
+		var t1 = parseInt(theTime1); 
+		if(t1 < 10){
+			t1 = "0"+t1;
+		} 
+		result = ""+t1+":"+result; 
+	} 
+	
+	if(theTime2 > 0) { 
+		
+		var t2 = parseInt(theTime2);
+		
+		if(t2 < 10){
+			t2 = "0"+t2;
+		} 
+		
+		result = t2+":"+result; 
+	} 
+	return result; 
+}
+ 
+</script>
+</html>

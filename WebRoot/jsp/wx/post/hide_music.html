@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>音频测试</title> 
+
+  </head>
+  
+  <body>
+    	<button style="width: 200px; height: 40px;" onclick="music_control();" id="music_button">播放</button>
+    	<audio id="music"  ></audio> 
+    	<div name="word" id="word0">文字1文字1文字1文字1文字1文字1文字1</div>
+    	<div name="word" id="word1">文字1文字1文字1文字1文字1文字1文字1</div>
+    	<div name="word" id="word2">文字1文字1文字1文字1文字1文字1文字1</div>
+    	<div name="word" id="word3">文字1文字1文字1文字1文字1文字1文字1</div>
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript">
+  
+  var music_arr = [
+           "http://1253790856.vod2.myqcloud.com/355e2b2dvodgzp1253790856/2fad8a8a9031868222952714970/f0.mp3" ,
+           "http://1253790856.vod2.myqcloud.com/355e2b2dvodgzp1253790856/2fad8a8a9031868222952714970/f0.mp3" ,
+           "http://1253790856.vod2.myqcloud.com/355e2b2dvodgzp1253790856/2fad8a8a9031868222952714970/f0.mp3"   ,
+           "http://1253790856.vod2.myqcloud.com/355e2b2dvodgzp1253790856/2fad8a8a9031868222952714970/f0.mp3" 
+          ];
+  
+  var this_code = 0;
+  
+  var music_audio;
+  
+  var is_paused = 1;
+  
+  //初始化播放器
+  function init_music(idname){
+	
+	  music_audio = document.getElementById(idname); 
+	  this_code = 0; 
+	  
+	  music_audio.src = music_arr[this_code];
+	   
+	  //添加播放器结束监听 
+	  music_audio.addEventListener("ended", function() {
+	    	 
+	    	 //播放结束
+	    	 console.log("播放结束,播放下一个");
+	    	 
+	    	 if((this_code+1) < music_arr.length ){
+	    		 
+	    		 $("#word"+this_code).css("color","#999999");
+	    		 
+	    		 this_code = this_code +1;
+	    		 
+	    		 music_audio.src = music_arr[this_code];
+	    		 
+	    		 $("#word"+this_code).css("color","#2dc158");
+	    		 
+	    		 music_audio.play();
+	    		 
+	    	 }else{
+	    		 $("#word"+this_code).css("color","#999999");
+	    	 }
+	    	 
+	     }, false);
+	  
+  }
+  
+$(function () {
+	init_music("music");
+});
+
+  
+  
+function music_control(){
+	
+	 if(music_audio.paused){
+		 
+		 $("#music_button").text("暂停");
+		 
+		 $("#word"+this_code).css("color","#2dc158");
+		 
+		 music_audio.play();
+		 
+		 
+		 
+	 }else{
+		 
+		 $("#music_button").text("播放");
+		 
+		 music_audio.pause();// 这个就是暂停
+		 
+		 
+		 
+	 }
+		 
+	
+}
+  
+  </script>
+</html>

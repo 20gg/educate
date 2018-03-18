@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  </head>
+  <style type="text/css">
+  	
+  	.div_css{
+  		position: absolute;		
+  		top:19%; left:70px;
+  	}
+  
+  .p_css{
+  
+  	color: #1BBE4A;
+  }
+  
+  	.button_css{
+  		position: absolute;
+  		bottom: 3%; left:33%;
+  		background-color: #1BBE4A;
+  		color: #fff;
+  		border: 0px;
+  		height:40px;
+  		width: 100px;
+  		 
+  		
+  	}
+  </style>
+  
+  <body style="margin: 0px;">
+  <div style="width: 100%;">
+    <div style="background: url('../../../img/wx/Invitation_bg.jpg' ); height:100%;background-size:100% 100%; ">  </div>
+    
+    </div>
+    
+    <div id='html_1'>
+    
+    </div>
+    
+    <button class="button_css"> 
+    	链接邀请
+    </button>
+    
+  </body>
+   <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  
+  <script type="text/javascript">
+  var open_id=localStorage.getItem("openid");
+  //var openid="-0001";
+  $(function(){
+	  
+	  	
+		$.ajax({
+			
+			type:"post",
+	  		url: pt_path +'/user/show_congif_s.do',
+	  		dataType:"json",
+	  		data:{"open_id":open_id },
+	  		success: function(data){
+	  			if("error"!=data[0].result){
+	  				var config_s=data[0].config_s;
+	  				var html="";
+	  				
+	 				html+="<div class='div_css' ><p>您每成功邀请一位学员入学</p>"
+	 				   +" <p class='p_css'>将获得"+config_s.scholarship+"元奖学金</p></div>";
+	 				   
+	 				  $("#html_1").html(html); 
+	  			}
+	  			
+	  		}
+		
+		});  
+		
+		
+		
+	  	
+	  	
+  	});
+  
+  </script>
+  
+  
+</html>

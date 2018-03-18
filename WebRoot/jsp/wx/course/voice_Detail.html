@@ -1,0 +1,360 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../../css/touxiang.css" />
+
+  </head>
+  <style type="text/css">
+   .load_tc_back{
+  width:100%;
+	height: 100%;
+	position: fixed;
+	 
+	top:0px;
+	left: 0px;
+	z-index: 10001;
+	overflow:hidden;
+	background:rgba(0,0,0,0.6);
+  
+  }
+  
+
+.tc_ts_div_sure {
+	width: 100px; height: 30px;  border:0px;background-color: #fff;color:#2CC159;
+			    font-size: 16px;  
+}
+.tc_ts_div_sure2 {
+	width: 110px; height: 30px;  border:0px;background-color: #2CC159;color:#fff;
+			    font-size: 13px;margin-left: 40px;
+}
+  
+  </style>
+  
+  <body style="margin: 0px;">
+  	
+  	
+  	
+  	
+  	
+  	
+  <div>	
+ 
+  	<div  id="top_video" style=" width: 100%; border-bottom:15px solid #f2f2f2;"></div>
+    
+    
+   <div style="width: 100%;margin-top: 15px;float:left;line-height: 37px;text-align: center;border-bottom:10px solid #f2f2f2;"> 
+    <div style="width: 20%;float:left;"><img src="../../../img/wx/logo.jpg" style="width:40px;height:40px;border-radius:21px; border: 1px solid #4CAF50; margin-bottom: 9px;"></div>
+   	<div style="width: 60%;float:left;font-size: 12px;"> 格勤教育|全年至少100节精品课程 </div>
+    <div style="width: 20%;float:left; margin-top: 6px;">
+    	<button style="border-radius:50px;background-color:#fff;color:#4CAF50; border:1px solid #4CAF50;" onclick="go_dinggou();" >订阅</button>
+    </div>
+    
+    </div>
+    
+    <div id="discuss_div" style="display: none;">
+    
+    </div>
+    
+    <div style="margin-top:20px;">&nbsp;&nbsp;&nbsp;<span style="color:#4CAF50;margin-right: 5px;">|</span>其他课程
+    <div id="other_video"></div>
+  	</div>
+  	<br><br><br><br>
+  	
+  	<div class="menu_style"  id="menu_id"  style="position: fixed; background-color: #fff;z-index: 100;bottom: 0px;">
+  	<div class=" menu_css" onclick="go_top();"><img src='../../../img/wx/home-page.png' style="width: 24px;height: 20px;"><br>首页</div>	
+  	<div class=" menu_css"  onclick="discuss();"><img src='../../../img/wx/discuss.png' style="width: 24px;height: 20px;"><br>评论</div>		
+  	<div class=" menu_css" onclick="go_buy();" ><img src='../../../img/wx/order.png' style="width: 24px;height: 20px;"><br>订阅</div>		
+  	<div class=" menu_css" onclick="collection();" id="collect_id"><img src='../../../img/wx/collect.png' style="width: 24px;height: 20px;"><br>收藏</div>
+  	</div>
+  	
+  	</div>
+  	
+  	 <div  class="load_tc_back" style="display: none;"  id="myts">
+ 		 
+		<div style="position: fixed;bottom: 0px;left: 0px;width:100%">	 
+		<input type="text" placeholder="内容不能超过400个字" maxlength="400" style="width: 100%;height: 100px;"id="val">
+		 </div>
+		  
+		 
+		<div  style="position: fixed;bottom: 0px;left: 0px;" >
+			 <button class="tc_ts_div_sure" onclick="close_it();">取消</button> 
+			 <button class="tc_ts_div_sure2" onclick="sub_discuss();">发表</button>
+		</div> 
+ 	 
+ 	</div>
+  </body >
+   <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/wx/wx_public.js"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript">
+  	
+  	
+  	//var openid="123456";
+  		 (function ajaxWatch(){
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/watched.do',
+  	  		
+  	  		data:{id:c_no},
+  	  		dataType:"text"
+  	  		
+  		});
+  		
+  	})();
+  		
+  		$(function(){
+  		 
+  	var c_no=localStorage.getItem("c_no");
+  	var watch=localStorage.getItem("watch");
+  			
+  			$.ajax({
+  		type:"post",
+  		url: pt_path +'/course/course_detail.do',
+  		dataType:"json",
+  		data:{"c_no":c_no,"watch":watch},
+  		success: function(data){
+  			
+  			var course=data[0].course;
+  			var course_list=data[0].course_list;
+  			var user=data[0].user;
+  			var html="";    var a=""; var b="";  var order="";
+  				var html2=""; 
+  				
+  				if(user.role==0&&user.state==0){
+  					
+  					for(var i=0;i<course_list.length;i++){  			
+  			  			if(c_no==course_list[i].c_no){
+  			  			html+="<div style='float:left;width:100%;border-bottom:10px solid #f2f2f2;line-height: 40px;'><div  cno='"+course.c_no+"' watch='"+course.watch+"'  ></div>"+
+  			  					"<div style='width:100%; '><audio controls='controls' id='video_id'   width='100%' loop='false' src='"+course.url+"'> </audio></div>"+
+  			  					" <div style='float:left;width:100%;'> <div style='float:left;width:70%;'> "+course.c_name+" </div><div style='float:left;width:30% '><a id='a_id'style=' color:#9F9F9F;' onclick='zhanka(this);' val='"+course.text+"' val2='"+course+"'  >课程详情></a></div></div><div style='clear:both;'></div><div id='go_kai' style='width:100%;'></di><div style='color:#9F9F9F;'>"+course.introduce2.substring(0,15)+"...</div>"	
+  			  					+"</div>";
+  			  					$("#top_video").html(html);
+  			  				}else if(course_list[i].type==0){
+  			  					
+  			  					if(course_list[i].is_order==0){
+  									order="<div style='width:60%;float:left;margin-left:10px;'><div style='float:left; width:100%'><div style='float:left; width:60%'>"+course_list[i].c_name+"</div><div style='float:left; width:30%;margin-left:5px;'><button style='background-color:#4CAF50;color:#fff;border:0px;'>未购买</button></div></div> <div style='float:left;color:#F4B56A; width:100%'>￥"+course_list[i].price+".00/年</div> <div style='float:left; width:100%'>主讲:"+course_list[i].teacher+"</div> <div style='float:left;width:100%;font-size: 9px; '><div style='float:left;width:40% '><img src='../../../img/wx/time.png' style='width:26%;' >"+course_list[i].date.substring(0,10)+"</div><div style='float:left;width:40%;margin-left:35px; ' ><img src='../../../img/wx/watch.png' style='width:26%'>"+course_list[i].watch+"</div></div></div>";		
+  								}else{
+  									order="<div style='width:60%;float:left;margin-left:10px;'><div style='float:left;width:100%;font-size:13px;'>"+course_list[i].c_name+"</div><br><div style='float:left;color:#F4B56A;width:100%;font-size:13px;'>限时免费</div><br><div style='float:left;width:100%;font-size:13px;'>主讲:"+course_list[i].teacher+"</div><div style='float:left;width:100%;font-size: 9px; '><div style='float:left;width:40% '><img src='../../../img/wx/time.png' style='width:26%;' >"+course_list[i].date.substring(0,10)+"</div><div style='float:left;width:40%;margin-left:35px; ' ><img src='../../../img/wx/watch.png' style='width:26%'>"+course_list[i].watch+"</div></div></div>";
+  								}
+  								if(course_list[i].is_xin==1){
+  								a="<img src='../../../img/wx/xin.png' style='width:5%;position:absolute;'>";
+  							}	
+  							if(course_list[i].type==1){
+  								b="<img src='../../../img/wx/video.png' style='width:5%;position:absolute;left:80px;margin-top:37px;'>";
+  								
+  							}else{
+  								b="<img src='../../../img/wx/voice.png' style='width:5%;position:absolute;left:80px;margin-top:37px;'>";						
+  							}
+  			  										 
+  			  					html2+="<div onclick='detail(this);' cno='"+course_list[i].c_no+"' watch='"+course_list[i].watch+"' style='width:100%;margin-top:20px;float:left;border-bottom:1px solid #f2f2f2;'>"+
+  			  					"<div style='width:30%;float:left;'>"+a+"<img src='"+pt_path+""+course_list[i].img+"' style='width:100%;float:left;height:55px;'>"+b+"</div>" 
+  			  					+""+order+""	
+  			  					+"</div>";			
+  			  				}	
+  			  			}$("#other_video").html(html2);
+  					
+  				}else if(user.role==0&&user.state==0){
+  					
+  					
+  					
+  					
+  				}
+  				
+  			
+  			
+  		}
+	
+  });
+  		
+  	});
+  		
+ var is_zk =0;
+  	function zhanka(obj){
+  		 
+  		var text=$(obj).attr("val");
+		   
+  		if(is_zk ==0){
+  			$("#a_id").html("收起详情>");
+  			
+  			$("#go_kai").html("<div style='padding:2% 2%;color:#9F9F9F;'>"+text+"</div>");
+  			
+  			is_zk = 1;
+  		}else{
+  			$("#a_id").text("课程详情>");
+  			
+  			$("#go_kai").html("<div style='padding:2% 2%;color:#9F9F9F;'>"+text.substring(0,20)+"...</div>");
+  			
+  			is_zk = 0;
+  		}	
+  	}
+  	function collection(){
+  		var c_no=localStorage.getItem("c_no");
+  		$.ajax({
+  			
+  		type:"post",
+  		url: pt_path +'/course/course_collection.do',
+  		dataType:"json",
+  		data:{"c_no":c_no,"open_id":openid},
+  		
+  		success: function(data){
+  			if("success"==data[0].result||"success2"==data[0].result){
+  					$("#collect_id").tips({
+					side : 1,
+					msg : '收藏成功',
+					bg : '#4CAF50',
+					time : 3
+				});					
+  			}			
+  		}
+  	});
+}
+  	 
+  	 function detail(obj){
+  	 	var c_no=$(obj).attr("cno");
+  	  	var watch=$(obj).attr("watch");
+  		localStorage.setItem("c_no", c_no );
+  	
+  		 $.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'/course/course_detail.do',
+  	  		dataType:"json",
+  	  		data:{"c_no":c_no,"watch":watch},
+  	  		success: function(data){
+  	  		localStorage.setItem("watch", watch );
+  	  			
+  	  		window.location.href=pt_path+'jsp/wx/course/voice_Detail.html';
+  	  			
+  	  			}
+  	  		});
+  	  
+  	 		
+  	 }
+  	 
+  	function ts_show(msg){
+	
+	$("#ts_msg").html(msg);
+	$("#myts").show();
+}
+  	function close_it(){
+  		var change2=document.getElementById("discuss_div");
+		 if (change2.style.display == "inline") {
+			 change2.style.display = "none";
+	        }
+  		$("#myts").hide();
+  	}
+
+	function discuss(){
+		
+		var c_no1=localStorage.getItem("c_no");
+		
+		localStorage.setItem("c_no", c_no1);
+		 
+		location.href = pt_path +"/jsp/art/comment.html";
+		/* var c_no=localStorage.getItem("c_no");
+		 
+		 
+		$.ajax({
+			type:"post",
+	  		url: pt_path +'/course/discuss_detail.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no},
+	  		success: function(data){
+	  			var change2=document.getElementById("discuss_div");
+				 if (change2.style.display == "none") {
+					 change2.style.display = "inline";
+			        }
+				
+	  			var discuss_list=data[0].discuss_list;
+	  			
+	  			var html="";
+	  			for(var i=0;i<discuss_list.length;i++){
+	  				 var a="";
+	  				if(discuss_list[i].role==0){
+	  					 a="普通书生";
+	  				}else if(discuss_list[i].role==1){
+	  					 a="会员";
+	  				}
+	  				if(discuss_list[i].c_no==c_no){
+	  				
+	  	html+="<div style='width:100%;border-bottom: 3px solid #f2f2f2;'><div style='width:100%;'><img src='"+discuss_list[i].head+"'></div><div style='width:100%;'>"+discuss_list[i].name+"&nbsp;"+a+"</div><div style='width:100%;'>"+discuss_list[i].date.substring(0,10)+"</div><div style='width:100%'>"+discuss_list[i].val+"</div></div>";	  				
+	  				}	
+	  			} $("#discuss_div").html(html);
+	  		
+	  		}
+			
+		});
+		ts_show();
+		 */
+		
+		
+		
+	}
+	
+	function sub_discuss(){
+				
+			
+		var val=$("#val").val();
+		var c_no=localStorage.getItem("c_no");
+		 
+			$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/course_discuss.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"open_id":openid,"val":val},
+	  		
+	  		success: function(data){
+	  			if("success"==data[0].result) 	{
+	  				
+	  				var change2=document.getElementById("discuss_div");
+	  				 if (change2.style.display == "inline") {
+	  					 change2.style.display = "none";
+	  					 
+	  					  
+	  					$("#myts").hide();
+	  			      }
+	  			}	
+	  		}
+	  	});
+		
+	}
+	function go_dinggou(){
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html'; 
+		 
+	 }
+	
+	function go_buy(){
+		window.location.href=pt_path+'jsp/wx/Guyang/buy.html'; 
+		 
+	 }
+	
+	 function add_study(see_time,is_end){
+			
+			//var c_no ="1496561112893";//课程号
+			var is_buy = 0; // 0 未购买  1已购买
+			
+			 $.ajax({
+					type:"post",
+					url: pt_path +"/study/add_study.do",
+					dataType:"json",
+					data:{"see_time":parseInt(see_time) ,"is_end":is_end,"openid":openid,"c_no":c_no,"is_buy":is_buy},
+					success: function(data){
+						
+					}
+			 });
+		}
+	 
+ function go_top(){
+		 
+		 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+		 
+}
+  </script>
+</html>

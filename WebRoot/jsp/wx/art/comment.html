@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/video/comment.css" type="text/css">
+		
+		<link rel="stylesheet" href="../../../css/post.css"> 
+	    
+		
+	<style type="text/css">
+	.at_ds{color:#f29824;margin-right:4%}
+	.back_ds{color:#fa2973;margin-right:4%}
+	
+	.tc_but_no {
+    width: 100Px;
+    height: 30px;
+    background-color: #fff;
+    border:1px solid #ddd;
+    color: #333; 
+    border-radius: 5px;
+    font-size: 16px;}
+    
+    .tc_but_yes {
+    width: 100Px;
+    height: 30px;
+    background-color: #FDC52C;
+    border:none;
+    color: #fff; 
+    border-radius: 5px;
+    font-size: 16px;}
+	</style>
+		
+	</head>
+	<body>
+		<div class="b_link">
+			<div class="title">
+				<h1 id="d_num">全部评论231条</h1>
+				<div class="publish" onclick="show_add();">
+					<div class="img">
+						<img src="../../../images/discuss/pen.png">
+					</div>
+					<h2>发表评论</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="pl" id="all_list">
+			<!-- <div class="column">
+				<div class="b_bg">
+					<img src="../../../images/vedio/touixiang1.png">
+				</div>
+				<div class="b_text">
+					<div class="b_title">书童要考公务员</div>
+					<div class="time">2017.04.27</div>
+				</div>
+				<p><span class="at_ds" >@导师</span>很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！</p>
+				<p><span class="back_ds" >到答课堂陈老师</span>很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！很好，不错！</p>
+				<div class="clearfix"></div>
+			</div>	 -->
+			 	
+			 
+		</div>
+		
+		<div class="more" id="no_log" >暂无评论</div>
+			
+		<div class="more" id="jia_zai" onclick="get_more();">加载更多</div>
+		
+		
+				<!-- 弹出 -->
+<div class="post_tc_back" style="display: none;" id="add_page" >
+	<div class="tc_page">
+		<div class="tc_head">
+		<label>发表评论</label>
+			<span onclick="close_add();" style="float: right; font-size: 18px;">&times;</span>
+		</div> 
+		<div class="tc_context" >
+			<textarea id="add_context" placeholder="请输入评论内容" maxlength="200" style="outline: none;-moz-appearance:none;  
+    -webkit-appearance:none;border: 1px solid #ddd; "></textarea>
+		</div> 
+		<div class="tc_foot"> 
+			<div class="tc_foot_a"><button class="tc_but_no" onclick="check_at(this);" id="at_but" >@导师</button></div>
+			<div class="tc_foot_a"><button id="tip" class="tc_but1" onclick="commit_add();">发表</button></div>
+		</div>
+	</div> 
+</div>
+
+
+		 
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>  
+<script type="text/javascript" src="../../../js/path.js"></script>
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script> 
+<script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>
+<script type="text/javascript">
+
+//var openid ="123456";
+var page_num =1;
+var page_count =1;
+
+var is_at = 0;
+var share_ul="3";
+$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		  get_discuss(1); 
+	}
+	 
+}
+
+function get_discuss(page){
+	
+	var c_no = localStorage.getItem("c_no");
+	
+	//var c_no ="000";
+	
+	 $.ajax({
+			type:"post",
+			url: pt_path +"/article/query_discuss.do",
+			dataType:"json",
+			data:{"c_no":c_no,"openid":openid},
+			success: function(data){
+				
+				page_num = data[0].page_num;
+	  			page_count = data[0].page_count;
+	  			
+	  			if(page_num >= page_count){
+	  				$("#jia_zai").hide();
+	  			}else{
+	  				$("#jia_zai").show();
+	  			}
+	  			
+	  			$("#d_num").text("全部评论"+data[0].count+"条");
+	  			
+	  			var list = data[0].discuss_list;
+	  			
+	  			if(list.length < 1){
+	  				$("#no_log").show();
+	  			}else{
+	  				$("#no_log").hide();
+	  			}
+	  			
+	  			var html="";
+	  			for(var i=0;i<list.length;i++){
+	  				
+	  				var at ="";
+	  				if(list[i].is_at == 1){
+	  					at =" <span class='at_ds'>@导师</span> ";
+	  				} 
+	  				var back ="";
+	  				if(list[i].at_state == 1){ 
+	  					back =" <p><span class='back_ds'>到答课堂"+list[i].answer_man+"</span>"+list[i].answer_info+"</p>"
+	  				}
+	  				
+	  				var img ="../../../images/vedio/touixiang1.png";
+	  				if(list[i].head != null && list[i].head != ""){
+	  					var img = list[i].head ;
+	  				}
+	  				
+	  				var d = "<div class='column'> <div class='b_bg'> <img src='"+img+"'> </div>"
+					+"<div class='b_text'> <div class='b_title'>"+list[i].name+"</div> <div class='time'>"+list[i].date+"</div> </div>"
+					+"<p>"+at+list[i].val+"</p>"+back+" <div class='clearfix'></div> </div>";
+					
+	  				html = html+d;
+	  			}
+	  			
+	  			$("#all_list").append(html);
+	  			
+			}
+	 });
+	
+}
+
+function get_more(){
+	
+	var p = page_num +1;
+	get_discuss(p); 
+}
+
+function show_add() {
+	
+	is_at = 0;
+	$("#at_but").attr("class","tc_but_no");
+	 
+	$("#add_context").val("");
+	$("#add_page").show();
+}
+
+function close_add() {
+	$("#add_page").hide();
+	
+	 $("body").scrollTop(0);
+}
+
+function check_at(obj){
+	
+	if(is_at == 0){
+		is_at = 1;
+		$(obj).attr("class","tc_but_yes");
+	}else{
+		is_at = 0;
+		$(obj).attr("class","tc_but_no");
+	}
+}
+
+function commit_add(){
+	
+	var val = $("#add_context").val();
+	
+	if(val == ""){
+		$("#add_context").tips({
+			side : 1,
+			msg : "请输入评论内容！",
+			bg : '#2CC159',
+			time : 3
+		});
+		
+		return false;
+	}
+	
+	var c_no = localStorage.getItem("c_no"); 
+	//var c_no ="000";
+	
+	 $.ajax({
+			type:"post",
+			url: pt_path +"/article/add_discuss.do",
+			dataType:"json",
+			data:{"openid":openid,"c_no":c_no,"val":val,"is_at":is_at},
+			success: function(data){
+				
+				if(data[0].back_code == 100){
+					 
+					
+					location.href = pt_path +"/jsp/wx/art/comment.html"; 
+				}
+			}
+		 });
+}
+
+</script>
+</html>

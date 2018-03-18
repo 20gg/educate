@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/burse/invotation.css" type="text/css">
+		<link rel="stylesheet" href="../../../css/tanchu.css" /> 
+		<style type="text/css">
+  	
+  	.div_css{
+  		position: absolute;	
+  		top:20%;  width:100%;
+  		text-align: center;
+  	}
+  
+  .p_css{
+  
+  	color: #1BBE4A;
+  }
+  
+  	.button_css{
+  		position: absolute;
+  		bottom: 3%; left:33%;
+  		background-color: #1BBE4A;
+  		color: #fff;
+  		border: 0px;
+  		height:40px;
+  		width: 100px;
+  		 
+  		
+  	}
+  </style>
+		
+	</head>
+	<body>
+		<div class="bg1">
+			<img src="../../../img/wx/Invitation_bg.jpg">
+		</div>
+		 <div id='html_1'></div>
+		 
+		 
+		<div class="inv"   onclick="share_show();">
+			<span style="background-color: #00a1e9;">立即邀请</span>
+		</div>
+		
+		
+		     <div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/213.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+ // var open_id=localStorage.getItem("openid");
+  //var openid="ok4o7waQyK5dri1qmHs9fIxhJY58";
+  
+  
+	var share_ul="Invitation";  
+	
+	$(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			  get_discuss(); 
+		}
+		 
+	}
+	
+	function  get_discuss(){
+		
+		$.ajax({
+			
+			type:"post",
+	  		url: pt_path +'/user/show_congif_s.do',
+	  		dataType:"json",
+	  		data:{"open_id":openid },
+	  		success: function(data){
+	  			if("error"!=data[0].result){
+	  				var config_s=data[0].config_s;
+	  				var html="";
+	  				
+	 				html+="<div class='div_css' ><div>您每成功邀请一位学员入学</div>"
+	 				   +" <div  class='p_css'>将获得"+config_s.scholarship/100+"元奖学金</div></div>";
+	 				   
+	 				 // $("#html_1").html(html); 
+	  			}
+	  			
+	  		}
+		
+		});  
+		
+	}
+	
+  
+   
+  
+  function close_share(){
+		$("#myshare").hide();
+	}
+function share_show(){
+	 
+	  
+		$("#myshare").show();
+	}
+	
+  
+  </script>
+</html>

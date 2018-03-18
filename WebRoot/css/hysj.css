@@ -1,0 +1,165 @@
+body,h1,h2,h3,h4{
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	font-family:"微软雅黑";
+}
+body{
+	background:#00a1e9;
+}
+.clearfix{
+	clear:both;
+}
+.bg{
+	width:94%;
+	margin:auto auto;
+	background:#f8f7f7;
+	margin-top:12px;
+	border-radius:4px;
+	padding-bottom:10px;
+}
+.bg .title_01{
+	width:94%;
+	margin:auto auto;
+	font-size:16px;
+	line-height:24px;
+	color:#333333;
+	padding-top:10px;
+	
+}
+.bg .title_01 span{
+	color:#00A1E9;
+}
+.bg .col{
+	width:88%;
+	margin:auto auto;
+	background:#ffffff;
+	border-radius:4px;
+	padding:3%;
+	margin-top:10px;
+}
+.bg .col .img{
+	width:20%;
+	float:left;
+}
+.bg .col .img img{
+	width:100%;
+	border-radius:50%;
+}
+.bg .col .text{
+	float:left;
+	width:76%;
+	margin-left:4%;
+}
+.bg .col .text .title_02{
+	width:100%;
+	margin-bottom:10px;
+}
+.bg .col .text .title_02 h1{
+	float:left;
+	margin-right:2%;
+	font-size:18px;
+	color:#333333;
+	line-height:20px;
+}
+.bg .col .text .title_02 span{
+	float:left;
+	background:#00A1E9;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:20px;
+	border-radius:20px;
+	font-size:14px;
+	display:block;
+	padding:0px 8px 0px 8px;
+}
+.bg .col .text h2{
+	width:100%;
+	text-align:left;
+	color:#00A1E9;
+	line-height:30px;
+	font-size:14px;
+}
+.bg .col .text h3{
+	width:100%;
+	text-align:left;
+	margin-left:30px;
+	color:#00A1E9;
+	line-height:30px;
+	font-size:14px;
+}
+.img_01{
+	width:94%;
+	margin:auto auto;
+	margin-top:12px;
+}
+.img_01 img{
+	width:100%;
+	border-radius:4px;
+	display:block;
+}
+.img_02{
+	width:94%;
+	margin:auto auto;
+	position:relative;
+}
+.img_02 img{
+	width:100%;
+	border-radius:0px 0px 4px 4px;
+	display:block;
+}
+.img_02 .go{
+	width:16%;
+	position:absolute;
+	top:28px;
+	right:20px;
+}
+.img_02 .go img{
+	width:100%;
+	border-radius:50%;
+	display:block;
+}
+.img_03{
+	width:94%;
+	margin:auto auto;
+	margin-top:12px;
+}
+.img_03 img{
+	width:100%;
+	border-radius:4px 4px 0px 0px;
+	display:block;
+}
+.img_04 img{
+	width:100%;
+	border-radius:0px 0px 4px 4px;
+	display:block;
+}
+.img_04{
+	width:94%;
+	margin:auto auto;
+	position:relative;
+	margin-top:12px;
+}
+.img_04 .ewm{
+	width:18%;
+	position:absolute;
+	top:20px;
+	right:20px;
+}
+.img_04 .ewm img{
+	width:100%;
+	display:block;
+}
+.foot{
+	width:100%;
+	font-size:18px;
+	color:#FFF;
+	background:#0F7DDB;
+	border-radius:4px;
+	line-height:50px;
+	text-align:center;
+	font-weight:400;
+	position: fixed;
+	 
+	bottom: 0px;
+}

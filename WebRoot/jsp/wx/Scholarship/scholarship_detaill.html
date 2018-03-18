@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		
+		<link rel="stylesheet" href="../../../css/wx/burse/burse.css" type="text/css">
+		
+		 <link rel="stylesheet" href="../../../css/wx_menu.css">
+		 
+		 <style type="text/css">
+		 .top span{display:block;float:right;width:26%;height:30px;margin-top:10px;margin-top:15px;border-radius:15px;text-align:center;line-height:30px;font-size:14px;color:#fff;background:#2dc158;}
+		 
+		 </style>
+		
+	</head>
+  
+  <body>
+   <div class="other" >
+			<div class="title" style="padding-bottom: 10px;">
+				<span></span>
+				<h1>奖学金明细</h1>
+				<div class="clearfix"></div>
+			</div>
+			<div id="log_list">
+			
+			</div>
+			
+			<div id="log_list2"></div>
+			<!-- <div class="col">
+				<div class="left">
+					<div class="nom1">01</div>
+				</div>
+				<div class="middle">
+					<div class="name">邀请王同学购买xxx课程</div>
+					<div class="time">消费金额 </div>
+					<div class="length">￥1256.00</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="right">
+					<div class="nom2">＋56.00</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			  -->
+		</div>
+		<div class="more" id="no_data" >暂无明细</div>
+		<div class="more" id="more" onclick="get_more();" style="margin-bottom: 20px;">加载更多</div>
+		 
+		<br><br><br><br><br>
+		
+		<!-- 菜单 -->
+	<!-- <div class="wx_menu_page">
+		<div class="wx_menu_one" onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" >
+			<div class="menu_s"><img src="../../../img/wx_menu/money2.png"></div>
+			<div class="menu_x menu_green" >边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x">我的</div>
+		</div>
+	</div> -->
+  </body>
+  
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+   <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>  
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>  
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+
+<script type="text/javascript">
+
+var share_ul="scholarship_detail";  
+var page_num =1;
+var page_count =1;
+	
+	//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+	
+	$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		get_data(1);
+		show_log(1);
+	}
+	 
+}
+	 
+
+function get_more(){
+	
+	var page = page_num+1;
+	
+	get_data(page);
+	
+}
+
+function get_data(page){
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/top/shcolarship_info.do',
+  		dataType:"json",
+  		data:{"openid":openid,"page":page},
+  		success: function(data){
+  			 
+  			page_num =data[0].page_num;
+  			page_count =data[0].page_num;
+  			
+  			if(page_num >= page_count){
+  				$("#more").hide();
+  			}else{
+  				$("#more").show();
+  			}
+  			
+  			var log_list = data[0].log_list;
+  			
+  			if(log_list.length < 1){
+  				$("#no_data").show();
+  			}else{
+  				$("#no_data").hide();
+  			}
+  			
+  			var html ="";
+  			for(var i=0;i<log_list.length;i++){
+  				
+  				var c = (page_num -1)*20+i+1;
+  				var p = log_list[i].pay_money/100;
+  				var r = log_list[i].rebate/100;
+  				
+  			 	if(r > 0){
+  			 		r = "+"+r;
+  			 	}
+  				
+				var aaa = log_list[i].c_name;
+  				
+  				if(aaa.length>10){
+  					aaa = aaa.substring(0,10)+"..."; 
+  				}
+  				
+  				var l= "<div class='col'> <div class='left'> <div class='nom1'>"+c+"</div></div>"
+				+"<div class='middle'> <div class='name'>"+aaa+"</div>"
+				+"<div class='time'>消费金额 </div> <div class='length'>"+p+"</div> <div class='clearfix'></div> </div>"
+				+"<div class='right'> <div class='nom2'>"+r+"</div> </div> <div class='clearfix'></div> </div>";
+				
+  				html = html +l;
+  				
+  			}
+  			
+  			$("#log_list").append(html);
+  			
+  			
+  		}
+	});
+}
+
+		function  show_log(page){
+			
+			 
+			$.ajax({
+		  		type:"post",
+		  		url: pt_path +'/course/show_log.do',
+		  		dataType:"json",
+		  		data:{"openid":openid,"page":page},
+		  		success: function(data){
+		  				var list=data[0].list;
+		  				var list_2=data[0].list_2;
+		  				var log_list = data[0].log_list;
+		  				var config_s=data[0].config_s;
+		  				
+		  				
+		  				var html ="";
+		  				if(list.length < 1){
+		  	  				$("#no_data").show();
+		  	  			}else{
+		  	  				$("#no_data").hide();
+		  	  			}
+		  			
+		  					var kk=0;
+		  				for(var i=0;i<list_2.length;i++){
+		  	  				kk++;
+		  	  				var c = log_list.length+kk;
+		  	  			
+		  	  				var r = list_2[i].scholarship/100;
+		  	  				
+		  	  			 	if(r > 0){
+		  	  			 		r = "+"+r;
+		  	  			 	}
+		  	  				
+		  					
+		  	  				
+		  	  				var l= "<div class='col'> <div class='left'> <div class='nom1'>"+c+"</div></div>"
+		  					+"<div class='middle'> <div class='name'>您邀请了"+list[i].name+"</div>"
+		  					+"<div class='clearfix'></div> </div>"
+		  					+"<div class='right'> <div class='nom2'>"+r+"</div> </div> <div class='clearfix'></div> </div>";
+		  					
+		  	  				html = html +l;
+		  	  				
+		  	  			}
+		  	  			
+		  	  			$("#log_list2").append(html);	
+		  				
+		  				
+		  				
+		  			}   
+		  					
+			});
+			
+		}
+
+</script>
+</html>

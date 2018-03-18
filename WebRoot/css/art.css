@@ -1,0 +1,45 @@
+.my_body{margin: 0;padding: 0;background-color: #fff; font-family: 微软雅黑;}
+
+.art_head{width: 100%;height: 50px;  border-bottom: 1px solid #e5e5e5;} 
+.head_one{width: 33.33%;float: left;height: 50px;} 
+.head_sort{width: 60px; height: 50px; line-height: 48px; text-align: center; color: #333; margin-left: auto;margin-right: auto;} 
+.head_choose{width: 60px; height: 48px; line-height: 48px; text-align: center; color: #2CC159;border-bottom: 2px solid #2CC159;margin-left: auto;margin-right: auto;}
+
+.art_recommend{padding: 10px;border-bottom: 1px solid #e5e5e5;}
+.reco_title{color: #333; font-size: 16px;}
+.reco_img{width: 100%;border-radius: 10px; margin-top: 10px;}
+
+
+/* 
+.reco_other{height: 36px;line-height: 36px; }
+.rou_jian{width: 50px; height: 20px;border-radius: 10px;  font-size:10px;
+ background-color: #2CC159;color: #fff; border: none; line-height: 20px; text-align: center;}
+ 
+ .art_read{font-size: 12px; color: #aaa; margin-top: 4px;}
+ .art_read img{height: 12px; width: 20px; } */
+ 
+ .reco_other{ margin-top: 10px;}
+ .reco_other .rou_jian{float:left;height:20px;line-height:20px;border:none;border-radius:10px;color:#fff;font-size:12px;background:#2dc158;}
+ .reco_other .art_read{float:left;height:20px;}
+ .reco_other .art_read img{height:12px;float:left;padding-top:4px;}
+ .reco_other .art_read .reco_r{line-height:20px;font-size:14px;float:left;color:#969696;margin-left:4px;font-family:"arial";}
+ .clearfix{clear:both;}
+ 
+ 
+ .art_page{margin:10px; height: 80px;border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 10px;}
+ .art_page_a{width: 70%; float: left;height: 100%;}
+ .art_page_title{height: 55px; font-size: 16px; color: #333;}
+ .art_page_read{height: 25px; }
+ .art_page_b{width: 30%; float: left;height: 100%;}
+ .art_page_b img{width: 100%;height: 100%; border-radius: 5px;}
+ 
+ 
+ .log_jia{height: 50px; text-align: center; line-height: 50px;background-color: #fff;} 
+ .log_jia button{width: 140px; height: 30px; border: 1px solid #ddd; background-color: #fff; border-radius: 15px; color: #aaa;} 
+  
+  .img_box{padding: 10px;}
+  
+  .info_box{ color: #646464; font-size: 14px; font-family: 微软雅黑; line-height: 2em;text-align: left;}
+  
+  .art_share {width: 100%;height: 50px;line-height: 50px; text-align: center;}
+  .art_share button{width: 140px; height: 44px; font-size: 14px; background-color: #2CC159;color: #fff; border: none;border-radius: 5px;}

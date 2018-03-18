@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		
+		<link rel="stylesheet" href="../../../css/wx/burse/burse.css" type="text/css">
+		
+		 <link rel="stylesheet" href="../../../css/wx_menu.css">
+		 <link rel="stylesheet" href="../../../css/wx/personal/circle.css?v=0.1" type="text/css">
+		 <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+			
+	</head>
+		 <style type="text/css">
+		 .top span{display:block;float:right;width:26%;height:30px;margin-top:10px;margin-top:15px;border-radius:15px;text-align:center;line-height:30px;font-size:14px;color:#fff;background:#2dc158;}
+		 
+		 </style>
+	
+	<body >
+		 <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+		<div class="burse_bg">
+			<img src="../../../images/burse/burse_bg.png">
+		</div>
+		<div class="burse_bg">
+			<h1>我的奖学金:</h1>
+			<h2 id="my_jxj"></h2>
+			<h3 onclick='go_sort();'>明细>></h3>
+			<div class="clearfix"></div>
+		</div>
+		<div class="inv">
+			<span onclick='go_invitation();' >立即邀请</span>
+		</div>
+		<div class="inv">
+			<div class="nomal" onclick="show_common();"  id="to_change">已邀请普通学员 ：<a id="pt_num"></a>位</div>
+			<div class="vip"    onclick="show_vip_user();" id="to_change_to">已邀请VIP学员 ：<a id="vip_num"></a>位</div>
+			
+			
+		
+			<div class="clearfix"></div>
+		</div>
+	
+	<div id="all_list" style="margin-bottom: 90px;">
+		
+		 
+		
+		</div>
+		
+		
+		<!-- <div class="other" >
+			<div class="title" style="padding-bottom: 10px;">
+				<span></span>
+				<h1>奖学金明细</h1>
+				<div class="clearfix"></div>
+			</div>
+			<div id="log_list">
+			
+			</div>
+			<div class="col">
+				<div class="left">
+					<div class="nom1">01</div>
+				</div>
+				<div class="middle">
+					<div class="name">邀请王同学购买xxx课程</div>
+					<div class="time">消费金额 </div>
+					<div class="length">￥1256.00</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="right">
+					<div class="nom2">＋56.00</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			 
+		</div> -->
+		<div class="more" id="no_data" >暂无明细</div>
+		<div class="more" id="more" onclick="get_more();" style="margin-bottom: 20px;">加载更多</div>
+		 
+		<br><br><br><br><br>
+		
+		<!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one" onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one">
+			<div class="menu_s"><img src="../../../img/wx_menu/money2.png"></div>
+			<div class="menu_x menu_green">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x">我的</div>
+		</div>
+	</div>
+		
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>  
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+
+
+<script type="text/javascript">
+
+//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+	var share_ul="scholarship";
+var page_num =1;
+var page_count =1;
+	
+	
+$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		$("#no_data").hide();
+		$("#more").hide();
+		get_data(1);
+	}
+	 
+}
+	
+
+
+function get_more(){
+	
+	var page = page_num+1;
+	
+	get_data(page);
+}
+
+function get_data(page){
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/top/shcolarship_info.do',
+  		dataType:"json",
+  		data:{"openid":openid,"page":page},
+  		success: function(data){
+  			
+  			if(data[0].user.head != null && data[0].user.head != ""){ 
+   				$("#head_img").attr("src",data[0].user.head);
+   			}else{ 
+   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+   			}
+   			
+   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+   			
+   			if(data[0].user.role!=1){ 
+				$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+			} 
+   			
+			$("#my_name").text(data[0].user.name);
+			 
+   			
+  			
+  			
+  			$("#my_jxj").text(data[0].user.scholarship/100 +"元");
+  			
+  			$("#pt_num").text(data[0].pt_num);
+  			$("#vip_num").text(data[0].vip_num);
+  			
+  			page_num =data[0].page_num;
+  			page_count =data[0].page_num;
+  			
+  			if(page_num >= page_count){
+  				$("#more").hide();
+  			}else{
+  				$("#more").show();
+  			}
+  			
+  			var log_list = data[0].log_list;
+  			
+  			if(log_list.length < 1){
+  				$("#no_data").show();
+  			}else{
+  				$("#no_data").hide();
+  			}
+  			
+  			var html ="";
+  			for(var i=0;i<log_list.length;i++){
+  				
+  				var c = (page_num -1)*20+i+1;
+  				var p = log_list[i].pay_money/100;
+  				var r = log_list[i].rebate/100;
+  				
+  			 	if(r > 0){
+  			 		r = "+"+r;
+  			 	}
+  				
+				var aaa = log_list[i].c_name;
+  				
+  				if(aaa.length>10){
+  					aaa = aaa.substring(0,10)+"..."; 
+  				}
+  				
+  				var l= "<div class='col'> <div class='left'> <div class='nom1'>"+c+"</div></div>"
+				+"<div class='middle'> <div class='name'>"+aaa+"</div>"
+				+"<div class='time'>消费金额 </div> <div class='length'>"+p+"</div> <div class='clearfix'></div> </div>"
+				+"<div class='right'> <div class='nom2'>"+r+"</div> </div> <div class='clearfix'></div> </div>";
+				
+  				html = html +l;
+  				
+  			}
+  			
+  			$("#log_list").append(html);
+  			
+  			
+  		}
+	});
+}
+ 
+function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html?v=0.1';
+	}
+	
+	function go_sort(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/scholarship_detaill.html?v=0.1';
+	}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html?v=0.1';
+		
+	}
+	
+	function go_personal(){
+		
+		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html?v=0.1';
+	}
+	
+	function go_invitation(){
+		
+		localStorage.setItem("openid", openid );
+	window.location.href=pt_path+'jsp/wx/Scholarship/Invitation.html?v=0.1';
+		
+	}
+	function go_my_order(){
+	
+	 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+	
+}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+		
+	}
+	
+	function go_vip(){
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+	}
+	
+ function go_top(){
+		 
+		 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+		 
+	 }
+ 
+ function head_str(){
+		
+		var date = new Date();
+		
+		var h = date.getHours();
+		
+		var head_str = "";
+		
+		if(h<11){
+			head_str = ",上午好";
+		}else if(h<14){
+			head_str = ",中午好";
+		}else if(h<17){
+			head_str = ",下午好";
+		}else{
+			head_str = ",晚上好";
+		}
+		
+		return head_str;
+	}
+	
+ function show_common(){
+	 $("#to_change_to").css("color","#646464");
+	 $("#to_change").css("color","#2DC158");
+	 
+	 $.ajax({
+		  type:"post",
+	  		url: pt_path +'/user/show_my_classmate.do',
+	  		dataType:"json",
+	  		data:{"open_id":openid},
+	  		success: function(data){
+	  		 
+ 				var list = data[0].xia_ji;
+ 				
+ 				var html ="";
+ 				for(var i=0;i<list.length;i++){
+ 					
+ 					var img = "../../images/vedio/touixiang1.png";
+ 					
+ 					if(list[i].head != null && list[i].head.head != ""){
+ 						img = list[i].head;
+ 					}
+ 					
+ 					var yxq = list[i].p1_date; 
+ 	  				if(list[i].p2_date != null){
+ 	  					yxq = list[i].p2_date;
+ 	  				} 
+ 	  				
+ 	  				if(list[i].role!=1){
+ 	  					var a="<div class='tl'> <div class='column'> <div class='b_bg'> <img src='"+img+"'> </div>"
+						+"<div class='b_text'> <div class='b_title'> <div class='a_t'>"+list[i].name+"</div>"
+						
+						+"<div class='clearfix'></div> </div> <div class='time'>我的邀请</div> </div>"
+						+"<div class='tran'><h1>有效期至"+yxq+"</h1><span  onclick='go_detail(\""+list[i].open_id+"\")';  '>详情</span></div>  <div class='clearfix'></div> </div>	 </div>";
+  					
+ 					html = html +a;	
+ 	  					
+ 	  					
+ 	  				}
+ 					
+ 				
+ 				}
+ 				
+ 				$("#all_list").html(html);
+	  			 
+	  		}
+		  
+	  });
+	 
+	 
+ }
+ 
+function show_vip_user(){
+	
+	 $("#to_change_to").css("color","#2DC158");
+	 $("#to_change").css("color","#646464");
+	 
+	 $.ajax({
+		  type:"post",
+	  		url: pt_path +'/user/show_my_classmate.do',
+	  		dataType:"json",
+	  		data:{"open_id":openid},
+	  		success: function(data){
+	  		 
+ 				var list = data[0].xia_ji;
+ 				
+ 				var html ="";
+ 				for(var i=0;i<list.length;i++){
+ 					
+ 					var img = "../../images/vedio/touixiang1.png";
+ 					
+ 					if(list[i].head != null && list[i].head.head != ""){
+ 						img = list[i].head;
+ 					}
+ 					
+ 					var yxq = list[i].p1_date; 
+ 	  				if(list[i].p2_date != null){
+ 	  					yxq = list[i].p2_date;
+ 	  				} 
+ 	  				
+ 	  				if(list[i].role ==1){
+ 	  					var a="<div class='tl'> <div class='column'> <div class='b_bg'> <img src='"+img+"'> </div>"
+						+"<div class='b_text'> <div class='b_title'> <div class='a_t'>"+list[i].name+"</div>"
+						
+						+"<div class='clearfix'></div> </div> <div class='time'>我的邀请</div> </div>"
+						+"<div class='tran'><h1>有效期至"+yxq+"</h1><span  onclick='go_detail(\""+list[i].open_id+"\")';  '>详情</span></div>  <div class='clearfix'></div> </div>	 </div>";
+  					
+ 					html = html +a;	
+ 	  					
+ 	  					
+ 	  				}
+ 					
+ 				
+ 				}
+ 				
+ 				$("#all_list").html(html);
+	  			 
+	  		}
+		  
+	  });
+	 
+	 
+ }
+ 
+function go_detail(open_id){
+	
+	localStorage.setItem("xia_open_id", open_id );
+	window.location.href=pt_path+'jsp/wx/Person_Center/subordinate.html';
+}
+</script>
+</html>

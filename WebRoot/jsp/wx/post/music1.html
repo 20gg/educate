@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>音频测试</title> 
+    <link rel="stylesheet" href="../../../js/qq_video/audio.css?v=1" />
+    
+</head>
+<body>
+
+<div class="audio">
+  		<div class="audio_title"><h1 id="audio_info">互联网营销案例分析</h1></div>
+  		<audio id="music" controls="controls" ></audio> 
+  		<!-- 播放器_弹出 -->
+   		<div id="video_tc" class="video_tc" >
+   			<div id="video_tc_page" class="video_tc_page">
+   				<div class="video_tc_title" id="video_tc_title">提示</div>
+   				<div class="video_tc_text"  id="video_tc_text"></div>
+   				<div class="video_tc_button"  id="video_tc_button" onclick="video_tc_sure(this);" code="1"></div>
+   			</div> 
+   		</div> 
+  		
+  	</div>
+    
+</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/qq_video/music.js"></script>
+<script type="text/javascript"> 
+$(function () {
+	
+	var c_obj = {"continue_time":20,"title":"提示","text":"已经听了一部分！","button":"继续播放"};
+	
+	var s_obj = {"stop_time":30,"title":"提示","text":"试听结束，请订阅！","button":"确定"};
+	
+	var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+	
+	//var src = "http://1253819261.vod2.myqcloud.com/eb4f086dvodtransgzp1253819261/79a257239031868223216178272/v.f220.m3u8";
+	var src="9031868223216178272";
+	 init_audio("music",src,null,null,e_obj,"课程名称");
+	 
+	 
+	
+});
+
+ 
+
+function add_study(see_time,is_end){
+	
+	var c_no ="23456";//课程号
+	var is_buy = 0; // 0 未购买  1已购买
+	 
+}
+ 
+</script>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	 <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+		
+		<title></title>
+		<script type="text/javascript" src="../../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/url.js"></script>
+	
+
+
+
+
+		<link rel="stylesheet" href="../../css/indexhtml.css" />
+
+		 <link href="../../boot/3.0.1/css/btb.css?v=4.4.0" rel="stylesheet">
+	
+	<style type="text/css">
+		.oneshop{
+		
+		display: inline-block;
+		float:left;
+		min-width:100px;
+		max-width:250px;
+		margin-left: 10px;
+		margin-top: 5px;
+		border-radius:3px;
+		border:1px solid #F0F0F0;
+		background: #FFFFFF;
+		color:#009AFE;
+		height:40px;
+		line-height: 40PX;
+		font-size: 12px;
+		text-align: center;
+		}
+	
+	.choosezb{
+		width:80px;
+		height:80px;
+		
+	border-radius:3px;
+		border:1px solid #F0F0F0;
+		background: #FFFFFF;
+		color:#009AFE;
+		line-height: 80PX;
+		font-size: 15px;
+		text-align: center;
+	}
+	.oneshop:hover,.choosezb:hover{
+		background:#009AFE;
+		color:#FFFFFF
+	}
+	</style>
+
+	</head>
+
+  
+ 
+	<body  style="min-width: 1200px; overflow-x: scroll;">
+ 
+		<div id="leftmain">
+			<div id="menulist">
+				<div class="head"><img src="../../img/logo.jpg"></div>
+			</div>
+			<div class="userinfo" onclick="exit()"><span id="mananame"></span>
+			
+			<div id="edituser" style="display: none;">
+			<div class="arrow-down"></div>
+			<div class="etou edit1"></div>
+			<div class="etou edit2"></div>
+			<div  style="color:red;" id="nowsname"></div>
+<!-- 			<div class="ewei" onclick="changeArea()">切换店铺</div> -->
+			<!-- <div class="ewei" >退出</div> -->
+			</div></div>
+		</div>
+
+		<div id="secondMenus" style="cursor: pointer;"></div>
+		<div id="threeMenus"></div>
+		<div id="fourMenus"></div>
+		<iframe id="rightmain" src="../../course/shows_course_order.do" frameborder=0 scrolling="auto"></iframe>
+		
+		
+		
+		
+		
+		
+	</body>
+<script type="text/javascript" src="../../js/path.js" ></script>
+		<script type="text/javascript" src="../../js/menulist.js?v=1.0"></script>
+	<script>
+	
+			
+			var menuss;
+			$.ajax({
+				type:'post',
+				url:pt_path + "login/into_pt.do",
+				dataType:"json",
+				success:function(data){
+				
+					
+					if(data[0].menu_arr != null && data[0].menu_arr.length> 0){
+				
+					menuss=data[0].menu_arr;
+					ME.init(data[0].menu_arr);
+					
+					
+					
+					 $("#mananame").html("退出");
+							/*
+							$(".edit1").html("用户名");
+							$(".edit2").html("手机");
+							$("#nowsname").html("格勤教育"); */
+						
+					}else{
+					
+						exit();
+					}
+					
+					
+				}
+				
+			});
+			
+			function exit(){
+				location.href = "../../jsp/pt/pt_login.html";
+			}
+			
+			
+		$(function(){
+		$("#shoparea").on("click",".oneshop",function(){
+			
+					var sid=$(this).attr("data");
+					window.location.href=getRootPath()+"/role/changeLogin.do?sid="+sid;
+			
+				});
+				$("#shoparea").on("click",".choosezb",function(){
+			
+				
+					window.location.href=getRootPath()+"/role/changeLogin.do?sid=0";
+			
+				});
+				
+				
+				
+    
+    	//win页面缩放事件
+						/* 	$(window).resize(function() {
+							ME.init(menuss);
+							}); */
+		});
+	/* 	var size = 1.0;  
+		function zoomout() {  
+		 size = size + 0.1;  
+		 set(); 
+		}  
+
+
+		function zoomin() {  
+		 size = size - 0.1;  
+		 set();  
+		}  
+
+
+		function set() {  
+		 //document.body.style.cssText = document.body.style.cssText + '; -webkit-transform: scale(' + size + ');-webkit-transform-origin: 0 0;';   
+		 //document.body.style.cssText = document.body.style.cssText + '; -webkit-transform: scale(' + size + '); '; 
+		 //$(body).css("width","120%);
+		document.body.style.zoom = size;
+		document.body.style.cssText += '; -moz-transform: scale(' + size + ');-moz-transform-origin: 0 0; ';     //
+		}  */
+		
+		</script>
+</html>

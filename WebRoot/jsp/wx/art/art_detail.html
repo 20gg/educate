@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+	
+    <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta http-equiv="Cache-Control" content="max-age=7200" />
+       <meta http-equiv="Expires" content="Mon, 20 Jul 2019 23:00:00 GMT" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../../css/tanchu.css" /> 
+    <link rel="stylesheet" href="../../../css/art.css" />
+    
+     <link rel="stylesheet" href="../../../css/wx_menu.css">
+<style type="text/css">
+#context{
+position: relative;
+width:100%;
+padding: 0;
+margin: 0;
+}
+#context p{
+padding: 0;
+margin: 0;
+width:auto;
+max-width: 92%;
+margin-left: auto;
+margin-right: auto;
+position: relative;
+
+}
+#context img{
+padding: 0;
+margin: 0;
+width:auto;
+max-width: 90%;
+margin-left: auto;
+margin-right: auto;
+
+/* vertical-align: middle; */
+position: relative;
+
+}
+
+</style>
+  </head>
+  
+  <body class="my_body">
+     <div class="art_recommend"  id="div_to">
+    	<div class="reco_title" id="title"></div> 
+    	<div class="reco_other">
+    		<button class="rou_jian"  style="margin-right: 20px;" id="rou_jian">热荐</button>
+    		<div class="art_read">
+    		<img src="../../../img/post/eye.png"><div id="art_read" class="reco_r"></div></div>
+    		<div class="clearfix"></div>
+    	</div>
+    </div>
+    
+    <div class="img_box"><img class="reco_img" id="art_img" src="" style="display: none;"></div>
+    
+    <div class="info_box" id="context"></div>
+    
+    <div class="art_share"><button onclick="share_show();" id="div_to2">喜欢就分享吧</button></div>
+    <br><br><br><br>
+    
+    <!-- 菜单 -->
+	<div class="wx_menu_page" id="wx_menu_page" style="display: none;">
+		<div class="wx_menu_one" onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_tl();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x">奖学金</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x">我的</div>
+		</div>
+	</div> 
+    
+    
+<div class="load_tc_back"  id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+    
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>  
+<script type="text/javascript" src="../../../js/path.js"></script>
+<script type="text/javascript">
+var art_id = "";
+
+var top_openid ="";
+
+var page_from_share = 0;
+
+var  share_ul="1";
+
+var get_share_ul ="";
+
+var share_title="";
+var share_dsc="";
+$(function name() {
+
+	 art_id = Get_String("art_id");
+	 
+	 top_openid = Get_String("share_id");
+	 
+	 get_share_ul = Get_String("share_ul"); 
+	 
+	 
+	 if(art_id == null){
+		 art_id = localStorage.getItem("art_id");
+		 
+		 page_from_share = 0;
+		 
+	 }else{
+		 localStorage.setItem("art_id", art_id);
+		 
+		 page_from_share = 1;
+	 }
+	 
+	 if(page_from_share == 1){
+		 $("#wx_menu_page").show();
+	 }else{
+		 $("#wx_menu_page").hide();
+	 }
+	 
+});
+
+</script>
+<script type="text/javascript" src="../../../js/wx/wx_sq.js"></script> 
+
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+function share_show(){
+	$("#myshare").show();
+}
+
+function close_share(){
+	$("#myshare").hide();
+}
+
+$(function() {
+	$("#div_to").hide();
+	$("#div_to2").hide();
+	wx_page_init();
+});
+
+function wx_page_init(){
+	
+	if(openid != null){
+		if(art_id == null || art_id == ""){
+			location.href = pt_path +"/jsp/wx/art/art_list.html"; 
+		}else{ 
+			get_art();
+		}
+	
+		set_top();
+	}
+	 
+}
+
+function set_top(){
+	
+	 if(top_openid != null && top_openid != ""){
+		 $.ajax({
+				type:"post",
+				dataType:"json",
+				url:pt_path+"top/set_top.do",
+				data : {"openid":openid,"top_openid":top_openid,"share_ul":get_share_ul},
+				success : function(data){
+					
+				}
+		 });
+	 } 
+}
+ 
+ 
+function get_art() {
+	
+	 if(page_from_share == 1){
+		 $("#wx_menu_page").show();
+	 }else{
+		 $("#wx_menu_page").hide();
+	 }
+	 
+	
+	
+	 $.ajax({
+		type:"post",
+		url: pt_path +"/article/read_art.do",
+		dataType:"json",
+		data:{"art_id":art_id},
+		success: function(data){
+			
+			$("#div_to").show();
+			$("#div_to2").show();
+			
+			share_title=data[0].article.title;
+			var read=data[0].article.read;
+			
+			$("#title").text(data[0].article.title);
+			$("#art_read").text(data[0].article.read);
+			
+			if(data[0].article.recommend == 1){ 
+				$("#rou_jian").show();
+			}else{
+				$("#rou_jian").hide();
+			}
+			
+		//	$("#art_img").attr("src",pt_path + data[0].article.img);
+				// $("#art_img").show();
+			$("#context").html(data[0].article.context);
+			share_dsc=$("#context").text().substring(0,30)+"...";
+			
+			$("#myload").hide();
+			
+			wx.ready(function() {
+
+				
+				
+				var showmenus = [
+						'menuItem:share:appMessage',
+						'menuItem:share:timeline' ];
+
+				wx.showMenuItems({
+					menuList : showmenus
+				});
+
+				wx.showOptionMenu();
+				wx.onMenuShareTimeline({
+					
+							// 分享标题
+							title : share_title,// 分享
+							link : 'http://www.daodaketang.com/educate/jsp/wx/art/art_detail.html?art_id='+art_id+"&share_id="+openid+"&share_ul="+"http://www.daodaketang.com/educate/jsp/wx/art/art_info.html"+"&v="+1, // 分享链接
+							imgUrl : "http://www.daodaketang.com/educate/img/logo.jpg", // 分享图标
+							type : 'link', // 分享类型,music、video或link，不填默认为link
+							success : function() {
+								// 用户确认分享后执行的回调函数
+							},
+							cancel : function() {
+								// 用户取消分享后执行的回调函数
+							}
+						});
+
+					
+				//分享给朋友
+				wx.onMenuShareAppMessage({
+							title : share_title, // 分享标题
+							desc : share_dsc, // 分享描述
+							link : 'http://www.daodaketang.com/educate/jsp/wx/art/art_detail.html?art_id='+art_id+"&share_id="+openid+"&share_ul="+share_ul+"&v="+1, // 分享链接
+							imgUrl : "http://www.daodaketang.com/educate/img/logo.jpg", // 分享图标
+							type : 'link', // 分享类型,music、video或link，不填默认为link
+							success : function() {
+								// 用户确认分享后执行的回调函数
+							},
+							cancel : function() {
+								// 用户取消分享后执行的回调函数
+							}
+						});
+
+
+		}); 
+		}
+	 });
+}
+
+function Get_String(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if ( r != null ){
+       return unescape(r[2]);
+    }else{
+       return null;
+    } 
+}
+
+function go_scholarship(){
+	
+	window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+}
+function go_personal(){
+
+	window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+}
+function go_my_order(){
+
+ 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+
+}
+
+function go_tl(){
+	window.location.href=pt_path+'jsp/wx/post/post_area.html';
+	
+}
+
+ 
+function go_top(){ 
+	window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+}
+
+</script>
+<script type="text/javascript" src="../../../js/wx/info.js"></script>
+</html>

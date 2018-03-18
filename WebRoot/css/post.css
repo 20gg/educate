@@ -1,0 +1,100 @@
+ 
+.my_body{margin: 0;padding: 0;background-color: #f6f6f6; font-family: 微软雅黑;}
+
+.post_head{height: 53px; line-height: 53px; background-color: #fff; padding-left: 10px; padding-right: 10px;}
+.head_a {width: 18%; float: left; height: 100%; text-align: center; line-height: 50px;}
+.head_b {width: 52%; float: left; height: 100%; text-align: left; line-height: 50px; color: #333;}
+.head_c {width: 30%; float: left; height: 100%; text-align: right; line-height: 50px;}
+
+.head_a img{width: 36px; height: 36px; border-radius: 18px; }
+
+.button_one{height: 28px; width: 80px; font-size: 12px; color: #fff;background-color: #2CC159; border: none;border-radius: 15px;line-height:28px;}
+
+.head_d {width: 65%; float: left; height: 100%; text-align: left; line-height: 50px; color: #333; font-size: 18px;} 
+.head_d b{color: #2CC159; font-size: 20px;}
+.head_e {width: 35%; float: left; height: 100%; text-align: right; line-height: 50px;}
+
+.button_two{height: 30px; width: 100px;line-height: 30px; font-size: 12px; color: #fff; border: none;border-radius: 15px;background-color: #FF728A;}
+
+.button_two img{width: 14px; height: 14px;}
+ 
+ .post_area {margin-top: 10px; padding-left: 10px; padding-right:10px; padding-top:10px; background-color: #fff;}
+ 
+ .area_page {width: 100%; height: 50px;}
+ 
+ .area_head{width: 15%; float: left; height: 100%;  line-height: 50px;}
+ .area_head img{width: 40px; height: 40px; border-radius: 20px; margin-top: 7px;}
+ 
+ .area_text{width: 85%; float: left; height: 100%; text-align: left; }
+ .area_text .text1{height: 30px; line-height: 30px; font-size: 18px; color: #333; margin-left: 5px;} 
+ .area_text .text2{height: 20px;  font-size: 14px; color: #aaa; margin-left: 5px;} 
+ .area_note{font-size: 13px; color: #999;margin-top: 10px;}
+ 
+ .log_page{width: 100%;}
+ .log_text{width: 85%; float: right; text-align: left;font-size: 13px; color: #999; margin-top: 10px;}
+ .log_clear{clear: both;}
+ 
+ 
+ .area_zan {width: 100%;height: 30px; line-height: 30px;text-align: right;margin-top: 10px;}
+ 
+ .zan_img {width: 14px; height: 14px;}
+ .zan_num{font-size: 14px; color: #aaa;}
+ .zan_green{font-size: 14px; color: #2CC159;}
+ 
+ .jia_zai{height: 40px; text-align: center; line-height: 40px; border: 1px solid #ddd; color: #aaa;
+  background-color: #fff; margin-top: 10px; }
+  
+ .log_jia{height: 50px; text-align: center; line-height: 50px;background-color: #fff;} 
+ .log_jia button{width: 140px; height: 30px; border: 1px solid #ddd; background-color: #fff; border-radius: 15px; color: #aaa;} 
+  
+  .post_tc_back {
+	width:100%;
+	height: 100%;
+	position: fixed;
+	top:0;
+	left: 0;
+	z-index: 500;
+	overflow:hidden;
+	display:-webkit-flex;
+	-webkit-justify-content:center;
+	-webkit-align-items:center;
+	background:rgba(0,0,0,0.8);
+}
+ 
+.tc_page{width: 85%;background-color: #fff; padding: 10px; border-radius: 5px;  }
+.tc_head {height: 30px; line-height: 30px; font-size: 16px; color: #2CC159;}
+.tc_title{height: 30px; line-height: 30px; text-align: center; margin-top: 10px;}
+.tc_title input{width: 90%; padding: 2px; height: 24px;}
+
+.tc_context{text-align: center; margin-top: 10px;}
+.tc_context textarea{width: 90%; padding: 2px; height: 100px;}
+ 
+.tc_foot{height: 40px; line-height: 40px;}
+
+.tc_foot_a{width: 50%;float: left; text-align: center;}
+
+.tc_but1 {width: 100Px; height: 30px; background-color: #2CC159; color: #fff; border: none;border-radius: 5px; font-size: 16px;}
+
+.tc_but2 {width: 100Px; height: 30px; background-color: #BCBCBC; color: #333; border: none;border-radius: 5px;font-size: 16px;}
+ 
+.but_page1 {height: 40px; line-height: 40px ;width: 100%; margin-top: 10px;}
+.but_page_a{width: 50%;float: left;height: 40px;}
+.but_page_b{width: 80%; margin-left: auto;margin-right: auto;background-color: #fff; 
+color: #333;text-align: center;height: 40px; line-height: 40px ;}
+.but_page_b span img{width: 17px; height: 17px;}
+
+.but_page2 {height: 40px; line-height: 40px ;width: 100%; margin-top: 10px;} 
+.but_page_c{width: 90%; ;height: 40px; line-height: 40px ;margin-left: auto;margin-right: auto;background-color: #fff; }
+
+.but_page_d{width: 10%;float: left;text-align: center;height: 40px; line-height: 40px ;}
+.but_page_d span img{width: 17px; height: 17px;}
+
+.but_page_e{width: 70%;float: left;height: 40px; line-height: 40px ;}
+.but_page_e input{width: 100%;height: 80%; border: none; font-size: 16px;}
+.but_page_f{width: 20%;float: left;height: 40px; line-height: 40px ;text-align: center;background-color:  #2CC159; color: #fff; }
+
+
+
+
+
+ 

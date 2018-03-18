@@ -1,0 +1,41 @@
+body,p,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;padding-bottom:20px;}
+.top_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.top_box .top{width:92%;height:60px;margin:auto auto;}
+.top .head{width:14%;float:left;height:40px;margin-top:10px;}
+.top .head img{height:40px;display:block; width: 40px;border-radius:20px;}
+.top .name{float:left;margin-left:2%;text-align:left;line-height:60px;color:#323232;font-size:17px;font-family:"创意简标宋";}
+.top .lel{width:4%;float:left;margin-left:2%;margin-top:24px;}
+.top .lel img{display:block;height: 20px;  margin-top: -5px;}
+
+.burse_bg{width:100%;background:#fff;margin:auto auto;padding-top:16px;padding-bottom:16px;}
+.burse_bg img{width:100%;display:block;}
+.burse_bg h1{float:left;margin-left:20%;color:#646464;font-size:16px;line-height:30px;text-align:left;}
+.burse_bg h2{width:20%;margin-left:2%;float:left;color:#ff962f;line-height:30px;font-size:14px;text-align:left;}
+.burse_bg h3{width:20%;float:left;color:#2DC158;line-height:30px;font-size:14px;text-align:left;}
+
+.inv{width:100%;background:#fff;margin:auto auto;padding-top:10px;padding-bottom:20px;}
+.inv span{display:block;width:40%;line-height:40px;font-size:16px;background: #2DC158;text-align:center;color:#fff;border-radius:20px;margin:auto auto;}
+.inv .nomal{float:left;width:49%;line-height:30px;color:#2DC158;font-size:15px;text-align:center;border-right:1px solid #CCCCCC;}
+.inv .vip{float:left;width:49%;line-height:30px;color:#646464;font-size:15px;text-align:center;}
+
+.other{width:100%;background:#fff;margin:auto auto;padding-top:16px;margin-top:10px;}
+.other .title{width:92%;margin:auto auto;}
+.other .title span{float:left;width:3px;height:20px;display:block;background:#2DC158;}
+.other .title h1{float:left;margin-left:3%;line-height:20px;font-size:16px;color:#323232;}
+.other .col{width:94%;margin:auto auto;line-height:18px;border-bottom:1px solid #eee;padding-top:20px;padding-bottom:20px;}
+.other .col .middle{width:60%;float:left;margin-left:5%;height:0px;padding-bottom:11%;position:relative;}
+.other .middle .name{float:left;width:100%;font-size:15px;text-align:left;color:#646464;margin-bottom:10px;}
+.other .middle .time{float:left;width:34%;font-size:13px;text-align:left;line-height:13px;color:#969696;position:absolute;bottom:0px;}
+.other .middle .length{float:left;width:34%;font-size:13px;text-align:left;line-height:13px;color:#ef2860;position:absolute;bottom:0px;left:34%;}
+.other .col .left{width:11%;float:left;height:0px;padding-bottom:11%;background:#2DC158;border-radius:50%;position:relative;}
+.other .col .left .nom1{width:100%;height:100%;color:#fff;font-size:12px;position:absolute;top:26%;text-align:center;}
+.other .col .right{width:20%;float:right;height:0px;padding-bottom:11%;border-radius:50%;position:relative;}
+.other .col .right .nom2{width:100%;height:100%;color:#ff962f;font-size:16px;position:absolute;top:25%;text-align:center;}
+
+.more{background:#fff;width:100%;margin:auto auto;margin-top:10px;border-top:1px solid #eee;border-bottom:1px solid #eee;color:#888;font-size:16px;line-height:50px;text-align:center;margin-bottom: 60px;}

@@ -1,0 +1,269 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+
+  </head>
+  
+  <body>
+    <!--播放器 封装  -->
+   <div  class="vodeo_box">
+   		<!-- qq_播放器 -->
+   		<div id="id_video" style="width:100%; height:auto; "></div> 
+   		<!-- 播放器_弹出 -->
+   		<div id="video_tc" class="video_tc" >
+   			<div id="video_tc_page" class="video_tc_page">
+   				<div class="video_tc_title" id="video_tc_title">提示</div>
+   				<div class="video_tc_text"  id="video_tc_text"></div>
+   				<div class="video_tc_button"  id="video_tc_button" onclick="video_tc_sure(this);" code="1"></div>
+   			</div> 
+   	 	 	<div class="video_tc_foot" >
+   	 	 		<span id="video_time_long" class="video_time_long">00:00:00</span>
+   	 	 		<span id="video_time_stop"  class="video_time_stop">&nbsp;/&nbsp;00:00</span>
+   	 	 	</div>
+   		</div> 
+   </div>
+    <div>
+    <div  id="top_video" style=" width: 100%; border-bottom:10px solid #f2f2f2;"></div>
+    
+    <div id="second_div"></div>
+    
+    <div id="third_div"></div>
+    
+    <div id="fourth_div"></div><br>
+    
+    <div style="text-align:center; margin-top:30px;"><span style="color:#4CAF50;">——</span>最近更新<span style="color:#4CAF50;">——</span></div>
+    <div id="other_video">
+    
+    </div>
+    
+    
+   <div  id="bottom_id"  style="position: fixed; z-index: 100; bottom: 10px; width: 100%;">
+  	
+  	</div>
+  	
+    </div>
+    
+  </body>
+   <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+ <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript" src="../../../js/qq_video/qq_video.js?v=1"></script>
+  <script type="text/javascript">
+	//var openid="oLir8jsziazLpKT0b6JSSbQ0icR4";	
+	var url=[];
+	
+	var c_no=localStorage.getItem("c_no");
+  	var watch=localStorage.getItem("watch");
+	(function ajaxWatch(){
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/watched.do',
+  	  		
+  	  		data:{id:c_no},
+  	  		dataType:"text"
+  	  		
+  		});
+  		
+  	})();
+	
+	
+	$(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			  test_1(); 
+		}
+		 
+	}
+	 
+	
+	function test_1(){
+		
+		$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/special_detail.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"watch":watch,'open_id':openid},
+	  		success: function(data){
+	  			
+	  			var special=data[0].special;
+	  			var user=data[0].user;
+	  			
+	  			
+	  				var html="";
+	  				var html2=""; 
+	  				var html3="";
+	  				var html4="";
+	  				var html5="";
+	  				var html6="";
+	  				 
+	  			   			
+	  			if(c_no==special.special_no&&special.is_show==1){
+	  				if(user.role==0&&user.state==0){
+	  					html+="<div style='float:left;width:100%;border-bottom:1px solid #f4f4f4; padding-bottom:15px;'><div special_no='"+special.special_no+"' watch='"+special.watch+"'  ><img src=' "+special.img+"' style='width:100%;'></div>"+
+	  					" <div style='text-align:center;'><span style='color:#4CAF50;'>——</span>专题简介<span style='color:#4CAF50;'>——</span></div><div style='float:left;margin-top:7px;'> "+special.special_name+" </div><div style='float:right;margin-top:7px; '><a id='a_id'style=' color:#9F9F9F;' onclick='zhanka(this);' val='"+special.text+"' val2='"+special+"'  >栏目详情></a></div><div style='color:#9F9F9F;float:left;margin-top:6px;'>"+special.text.substring(0,38)+"...</div>"
+	  					+"</div>";
+	  					$("#top_video").html(html);
+	  					html3+="<div style='width:100%;float:left;margin-top:10px;text-align: center;line-height: 40px;border-bottom:5px solid #f2f2f2;'> <div style='width:30%;color:#F4B56A;float:left;'>￥"+special.price/100+".00/年</div><div style='width:38%;margin-left:70px;color:#F4B56A;float:left;'>"+special.watch+"人已订阅</div></div>";
+	  					$("#second_div").html(html3);
+	  					
+	  					html4+="<div style='width:100%;float:left;margin-top:10px;text-align: center;line-height: 40px;border-bottom:5px solid #f2f2f2;'><div style='text-align:center;'><span style='color:#4CAF50;'>——</span>适宜人群<span style='color:#4CAF50;'>——</span></div> <div style='width:100%;color:#999;margin-top10px;'> "+special.fit_people+" </div></div>";
+	  					$("#third_div").html(html4);
+	  					
+	  					html5+="<div style='width:100%;float:left;margin-top:10px;text-align: center;line-height: 40px;border-bottom:5px solid #f2f2f2;'><div style='text-align:center;'><span style='color:#4CAF50;'>——</span>订阅须知<span style='color:#4CAF50;'>——</span></div> <div style='width:100%;color:#999;margin-top10px;'> "+special.order_notice+" </div></div>";
+	  					$("#fourth_div").html(html5);
+	  					
+	  					  url=special.url;
+	  						 
+	  					 
+	  					if(url != null && url.length > 0){
+	  						for (var j=0;j<url.length;j++){
+		  						html2+="<div onclick='detail(this);'code='"+j+"' special_no='"+special.special_no+"' watch='"+special.watch+"' style='width:100%;margin-top:20px;float:left;border-bottom:5px solid #f2f2f2;'>"+
+		  						
+		  						"<div style='width:100%;float:left;margin-top:10px; '>"
+		  						+"<div style='width:5%;float:left;border-radius:30px;width:35px;background:#ddd;padding:1px 10px;text-align:center; font-size:12px;'>视频</div>"
+		  						+"<div style='width:15%;float:left; font-size:12px;margin-left:5px;'>第0"+(j+1)+"讲</div>"
+		  						+"<div style='width:31%;float:left; font-size:12px;margin-left:5px;'>|"+special.special_name.substring(0,6)+"0"+(j+1)+"</div>"
+		  						+"<div style='width:24%;float:left; font-size:12px; '>"+special.date.substring(0,10)+"</div>"
+		  						+"</div>"
+		  						+"</div>";	
+		  						  
+		  					  }$("#other_video").html(html2);
+	  					}
+	  					
+	  					html6+=" <div style='width: 100%;float: left;line-height: 40px;text-align: center;padding-top: 30px;'></div>"		
+	  					  +"<div style='width: 60%;float: left;'><button style='border:0px;width:105px;height:40px;' onclick='free_video(this);'code='0' special_no='"+special.special_no+"' watch='"+special.watch+"'>免费试看</button></div>	"		
+	  					  +"<div style='width: 40%;float: left;'><button style='background-color:#4CAF50;border:0px;width:105px;height:40px;color:#fff;' onclick='pay_menoy();'>订阅:￥"+special.price/100+"/年</button></div>";
+	  					$("#bottom_id").html(html6);
+	  				}else if(user.role==1&&user.state==0){
+	  					
+	  					html+="<div style='float:left;width:100%;border-bottom:1px solid #f4f4f4; padding-bottom:15px;'><div special_no='"+special.special_no+"' watch='"+special.watch+"'  ><img src=' "+special.img+"' style='width:100%;'></div>"+
+	  					" <div style='text-align:center;'><span style='color:#4CAF50;'>——</span>专题简介<span style='color:#4CAF50;'>——</span></div><div style='float:left;margin-top:7px;'> "+special.special_name+" </div><div style='float:right;margin-top:7px; '><a id='a_id'style=' color:#9F9F9F;' onclick='zhanka(this);' val='"+special.text+"' val2='"+special+"'  >栏目详情></a></div><div style='clear:both;'></div><div id='go_kai' style='width:100%;'></di><div style='color:#9F9F9F;float:left;margin-top:6px;'>"+special.text.substring(0,38)+"...</div>"
+	  					+"</div>";
+	  					$("#top_video").html(html);
+	  					html3+="<div style='width:100%;float:left;margin-top:10px;text-align: center;line-height: 40px;border-bottom:5px solid #f2f2f2;'> <div style='width:30%;color:#F4B56A;float:left;' onclick='detail(this);' special_no='"+special.special_no+"' watch='"+special.watch+"'>开始学习</div><div style='width:38%;margin-left:70px;color:#F4B56A;float:left;'>"+special.watch+"人已订阅</div></div>";
+	  					$("#second_div").html(html3);
+	  					
+	  					 url=special.url;		 
+	  					if(url != null && url.length > 0){
+	  						for (var j=0;j<url.length;j++){
+		  						html2+="<div onclick='detail(this);' code='"+j+"'special_no='"+special.special_no+"' watch='"+special.watch+"' style='width:100%;margin-top:20px;float:left;border-bottom:5px solid #f2f2f2;'>"+
+		  						
+		  						"<div style='width:100%;float:left;margin-top:10px; '>"
+		  						+"<div style='width:5%;float:left;border-radius:30px;width:35px;background:#ddd;padding:1px 10px;text-align:center; font-size:12px;'>视频</div>"
+		  						+"<div style='width:15%;float:left; font-size:12px;margin-left:5px;'>第0"+(j+1)+"讲</div>"
+		  						+"<div style='width:31%;float:left; font-size:12px;margin-left:5px;'>|"+special.special_name.substring(0,6)+"0"+(j+1)+"</div>"
+		  						+"<div style='width:24%;float:left; font-size:12px; '>"+special.date.substring(0,10)+"</div>"
+		  						+"</div>"
+		  						+"</div>";	
+		  						  
+		  					  }$("#other_video").html(html2);
+	  					}
+	  					
+	  					html6+=" <div style='width: 100%;float: left;line-height: 40px;text-align: center;padding-top: 30px;'></div>"		
+	  					  +"<div style='width: 100%;float: left;'><button style='border:0px;width:100%;height:30px;background-color:#4CAF50;'>分享课程</button></div>";	
+	  					 
+	  					$("#bottom_id").html(html6);	
+	  				}
+	  						
+	  			}	  				
+	  			 
+	  			
+	  		}
+		
+	  });
+		
+	}
+	
+	 
+	
+	 var is_zk =0;
+	  	function zhanka(obj){
+	  		var text=$(obj).attr("val");
+	  		
+	  		if(is_zk ==0){
+	  			$("#a_id").text("收起详情>"+text);
+	  			
+	  			is_zk = 1;
+	  		}else{
+	  			$("#a_id").text("课程详情>");
+	  			is_zk = 0;
+	  		}	
+	  	}
+  	
+	  	 
+	  	function detail(obj){
+			var code = $(obj).attr("code");
+	  		
+	  		var path = url[code];
+	  		
+	  		 
+	  		localStorage.setItem("path", path );
+	  		
+	  		
+	  		var c_no=$(obj).attr("special_no");
+	  		 
+	  		localStorage.setItem("c_no", c_no );
+			
+	  		var watch=$(obj).attr("watch");
+	  		
+	  		localStorage.setItem("watch", watch);
+	  		
+	  		
+			window.location.href=pt_path+'jsp/wx/course/special_Detail_too.html';
+		}
+	  	
+	  	function free_video(obj){
+			 	
+	  		var code = $(obj).attr("code");
+	  		var path = url[code];
+	  		
+	  		 
+	  		 
+	  		localStorage.setItem("path", path );
+	  		
+	  		
+	  		var c_no=$(obj).attr("special_no");
+	  		 
+	  		 
+	  		localStorage.setItem("c_no", c_no );
+			
+	  		var watch=$(obj).attr("watch");
+	  		 
+	  		
+	  		localStorage.setItem("watch", watch);
+	  		
+	  		
+			window.location.href=pt_path+'jsp/wx/course/special_Detail_too.html';
+		}
+	  	
+		 function pay_menoy(){
+			 var special_no=localStorage.getItem("special_no");
+			  localStorage.setItem("special_no", special_no);
+			   
+				window.location.href=pt_path+'jsp/wx/Guyang/buy.html'; 
+				 
+			 }
+		 
+		 function add_study(see_time,is_end){
+				
+			 
+			}
+  
+  </script>
+</html>

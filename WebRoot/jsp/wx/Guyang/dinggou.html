@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/hysj.css?v=0.7" type="text/css">
+		<link rel="stylesheet" href="../../../css/plyr.css">
+		
+		 <link rel="stylesheet" href="../../../js/qq_video/video.css?v=1" />
+		 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
+		 
+	</head>
+	<body>
+		<!-- <div class="video">
+			<video poster="../../../img/wx/vs.png" controls>
+			  <source src="http://www.jplayer.org/video/m4v/Incredibles_Teaser.m4v" type="video/mp4">
+			</video>			
+		</div> -->
+		
+	<!--播放器 封装  -->
+   <div  class="vodeo_box">
+   		<!-- qq_播放器 -->
+   		<div id="id_video" style="width:100%; height:auto; "></div> 
+   		<!-- 播放器_弹出 -->
+   		<div id="video_tc" class="video_tc" >
+   			<div id="video_tc_page" class="video_tc_page">
+   				<div class="video_tc_title" id="video_tc_title">提示</div>
+   				<div class="video_tc_text"  id="video_tc_text"></div>
+   				<div class="video_tc_button"  id="video_tc_button" onclick="video_tc_sure(this);" code="1"></div>
+   			</div> 
+   	 	 	<div class="video_tc_foot" >
+   	 	 		<span id="video_time_long" class="video_time_long">00:00:00</span>
+   	 	 		<span id="video_time_stop"  class="video_time_stop">&nbsp;/&nbsp;00:00</span>
+   	 	 	</div>
+   		</div> 
+   </div>
+		
+		<div class='bg'>
+			<div class='title_01'>到答课堂 -<span> 最前沿、最简单、最实用</span>的管理知识分享平台</div>
+			<div class='col'>
+				<div class='img'>
+					<img src='' id="user_head">
+				</div>
+				<div class='text'>
+					<div class='title_02'>
+						<h1 id="user_name"></h1>
+						<span id="user_role"></span>
+						<div class='clearfix'></div>
+					</div>
+					<h2>每周2节，全年至少100节视频大课</h2>
+					<h3>碎片化时间 系统化学习</h3>
+					<h3>全年至少10余次线下研习</h3>
+				</div>
+				<div class='clearfix'></div>
+			</div>
+		</div>
+		<div class='img_01'>
+			<img src='../../../img/vip_01.jpg'>
+		</div>
+		<div class='img_03'>
+			<img src='../../../img/vip_02.jpg'>
+		</div>
+		<div class='img_02'>
+			<img src='../../../img/vip_03.png'>
+			<a onclick="go_join()"><div class='go'>
+				<img src='../../../img/arrow_01.png'>
+			</div></a>
+		</div>
+		<div class='img_01'>
+			<img src='../../../img/vip_04.jpg'>
+		</div>
+		<div class='img_01'>
+			<img src='../../../img/vip_05.jpg'>
+		</div>
+		<div class='img_01'>
+			<img src='../../../img/vip_06.jpg'>
+		</div>
+		<div class='img_04'>
+			<img src='../../../img/vip_07.png'>
+			<div class='ewm'>
+				<img src='../../../img/ewm.jpg'>
+			</div>
+		</div>
+		<br><br><br><br><br><br>
+		<div class='foot' onclick="go_join()" id="vip_0">立即购买</div>
+		 <div class='foot' onclick="go_top()" id="vip_1">进入首页</div>
+		
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/qq_video/qq_video.js?v=1"></script>
+<script type="text/javascript" src="../../../js/wx/wx_sq2.js?v=0.2"></script>
+<script type="text/javascript" src="../../../js/wx/wx_me.js?v=0.5"></script> 
+
+
+
+	<script type="text/javascript">
+	var share_ul="dinggou";
+	var c_no="";
+	var share_url = "http://www.daodaketang.com/educate/jsp/wx/Guyang/dinggou.html";
+	
+	var share_title_name="到答课堂";
+	var share_title_main="学管理 上到答";
+	var share_title_img="http://www.daodaketang.com/educate/img/logo.jpg";
+	
+	$(function () {
+		
+		var c_obj = {"continue_time":20,"title":"提示","text":"已经看了一部分！","button":"继续播放"};
+		
+		var s_obj = {"stop_time":30,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+		
+		var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+		
+		//视频的防盗链接  使用是  视频的id 与appid 传 null
+		//var video_url = "http://1253790856.vod2.myqcloud.com/e985cdd5vodtransgzp1253790856/e0dc21e79031868222951683144/f0.f20.mp4?sign=xxxxxx&t=55bb9b80";
+		var varr = [];
+		varr.push();
+		//视频id ,appid,防盗链接数组，继续播放设置，试看播放设置，播放结束设置
+		video_init("9031868223270167174","1253819261",null,null,null,null);
+		
+		if(openid != null && openid!="null" && openid!=""){
+			wx_page_init();
+			
+		}
+	});
+	
+	
+	function wx_page_init() {
+		check_user();
+	}
+
+	function video_stop_event(){
+		alert("点击了试看结束！");
+	}
+
+	function video_end_event(){
+		
+		alert("点击了视频播放结束结束！");
+	}
+	
+	 
+	var role = 0;
+	
+	function check_user(){
+		
+		$.ajax({
+			type:"post",
+			dataType:"json",
+			url:pt_path+"wxpay/check_user.do",
+			data : {"openid":openid},
+			success : function(data){
+				var r ="";
+				role = data[0].user.role;
+				if(role == 0 || role==3){
+		  			r ="普通用户";
+		  			$("#vip_1").hide();
+		  			$("#vip_0").show();
+		  		}if(role == 1){
+		  			$("#vip_0").hide();
+		  			$("#vip_1").show();
+		  			r ="全站vip";
+		  			
+		  		}
+		  		$("#user_role").text(r);
+		  		$("#user_name").text(data[0].user.name);
+		  		$("#user_head").attr("src",data[0].user.head);
+		  		
+				
+			}
+		 });
+		
+	}
+
+
+		
+	
+	function go_join(){
+		
+		//alert(role);
+		
+		if(role != 1){
+			 window.location.href=pt_path+"wxpay/into_join.do?openid="+openid; 
+		}else{
+		//	window.location.href=pt_path+"jsp/pt/a_edit/show/1495714795.html";  into_xf
+			window.location.href=pt_path+"wxpay/into_xf.do?openid="+openid;
+			
+			//进入续费页面
+		}
+	  
+	 
+		
+	}
+	function go_top(){
+		 
+		 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+		 
+	 }
+	
+	</script>
+	
+</html>

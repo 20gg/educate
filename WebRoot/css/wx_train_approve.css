@@ -1,0 +1,40 @@
+::-webkit-scrollbar{width:0px;height:0px; display:none;}
+ 
+ .my_body {
+ 	margin: 0;
+ 	padding: 0; 
+ 	font-family: Î¢ÈíÑÅºÚ;
+ 	overflow-y:scroll;
+ }
+ 
+ .full_img{
+ 	width: 100%;
+ }
+ 
+ .shang{
+ 	margin-top: 10px; width: 96%;margin-left: 2%; margin-right: 2%;
+ }
+ 
+ .mar_top{
+ 	margin-top: 10px;
+ }
+ 
+ .my_title{
+ 	width: 33%; margin-left: 33.5%;margin-right: 33.5%; 
+ }
+ 
+ .my_title_content{
+ 	text-align: center; font-size: 18px;margin-top: -32px;font-family: Î¢ÈíÑÅºÚ;
+ }
+ 
+ .pic_rigth{
+ 	text-align: right;margin-top: 20px; padding-right: 10px;
+ }
+ 
+ .pic_img{
+ 	width: 10%;
+ }
+ 
+ .pic_left{
+ 	text-align: left;margin-top: 20px; padding-left: 10px;
+ }

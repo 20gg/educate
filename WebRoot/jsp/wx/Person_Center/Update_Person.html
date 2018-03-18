@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+     <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../../css/wx/buy_online/personal_mes.css" type="text/css">
+  
+  </head>
+  
+  <style type="text/css"> 
+  
+  </style>
+  
+  <body > 
+  <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+	<div class="top_box" >
+			 
+			<div class="row">
+				<div class="col1">姓名</div>
+				<div class="col2">
+				<input  type="text" placeholder="请填写您的姓名" style="border: none;height: 40px; font-size: 16px; "  id="name">
+				
+				</div>
+				<div class="clearfix"></div> 
+			</div>
+			<div class="row" >
+				<div class="col1">手机</div>
+				<div class="col2">
+				
+				<input   placeholder="请填写您的手机" style="border: none;height: 40px;font-size: 16px;"  id="phone">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			
+			<div class="row" >
+				<div style="float:left;width:15%;line-height:50px;color:#323232;text-align:left;font-size:15px;">验证码</div>
+				<div class="col2">
+				<div style="float: left;width: 100%;text-align: center;margin-left: 12px;">
+				<input type="text" placeholder="输入验证码"   id="kh_code" style="border: none;height: 40px;font-size: 16px;width: 100px;" ></input>
+				</div>
+				 
+				</div>
+				<div style="float: left;width: 26%; margin-top: 9px;">
+				
+				<button id="clab" type="button" onclick="sendMessage2();" style="border: none;height: 30px;font-size: 10px;background-color: #2dc158;color: #fff;">获取验证码</button>
+				</div>
+				
+				
+				
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col1">公司</div>
+				<div class="col2">
+				<input   placeholder="请填写您的公司" style="border: none;height: 40px;font-size: 16px;"  id="company">				
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="row" style="border:none; ">
+				<div class="col1">职称</div>
+				<div class="col2">
+				<input   placeholder="请填写您的职位" style="border: none;height: 40px; font-size: 16px;"  id="job">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			 
+		</div>
+		
+		<div class="button"  >
+			<span id="join_button" onclick="Update_personinfo();">确定</span>
+		</div>
+   
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+  <script type="text/javascript">
+  
+ // var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+  
+  var share_ul="update_person";
+   var random="";
+  	function Update_personinfo() {  			 
+  		$("#join_button").attr("disabled", true);
+  		
+		var name=$("#name").val();
+		var phone=$("#phone").val();
+		var company=$("#company").val();
+		var job=$("#job").val();
+		var yzm_cc=$("#kh_code").val();
+		 		
+		if(name==null||name==""){
+			$("#name").tips({
+				side : 3,
+				msg : '请输入姓名',
+				bg : '#2dc158',
+				time :3
+			});
+			
+			$("#join_button").attr("disabled", false);
+			return false;
+		}	
+		
+		if(yzm_cc==null||yzm_cc==""){
+			$("#kh_code").tips({
+				side : 3,
+				msg : '请输入验证码',
+				bg : '#2dc158',
+				time :3
+			});
+			
+			$("#join_button").attr("disabled", false);
+			return false;
+		}	
+		
+		if(phone==null||phone=="" || isPhone(phone) == false){
+			$("#phone").tips({
+				side : 3,
+				msg : '请输入手机',
+				bg : '#2dc158',
+				time :2
+			});
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+
+		if(company==null||company==""){
+			$("#company").tips({
+				side : 3,
+				msg : '请输入公司',
+				bg : '#2dc158',
+				time :2
+			});
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+
+		if(job==null||job==""){
+			$("#job").tips({
+				side : 3,
+				msg : '请输入职位',
+				bg : '#2dc158',
+				time :2
+			});
+			
+			$("#join_button").attr("disabled", false);
+			return false;
+		}
+  			
+  			$.ajax({
+  				type:"post",
+  				dataType:"json",
+  				url:pt_path+"user/update_my_info.do",
+				data : {"phone":phone,"company":company,"job":job,"open_id":openid,"name":name,"yzm_cc":yzm_cc},
+				success : function(data){
+					if("success"==data[0].result){
+							window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';				
+					}else if("have_phone" == data[0].result){
+						
+						$("#join_button").tips({
+							side : 3,
+							msg : '手机号已存在',
+							bg : '#2dc158',
+							time :2
+						});
+					}else{
+						
+						$("#join_button").tips({
+							side : 3,
+							msg : '手机号或验证码不匹配',
+							bg : '#2dc158',
+							time :2
+						});
+					}
+					
+				}
+  				
+  				
+  			}); 
+	}
+  
+  	function isPhone (string) {    
+  		var pattern = /^1[34578]\d{9}$/;    
+  		if (pattern.test(string)) {        
+  		return true;    
+  		}else{
+  		return false;
+  		}  
+  	}
+  	
+  	$(function(){
+  		
+  		/* var aaa=$("#phone").val();
+  		
+  		if(aaa=="" || aaa==null){
+  			
+  			
+  		} */
+  		
+  		
+  		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/user/show_my_info.do',
+	  		dataType:"json",
+	  		data:{"open_id":openid},
+	  		success: function(data){ 
+	  			
+	  			if(data[0].user.head != null && data[0].user.head != ""){ 
+	   				$("#head_img").attr("src",data[0].user.head);
+	   			}else{ 
+	   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+	   			}
+	   			
+	   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+	   			
+	   			$("#my_name").text(data[0].user.name);
+	   			
+				if(data[0].user.role!=1){
+					
+					$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+				} 
+				
+				$("#name").val(data[0].user.u_name);
+				$("#phone").val(data[0].user.phone);
+				$("#company").val(data[0].user.company);
+				$("#job").val(data[0].user.job);
+	  		}
+  		});
+  	});
+  
+function go_vip(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+  	}
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+  
+  
+  function sendMessage2(){
+	  
+	  var phone=$("#phone").val();
+	  $("#clab").attr("disabled",true);
+	  
+	  if(phone==null || phone =="" || isPhone(phone) == false){
+		  $("#phone").tips({
+				side : 3,
+				msg : '请输入手机号',
+				bg : '#2dc158',
+				time :2
+			});
+		  $('#clab').attr("disabled ",false);
+		  
+		  return false;
+	  }
+	 
+		$.ajax({
+  			type:"post",
+	  		url: pt_path +'/user/sendmessage_phone.do',
+	  		dataType:"json",
+	  		data:{"phone":phone},
+	  		success: function(data){ 
+	  			 random = data[0].random;
+	  			 
+	  		// 短信发送成功
+					
+					//has_send = true;
+					 
+					$('#clab').text("已发送");
+					setInterval(i);
+					var num = 60;
+					var i = setInterval(function() {
+					 	if(num>0){
+					 		num--;
+					 		$('#clab').text("已发送"+num+"s");
+					 		//flag=true;
+					 	}else{
+					 		  clearInterval(i);
+					 		   
+					 		 $('#clab').attr("disabled ",false);
+					 		  $('#clab').text("发送验证码");
+					 		 // flag=false;
+					 		 $('#clab').attr("disabled ",false);
+					 		}
+			              
+			        }, 1000);
+	  		}
+	 
+		});
+  }
+  
+  
+  
+  function is_true(){
+	  var yzm=$("#kh_code").val();
+	  
+	  if(yzm==null || yzm  ==""){
+		  
+		  $("#kh_code").tips({
+				side : 3,
+				msg : '请输入验证码',
+				bg : '#2dc158',
+				time :2
+			});
+		  
+		  return false;
+	  }
+	  
+	  if(yzm!=random){
+		  
+		  $("#kh_code").tips({
+				side : 3,
+				msg : '请输入正确的验证码',
+				bg : '#2dc158',
+				time :2
+			});
+		  
+		  return false;
+	  }else{
+		  
+		  
+		  return true;
+	  }
+	  
+	  
+  }
+  
+  </script>
+  
+</html>

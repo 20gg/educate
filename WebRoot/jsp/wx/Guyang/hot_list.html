@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/hot_list.css" type="text/css">
+		
+		
+		<style type="text/css">
+		.tb_video{background:url(../../../images/hot/video.png) no-repeat;background-size:100%;}
+		.tb_music{background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;}
+		</style>
+		
+	</head>
+	<body>
+		<div class="top_box">
+			<div class="top">热门排行榜</div>			
+		</div>
+		<div class="top_box" style="margin-bottom: 0px;" id="all_list">
+		
+			<!-- <div class="column1">
+				<div class="a_bg">
+					<img src="../../../images/hot/col1.jpg">
+					<div class="list">01</div>
+				</div>
+				<div class="a_text">
+					<div class="a_title">女神经教你玩WPS [专题]</div>
+					<div class="a_view">
+						<img src="../../../images/hot/view1.png">
+					</div>
+					<div class="a_numb">1234</div>
+					<div class="clearfix"></div>				
+				</div>
+			</div>
+			
+			
+			<div class="column2" >
+				<div class="b_bg">
+					<img src="../../../images/hot/col2.jpg">
+					<div class="list">02</div>
+					<div class="icon tb_music"></div>
+				</div>
+				<div class="b_text">
+					<div class="b_title">如何获得成功之道</div>
+					<div class="price">￥129.00</div>
+					<div class="doc">主讲：陈平</div>
+					<div class="mes">
+						<div class="view1">
+							<img src="../../../images/hot/time.png">
+						</div>
+						<div class="b_numb">2017.05.19</div>
+						<div class="view2">
+							<img src="../../../images/hot/view.png">
+						</div>
+						<div class="b_numb">1234</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div> -->
+			 	
+		</div>   
+	</body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>  
+<script type="text/javascript" src="../../../js/path.js"></script>
+	 <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript">
+
+var share_ul="hot_list";
+
+
+$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		  test_1(); 
+	}
+	 
+}
+
+function  test_1(){
+	
+	$.ajax({
+		type:"post",
+		url: pt_path +"/article/query_host.do",
+		dataType:"json", 
+		success: function(data){
+			
+			var s_list = data[0].s_list;
+			var c_list = data[0].c_list;
+			
+			if(s_list.length > 0){
+				
+				/* var n = s_list[0].special_name;
+				if(n.length >10){
+					n = n.substring(0,10)+"...";
+				} 
+				var h1 ="<div class='column1' onclick='into_s(this)' sid='"+s_list[0].special_no+"' > <div class='a_bg'> <img src='"+s_list[0].img+"'> <div class='list'>1</div> </div>"
+				+"<div class='a_text'> <div class='a_title'>"+n+"</div> <div class='a_view'> <img src='../../../images/hot/view1.png'> </div>"
+					+"<div class='a_numb'>"+s_list[0].watch+"</div> <div class='clearfix'></div> </div> </div> ";
+					
+				$("#all_list").append(h1); */
+				
+				var h2 =""; 
+				for(var i=0;i<s_list.length;i++){
+					
+					var n1 = s_list[i].special_name;
+					if(n1.length >10){
+						n1 = n1.substring(0,10)+"...";
+					} 
+					
+					var z = i+1;
+					var tb = "list";
+					if(z>3){
+						tb = "list2";
+					}
+					
+					var s ="<div class='column2' onclick='into_s(this)' sid='"+s_list[i].special_no+"' skind='"+s_list[i].kind+"' stype='"+s_list[i].type+"'> <div class='b_bg'> <img src='"+s_list[i].img+"'> <div class='"+tb+"'>"+z+"</div><div class='icon tb_video'></div> </div>"
+					+"<div class='b_text'> <div class='b_title'>"+n1+"</div> <div class='price'>￥"+s_list[i].price/100+"/年</div> <div class='doc'>主讲："+s_list[i].teacher+"</div>"
+					+"<div class='mes'> <div class='view1'> <img src='../../../images/hot/time.png '> </div><div class='b_numb'>"+s_list[i].date.substring(0,10)+"</div><div class='view2'> <img src='../../../images/hot/view.png'> </div>"
+					+"<div class='b_numb'>"+s_list[i].watch+"</div> <div class='clearfix'></div> </div> </div> <div class='clearfix'></div></div>";
+					
+					h2 = h2+s;
+				}
+				
+				$("#all_list").append(h2);
+			}
+			
+			var begin = 0;
+			
+			if(s_list.length == 0){ 
+				begin = 1;
+			}
+			
+			/* if(c_list.length > 0){
+				
+				/* if(s_list.length == 0){
+					
+					var n2 = c_list[0].c_name;
+					if(n2.length >10){
+						n2 = n.substring(0,10)+"...";
+					} 
+					var h3 ="<div class='column1' onclick='into_c(this)' sid='"+c_list[0].c_no+"'> <div class='a_bg'> <img src='"+c_list[0].img+"'> <div class='list'>1</div> </div>"
+					+"<div class='a_text'> <div class='a_title'>"+n2+"</div> <div class='a_view'> <img src='../../../images/hot/view1.png'> </div>"
+						+"<div class='a_numb'>"+c_list[0].watch+"</div> <div class='clearfix'></div> </div> </div> ";
+						
+					$("#all_list").append(h3);
+				} */
+				
+				/* var h4 =""; 
+				for(var i=0;i<c_list.length;i++){
+					
+					var n1 = c_list[i].c_name;
+					if(n1.length >10){
+						n1 = n1.substring(0,10)+"...";
+					}
+					
+					var type =" tb_video ";
+					if( c_list[i].type == 0){
+						type =" tb_music ";
+					}
+					
+					var t = formatSeconds(c_list[i].time);
+					
+					var z = i+1+s_list.length;
+					
+					var tb = "list";
+					if(z>3){
+						tb = "list2";
+					}
+					
+					var c ="<div class='column2' onclick='into_c(this)' sid='"+c_list[i].c_no+"' > <div class='b_bg'> <img src='"+c_list[i].img+"'> <div class='"+tb+"'>"+z+"</div><div class='icon "+type+" '></div> </div>"
+					+"<div class='b_text'> <div class='b_title'>"+n1+"</div> <div class='price'>￥"+c_list[i].price/100+"/年</div> <div class='doc'>主讲："+c_list[i].teacher+"</div>"
+					+"<div class='mes'><div class='view1'> <img src='../../../images/hot/time.png '> </div>"
+					+"<div class='b_numb'>"+c_list[i].date.substring(0,10)+"</div> <div class='view2'> <img src='../../../images/hot/view.png'> </div>"
+					+"<div class='b_numb'>"+c_list[i].watch+"</div> <div class='clearfix'></div> </div> </div> <div class='clearfix'></div></div>";
+					
+					h4 = h4+c;
+				}
+				
+				$("#all_list").append(h4); */
+			//} */
+			
+		}
+	});
+	
+}
+
+ 
+
+//秒值转换为时分秒字符串
+function formatSeconds(value) { 
+	
+	var theTime = parseInt(value);// 秒 
+	var theTime1 = 0;// 分 
+	var theTime2 = 0;// 小时 
+	
+	 
+	if(theTime >= 60) { 
+		theTime1 = parseInt(theTime/60); 
+		theTime = parseInt(theTime%60); 
+	 
+		if(theTime1 >= 60) { 
+			theTime2 = parseInt(theTime1/60); 
+			theTime1 = parseInt(theTime1%60); 
+		} 
+	} 
+	
+	var result = ""+parseInt(theTime)+"";
+	
+	if(result.length == 1){
+		result = "0"+result;
+	}
+	
+	if(theTime1 >= 0) {  
+		var t1 = parseInt(theTime1); 
+		if(t1 < 10){
+			t1 = "0"+t1;
+		} 
+		result = ""+t1+":"+result; 
+	} 
+	
+	if(theTime2 > 0) { 
+		
+		var t2 = parseInt(theTime2);
+		
+		if(t2 < 10){
+			t2 = "0"+t2;
+		} 
+		
+		result = t2+":"+result; 
+	} 
+	return result; 
+} 
+
+	function into_s(obj){
+		var special_no=$(obj).attr("sid");
+		var kind=$(obj).attr("skind");
+		 var type=$(obj).attr("stype");
+		
+		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/query_isbuy.do',
+  	  		
+  	  		data:{"open_id":openid,"special_no":special_no},
+  	  		dataType:"json",
+  	  		success:function(data){
+  	  			var isbuy=data[0].isbuy;
+  	  			var user=data[0].user;
+  	  		localStorage.setItem("c_no", special_no );
+  	  	if(user.role==1 || isbuy==1){
+  	  	if(kind==1){
+			 	if(type==1){
+			 		window.location.href=pt_path+'/jsp/wx/course/free_specials.html';
+			 	}else{
+			 		 
+			 		window.location.href=pt_path+'/jsp/wx/course/af_special_buy_voice.html';
+			 	}
+				
+		 }else{
+			 
+			 window.location.href=pt_path+'/jsp/wx/course/af_little_special.html?v=3l';
+		 }
+  	  }else{
+  		  
+  		if(kind==1){
+		 	if(type==1){
+		 		window.location.href=pt_path+'/jsp/wx/course/free_specials.html';
+		 	}else{
+		 		 
+		 		window.location.href=pt_path+'/jsp/wx/course/special_detail_voice.html?v=1';
+		 	}
+			
+	 }else{
+		 
+		 window.location.href=pt_path+'/jsp/wx/course/bf_little_sp.html?v=1';
+	 }
+  		  
+  	  }		
+  	  		
+  	  			/* if(isbuy==1){
+  	  			localStorage.setItem("c_no", special_no );
+  	  			window.location.href=pt_path+'jsp/wx/course/af_special.html?v=1';	
+  	  			}else{
+  	  			localStorage.setItem("c_no", special_no );
+  	  			window.location.href=pt_path+'jsp/wx/course/free_specials.html?v=1';
+  	  				
+  	  			} */
+  	  			
+  	  			
+  	  		}
+  	  		
+  		});
+		
+		
+	}
+
+	
+	function into_c(obj){
+		var c_no=$(obj).attr("sid");
+		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/query_isbuy2.do',
+  	  		
+  	  		data:{"open_id":openid,"c_no":c_no},
+  	  		dataType:"json",
+  	  		success:function(data){
+  	  			var isbuy=data[0].isbuy;
+  	  			var course=data[0].course;
+  	  			
+  	  			if(course.type==0&&isbuy==1){
+  	  			localStorage.setItem("c_no", c_no );
+  	  			window.location.href=pt_path+'jsp/wx/course/buy_voice.html';
+  	  			}else if(course.type==0&&isbuy==-1){
+  	  			localStorage.setItem("c_no", c_no );
+  	  			window.location.href=pt_path+'jsp/wx/course/bf_voice.html';
+  	  			}
+  	  			
+  	  			
+  	  			if(course.type==1&&isbuy==1){
+  	  			localStorage.setItem("c_no", c_no );
+  	  		window.location.href=pt_path+'jsp/wx/course/buy_course.html';
+  	  			}else if(course.type==1&&isbuy==-1){
+  	  			localStorage.setItem("c_no", c_no );
+  	  		window.location.href=pt_path+'jsp/wx/course/course_Detail.html';
+  	  				
+  	  			}
+  	  			
+  	  			
+  	  		}
+  	  		
+  		});
+		
+		
+	}
+	
+
+</script>
+</html>

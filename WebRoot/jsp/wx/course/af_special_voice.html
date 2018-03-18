@@ -1,0 +1,697 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../../../css/wx/subject/free.css" type="text/css">
+	<link rel="stylesheet" href="../../../css/tanchu.css" /> 
+	<link rel="stylesheet" href="../../../css/post.css"> 
+	<link rel="stylesheet" href="../../../js/qq_video/audio.css?v=1" />
+	 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
+		 
+  </head>
+  
+  <style type="text/css">
+  
+  	html,body{
+  	margin: 0;
+  	padding: 0;
+  	overflow-x:hidden;
+  	
+  	}
+  </style>
+  <body >
+  
+  	<!--音频播放器 封装  -->
+   <div class="audio" id="yinpin_1">
+  		<div class="audio_title"><h1 id="audio_info">互联网营销案例分析</h1></div>
+  		<audio id="music" controls="controls" ></audio> 
+  		<!-- 播放器_弹出 -->
+   		<div id="video_tc" class="video_tc" >
+   			<div id="video_tc_page" class="video_tc_page">
+   				<div class="video_tc_title" id="video_tc_title">提示</div>
+   				<div class="video_tc_text"  id="video_tc_text"></div>
+   				<div class="video_tc_button"  id="video_tc_button" onclick="video_tc_sure(this);" code="1"></div>
+   			</div> 
+   		</div> 
+  		
+  	</div>
+  
+    
+    <div>
+  
+    
+     <div  class="cont2" >
+     <div class='b_title'style='margin-left:50px;' > 
+	 <h1 onclick="show_all_v();"  id="vv_1">所有音频</h1> 
+	 <span style='margin-left:12px;'></span> 
+	  <h1 id="vv_2"  onclick="show_ansow();">互动问答</h1> 
+	 
+	 <div class='clearfix'></div></div> 
+    <div class='sort' style="background: #fff;border-bottom: 1px solid #dcdcdc;border-top:1px solid #dcdcdc;">
+	<div class='img'>
+	<img src='../../../images/subject/paixu.png'></div>
+	<h1 >默认排序</h1>	
+	<div class='clearfix'></div></div>
+	
+	<div id="other_video"style="border-bottom: 1px solid #dcdcdc;">
+	
+	</div>
+	
+    
+    </div>
+    
+    
+    <div  id="bottom_id"  class="footer" style="margin-top: 20px;">
+  	
+  	</div>
+  	
+    </div>
+    
+    
+    <div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+
+
+
+
+
+<!-- 弹出 -->
+<div class="post_tc_back" style="display: none;" id="add_page">
+	<div class="tc_page">
+		<div class="tc_head"><label>发布话题</label>
+		<span style="float: right;" onclick="close_add();"> x</span>
+		</div>
+		<div class="tc_title">
+		 	<input type="text" id="add_title" placeholder="请输入标题" maxlength="24"
+		 	 style="height: 22px;outline: none;-moz-appearance:none;  -webkit-appearance:none;  border: 1px solid #ddd;" >
+		</div>
+		<div class="tc_context">
+			<textarea id="add_context" placeholder="请输入话题内容" maxlength="200" style="outline: none;-moz-appearance:none;  
+    -webkit-appearance:none;border: 1px solid #ddd; "></textarea>
+		</div> 
+		<div class="tc_foot">
+		<div class="tc_foot_a"><button class="tc_but2" onclick="aite();">@导师</button></div>
+			<div class="tc_foot_a"><button id="tip" class="tc_but1" onclick="commit_add();">确定</button></div>
+			
+		</div>
+	</div> 
+</div>
+    
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/wx_me.js"></script>  
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../js/qq_video/music.js"></script>
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+
+// var openid ="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+   
+  var this_cid ="";
+  
+  var this_vid = "";
+  var share_ul="af_special_voice";
+ 
+  var share_title_name="";
+  var share_title_main="";
+  var share_title_img="";
+ 
+	 var dy = 0;
+     var sc = 0;
+      
+	var url_c=[];
+	 var study_log=[];
+	
+	function Get_String(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);
+	    if ( r != null ){
+	       return unescape(r[2]);
+	    }else{
+	       return null;
+	    } 
+}
+	
+	var share_url = "http://www.daodaketang.com/educate/jsp/wx/course/special_voice_too.html?c_no=";
+	
+	var c_no="";
+  	var watch=localStorage.getItem("watch");
+  	
+  	
+	(function ajaxWatch(){
+		
+	
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'course/watched.do',
+  	  		
+  	  		data:{id:c_no},
+  	  		dataType:"text"
+  	  		
+  		});
+  		
+  	})();
+	
+	$(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			test_1(); 
+		}
+		 
+	}
+	
+	
+	function test_1(){
+		
+		document.getElementById("vv_1").style.color="#2dc158";
+		c_no = Get_String("c_no"); 
+		 
+		if(c_no == null || c_no == ""){
+			c_no = localStorage.getItem("c_no");
+		 }else{
+			 localStorage.setItem("c_no", c_no);
+		 }
+		 
+	  	
+	  	//var path=localStorage.getItem("path");
+	  			
+	  			$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/special_detail.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"watch":watch,"open_id":openid},
+	  		success: function(data){
+	  		
+	  			dy = data[0].dy;
+	  			sc = data[0].sc;
+	  			
+	  			if(data[0].user.role == 1){
+	  				dy =1;
+	  			}
+	  			
+	  			
+	  			/* if(dy > 0){
+	  				window.location.href=pt_path+'jsp/wx/course/af_special_voice.html';
+	  			} */
+	  			
+	  			var special=data[0].special;
+	  			
+	  			var list_string=data[0].list_string;
+	  			
+	  			var ccourse_list=data[0].ccourse_list;
+	  			
+	  			 study_log=data[0].study_log;
+	  		//设置分享的	内容以及图片，如果为空则使用默认的
+	  			share_title_name=special.share_title;
+	  			var str_bule=special.introduce2;
+	  			
+	  			var str_sharee_img=special.sharee_img;
+	  			
+	  			
+	  				if(str_sharee_img==null ||str_sharee_img==""){
+	  					share_title_img="http://www.daodaketang.com/educate/img/logo.jpg";
+	  				}else{
+	  					
+	  					share_title_img=str_sharee_img;
+	  				}
+	  			
+	  			
+	  			if(str_bule==null || str_bule==""){
+	  				share_title_main="我发现了一些好玩有趣的东西，快来看看吧！";
+	  			}else{
+	  				
+	  				if(str_bule.length>30){
+	  					share_title_main=str_bule.substring(0,30);
+	  				}else{
+	  					share_title_main=str_bule;
+	  				}
+	  				
+	  			}
+	  			
+	  			
+	  			
+	  			var user=data[0].user;
+	  			 
+	  			
+	  				var html="";
+	  				var html2=""; 
+	  				 
+	  				var html6="";  
+	  				 
+	  				 
+	  				
+	  			if(c_no==special.special_no){
+	  				
+	  				
+	  				var c_obj = {"continue_time":20,"title":"提示","text":"已经看了一部分！","button":"继续播放"};
+	  				
+	  				var s_obj = {"stop_time":30,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+	  				
+	  				var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+	  				
+	  				if(study_log.length>0){
+	  					 
+						var this_cid_seetime = 0;
+	  					
+	  					for(var stl=0;stl<study_log.length;stl++){
+	  						
+	  						if(study_log[stl].cid == ccourse_list[0].c_no){
+	  							this_cid_seetime = study_log[stl].see_time;
+	  						}
+	  					}
+	  					
+	  					if(this_cid_seetime > 0){
+	  						c_obj.continue_time = this_cid_seetime; 
+	  						c_obj.text = "已经观看了"+this_cid_seetime+"秒";
+	  					}else{
+	  						 c_obj = null;
+	  					}
+	  						   				
+	  				}else{
+	  					 c_obj = null;
+	  				}
+	  				
+	  				if(dy > 0){
+	  					s_obj = null;
+	  				}
+	  				
+	  				
+	  				
+	  				this_vid =ccourse_list[0].sourceurl;
+					 
+	  				init_audio("music",this_vid,null,null,null,ccourse_list[0].c_name);
+	  				 		
+	  				
+	  				this_cid =ccourse_list[0].c_no;//课程编号
+	  				 
+	  				url_c = ccourse_list; 
+	  						 
+	  					 
+	  					if(ccourse_list != null && ccourse_list.length > 0){
+	  						for (var er=0;er<ccourse_list.length;er++){
+	  							
+	  							var uff="未播放";
+	  							if(study_log.length>0){
+	  								
+	  								for(var kkk=0;kkk<study_log.length;kkk++){
+	  									 
+	  									if(study_log[kkk].cid == ccourse_list[er].c_no && study_log[kkk].see_time>0){
+	  										uff="已播放"+study_log[kkk].see_time+"秒";
+	  									}
+	  								}
+	  							}
+		  						 		  						 		  								
+		  								html2+="<div class='col'   >"
+				  						+"<div class='left'  onclick='go_coursed(this);' code='"+er+"'  special_no='"+special.special_no+"' watch='"+special.watch+"' c_no='"+ccourse_list[er].c_no+"'  vid='"+ccourse_list[er].sourceurl+"' c_name='"+ccourse_list[er].c_name+"'>" 
+				  						+"<div class='name'>"+(er+1)+"."+ccourse_list[er].c_name+"</div>"
+				  						+"<div style='float:left;width:33%;font-size:12px;text-align:left;color:#888888;'>"+ccourse_list[er].date.substring(0,10)+"</div>"	
+				  						+"<div style='float:left;width:33%;font-size:12px;text-align:left;color:#888888;' >时长"+formatSeconds(ccourse_list[er].time)+"</div>"
+				  						+"<div style='float:left;width:33%;font-size:12px;text-align:left;color:#2DC158;position:absolute;bottom:0px;right:0px;' >"+uff+"</div>"
+				  						+"<div class='clearfix'></div></div>"
+				  						+"<div class='right' onclick='detail(this);' code='"+er+"'  special_no='"+special.special_no+"' watch='"+special.watch+"' c_no='"+ccourse_list[er].c_no+"' vid='"+ccourse_list[er].sourceurl+"' c_name='"+ccourse_list[er].c_name+"'>"	
+				  						+"<img src='../../../images/subject/play_01.png'></div>"	
+				  						+"<div class='clearfix'></div></div>";		
+		  							 
+		  						
+		  					  
+		  					  }$("#other_video").html(html2);
+	  					}
+	  					
+	  					 
+		  				html6+="<div class='free' onclick='share_show();'>邀请朋友来听</div>"
+								+"<div class='buy' onclick='go_study();'>学习记录</div>"
+								+"<div class='clearfix'></div>";			  
+		  					  
+		  					$("#bottom_id").html(html6);
+	  				 
+	  						
+	  			}	  				
+	  			 
+	  			
+	  		}
+		
+	  });
+	}
+	
+	 var is_zk =1;
+	  	function zhanka(obj){
+	  		var text=$(obj).attr("val");
+	  		
+	  		if(is_zk ==0){
+	  			$("#a_id").text("收起详情>"+text);
+	  			
+	  			is_zk = 1;
+	  		}else{
+	  			$("#a_id").text("课程详情>");
+	  			is_zk = 0;
+	  		}	
+	  	}
+  	
+	  	 
+	  	function detail(obj){
+	  		 
+	  		var code = $(obj).attr("code");
+	  		
+	  		var path = url_c[code].sourceurl;
+	  		 
+	  		var c_no = $(obj).attr("c_no");
+	  		
+	  		var vid=$(obj).attr("vid");
+	  		var c_name = $(obj).attr("c_name");
+	  		
+			var c_obj = {"continue_time":0,"title":"提示","text":"您还未开始学习","button":"开始学习"};
+			
+			var s_obj = {"stop_time":30,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+			
+			var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+			
+			if(study_log.length>0){
+				var p_seetime=0;
+				
+				for(var stl=0;stl<study_log.length;stl++){
+						
+					if(study_log[stl].cid == url_c[code].c_no){
+						p_seetime = study_log[stl].see_time;
+					}
+				}
+				
+				if(p_seetime > 0){
+					
+					c_obj.continue_time = p_seetime; 
+					c_obj.text = "已经观看了"+p_seetime+"秒";
+				}else{
+					 c_obj = null;
+				} 
+			}else{
+				 c_obj = null;
+			}
+			
+			if(dy > 0){
+				s_obj = null;
+			}
+			
+			this_vid = url_c[code].sourceurl;
+			init_audio("music",this_vid,null,null,null,c_name);
+			
+			this_cid = url_c[code].c_no;//视频编号
+	  		
+	  		 
+		}
+	  	
+	  	
+ function pay_menoy(){
+	 //var special_no=localStorage.getItem("special_no");
+	 // localStorage.setItem("special_no", special_no);
+	  if(dy < 1){
+		  window.location.href=pt_path+"wxpay/into_buy.do?c_no="+c_no+"&openid="+openid+"&kind=2";
+	  }else{
+		  window.location.href=pt_path+'jsp/wx/course/af_special.html';
+	  }
+	    
+}
+  
+		 
+ function close_share(){
+		$("#myshare").hide();
+}
+ function share_show(){
+		$("#myshare").show();
+}
+		 
+ function video_stop_event(){
+	if(dy < 1){
+			 //localStorage.setItem("c_no", c_no);
+		window.location.href=pt_path+"wxpay/into_buy.do?c_no="+c_no+"&openid="+openid+"&kind=2";
+	}else{
+		window.location.href=pt_path+'jsp/wx/course/af_special.html';
+	}
+			
+}
+
+function video_end_event(){
+	 
+	alert("点击了视频播放结束结束！");
+}
+
+
+function  go_coursed(obj){
+	
+	var c_no = $(obj).attr("special_no");
+	localStorage.setItem("c_no", c_no);
+	window.location.href=pt_path+'jsp/wx/course/af_special_buy_voice.html';
+	
+}
+			
+ function add_study(see_time,is_end){
+		
+		var is_buy = 0;
+		 if(dy > 0){
+			 is_buy = 1;
+		 }
+	 
+		 if(see_time > 5){
+			 
+			 //将 观看时间保存到  js 的视频信息里
+			 
+			 var sssss = parseInt(see_time);
+			 
+			 for(var i=0;i<url_c.length;i++){
+				 if(this_vid == url_c[i].vid){
+					 url_c[i].see_time = sssss;
+				 }
+			 }
+			 
+			 $.ajax({
+					type:"post",
+					url: pt_path +"/study/add_study.do",
+					dataType:"json",
+					data:{"see_time":parseInt(see_time) ,"is_end":is_end,"openid":openid,"c_no":c_no,"is_buy":is_buy,"type":2,"cid":this_cid},
+					success: function(data){
+						
+					}
+			 });
+		 } 
+ }
+ 
+//制保留2位小数，如：2，会在2后面补上00.即2.00    
+	function toDecimal2(x) {    
+	    var f = parseFloat(x);    
+	    if (isNaN(f)) {    
+	        return false;    
+	    }    
+	    var f = Math.round(x*100)/100;    
+	    var s = f.toString();    
+	    var rs = s.indexOf('.');    
+	    if (rs < 0) {    
+	        rs = s.length;    
+	        s += '.';    
+	    }    
+	    while (s.length <= rs + 2) {    
+	        s += '0';    
+	    }    
+	    return s;    
+	}
+	
+	function go_study(){
+		
+		
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/study.html';
+		
+	}
+	
+	function show_all_v(){
+		document.getElementById("vv_1").style.color="#2dc158";
+		document.getElementById("vv_2").style.color="#323232";
+		$("#other_video").show();
+	}
+	
+	 
+	
+	function close_add(){
+		$("#add_page").hide();
+		$("body").scrollTop(0);
+	}
+
+	function show_ansow() {
+		
+		document.getElementById("vv_2").style.color="#2dc158";
+		document.getElementById("vv_1").style.color="#323232";
+		
+		$("#other_video").hide();
+		
+		$("#add_title").val("");
+		$("#add_context").val("");
+		$("#add_page").show();
+		
+		 $("body").scrollTop(0);
+	}
+	
+	
+	function aite(){
+		var title = $("#add_title").val();
+		
+		if(title == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入标题！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		 
+		var context = $("#add_context").val();
+		
+		if(context == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入话题内容！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		
+		
+		var  is_at="0";
+		
+		$("#myload").show();
+		
+		 $.ajax({
+	 		type:"post",
+	 		url: pt_path +"/area/add_post.do",
+	 		dataType:"json",
+	 		data:{"openid":openid,"title":title,"context":context,"is_at":is_at},
+	 		success: function(data){
+	 			
+	 			if(data[0].back_code == 200){
+	 				$("#myload").hide();
+	 				
+	 				location.href = pt_path +"/jsp/wx/post/post_area.html"; 
+	 			}
+	 		}
+		 });
+		
+		
+	}
+	
+	function commit_add(){
+		
+		var title = $("#add_title").val();
+		
+		if(title == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入标题！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		 
+		var context = $("#add_context").val();
+		
+		if(context == ""){
+			$("#tip").tips({
+				side : 1,
+				msg : "请输入话题内容！",
+				bg : '#2CC159',
+				time : 1
+			});
+			
+			return false;
+		}
+		
+		$("#myload").show();
+		
+		 $.ajax({
+	 		type:"post",
+	 		url: pt_path +"/area/add_post.do",
+	 		dataType:"json",
+	 		data:{"openid":openid,"title":title,"context":context},
+	 		success: function(data){
+	 			
+	 			if(data[0].back_code == 200){
+	 				$("#myload").hide();
+	 				
+	 				location.href = pt_path +"/jsp/wx/post/post_area.html"; 
+	 			}
+	 		}
+		 });
+		
+	}
+	
+	 // 分钟转化成时分秒
+
+    function formatSeconds(value) {
+
+     	    var theTime = parseInt(value);// 秒
+
+     	    var theTime1 = 0;// 分
+
+     	    var theTime2 = 0;// 小时
+
+     	    if(theTime > 60) {
+
+     	        theTime1 = parseInt(theTime/60);
+
+     	        theTime = parseInt(theTime%60);
+
+     	            if(theTime1 > 60) {
+
+     	            theTime2 = parseInt(theTime1/60);
+
+     	            theTime1 = parseInt(theTime1%60);
+
+     	            }
+
+     	    }
+
+     	        var result = ""+parseInt(theTime)+"秒";
+
+     	        if(theTime1 > 0) {
+
+     	        result = ""+parseInt(theTime1)+"分"+result;
+
+     	        }
+
+     	        if(theTime2 > 0) {
+
+     	        result = ""+parseInt(theTime2)+"小时"+result;
+
+     	        }
+
+     	    return result;
+
+     	}
+  </script>
+</html>

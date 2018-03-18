@@ -1,0 +1,626 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta charset="UTF-8">
+		 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+    
+     <!-- 轮播 -->
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+	    <link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/swiper.min.css"/> 
+	<link rel="stylesheet" href="../../../css/tanchu.css" /> 
+	<link rel="stylesheet" href="../../../css/wx/video/class_list.css" type="text/css">
+  </head>
+  
+  <body  >
+  	<!-- 轮播 -->
+		<div class="swiper-container" style="margin: 0px; padding: 0px; height: 160px;">
+		<ul class="swiper-wrapper" id="lunbo_list">
+			<!-- <li class="swiper-slide" >
+				<a href="http://www.baidu.com"  class="custom-url">
+					<img src="../../../js/lunbo/img/1.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+			  -->
+		</ul>
+		<div class="swiper-pagination"></div>
+	</div>
+	  <!-- 轮播 -->
+  
+  	
+  <div class="a_link" onclick="go_special();">
+			<div class="title">
+				<span></span>
+				<h1>课程类别</h1>
+				<div class="arrow">
+					<img src="../../../images/vedio/arrow2.png">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		
+			<div class="top_box" id="div_video" >			
+			 
+			
+		</div>
+  
+     
+      <div class="more" id="more"  onclick="get_more();">加载更多</div>
+  </body>
+  	<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  	
+  	<script type="text/javascript" src="../../../js/lunbo/js/swiper-3.2.5.min.js"></script>
+<script type="text/javascript" src="../../../js/lunbo/js/banner-swiper.js"></script> 
+
+ <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  
+  <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>  
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+ 
+  	<script type="text/javascript">
+  	 
+  //	 openid="oLir8jsziazLpKT0b6JSSbQ0icR4";
+ 
+  	var type=0;
+  	var page_num =1;
+  var page_count =1;
+  
+  var share_ul="voice_list";	
+  function get_more(){
+	   	
+	   	var page = page_num+1;
+	   	
+	   	get_data(page);
+	  }
+  	
+  	
+  /*初始化轮播*/
+  var pagi = null, time = null, loo = null;
+  var swiper;
+
+  function init_lunbo () {
+  	if ($(".swiper-wrapper .swiper-slide").length > 1) {
+  		pagi = ".swiper-pagination";
+  		time = "2500";
+  		loo = true;
+  	} else {
+  		pagi = null;
+  		time = null;
+  		loo = null;
+  	}
+  	
+  	swiper = new Swiper('.swiper-container', {
+  		pagination : pagi,
+  		paginationClickable : true,
+  		spaceBetween : 0,
+  		centeredSlides : true,
+  		autoplay : time,
+  		loop : loo,
+  		autoplayDisableOnInteraction : false
+  	});
+  } 
+  /*初始化轮播*/
+ 	
+  
+  $(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		get_data(1);
+	}
+	 
+}
+   
+  	
+  	function get_data(page){
+  		
+  		$.ajax({
+  	  		type:"post",
+  	  		url: pt_path +'/course/wx_course_list.do',
+  	  		dataType:"json",
+  	  		data:{"open_id":openid,"page":page,"type":type},
+  	  		success: function(data){
+  	  			
+  	  		if(page_num ==1){
+  	  			
+  	  		//显示轮播 
+		  			var lunbo_list = data[0].lunbo_list; 
+		  			if(lunbo_list.length > 0){ 
+		  				
+		  				$("#lunbo_list").show();
+		  				
+		  				var lunbo ="";
+		  				for(var i=0;i< lunbo_list.length;i++){
+		  					var n = lunbo_list[i].name; 
+	  	  					if(n.length > 10){
+	  	  						n = n.substring(0,10)+"...";
+	  	  					}
+
+		  					var link ="";
+		  					if(lunbo_list[i].link != null && lunbo_list[i].link !=""){ 
+		  						link =" href='"+lunbo_list[i].link+"' "; 
+		  					}
+		  					
+		  					var l ="<li class='swiper-slide'> <a class='custom-url' "+link+"> <img src='"+pt_path+lunbo_list[i].img+"'>"
+	  						+"<div>"+n+"<span>"+lunbo_list[i].cdate+"</span></div> </a> </li>";
+	  						
+							lunbo = lunbo+l; 
+		  				}
+		  				
+		  				$("#lunbo_list").html(lunbo);
+		  				
+		  				init_lunbo();
+		  				
+		  			}else{
+		  				
+		  				$("#lunbo_list").hide();
+		  			}  
+  	  		}
+  		  		
+  	  	page_num =data[0].special.pageNum;//当前页
+			page_count =data[0].special.pageCount;//总页数
+			
+			 
+			
+			if(page_num >= page_count){
+				$("#more").hide();
+			}else{
+				$("#more").show();
+			}
+  	  			
+  	  			
+  	  			var course=data[0].course_list;
+  	  			var user=data[0].user; var order=""; var a=""; var b="";
+  	  			//var course_order=data[0].course_order;
+  	  		
+  	  			if(user.role==0&&user.state==0){
+  	  			var html="";
+  	  			var html2=""; var lb ="";
+  	  				for(var i=0; i<course.length;i++){
+  	  					 
+  	  						var introduce= "";
+  	  				 
+  	  						if(course[i].introduce2!= null){
+  	  					
+  	  						if(course[i].introduce2.length>12){
+  	  							introduce=course[i].introduce2.substring(0,12)+"...";
+  	  							 
+  	  						}
+  	  					}  		 				
+  	  				//if(course[i].top==1&&course[i].type==0){
+  	  				//lb+="<li onclick='detail(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"' ><img  src='"+pt_path+""+course[i].img+"' class='lb_img'> </li>";
+  	  					
+  	  					/* html+="<div onclick='detail(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"' style='width:100%'>"+
+  	  					"<div style='width:100%;position:absolute;' ><img src='"+pt_path+""+course[i].img+"' style='width:100%;'>"+
+  	  					"<div style='position:absolute;bottom:10px;background-color: #5C5954;color:#fff;width:291px;line-height: 20px;'>"+introduce+"</div><div style='position:absolute;bottom:10px;right:10px;background-color: #5C5954;color:#fff;line-height: 20px;'>"+course[i].date.substring(0,10)+"</div>"
+  	  					+"</div>"	
+  	  					+"</div>";
+  	  					$("#top_video").html(html); */
+  	  				/* }else */ if( course[i].type==0&&course[i].is_show==1){
+  	  					
+  	  				if(course[i].is_xin==1){
+						a="<div class='list'>新</div>";
+					}	
+					if(course[i].type==1){
+						b="<div class='icon' style='background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+						
+					}else if(course[i].type==0){   
+						 
+					b="<div class='icon' style='background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+						
+					}
+  	  					
+					if(course[i].isBuy!=1&&course[i].is_free==1){
+						
+						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+						
+							z="<span style='background:#cccccc;'>未购买</span>";
+  						zz="<div class='price'>￥"+toDecimal2(course[i].price/100)+"/年</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";
+  						
+  						html2+="<div class='column2' onclick='bf(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"'>"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	
+  						+""+z+""	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";	
+						
+					}else if(course[i].isBuy==1){
+						
+							z="<span style='background:#2dc158;'>已购买</span>";
+  						zz="<div class='price'>开始学习</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";
+  						
+  						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+  						
+  						html2+="<div class='column2' onclick='af(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"'>"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	
+  						+""+z+""	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";	
+  						
+					}else if(course[i].is_free==-1){
+						
+						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+  						zz="<div class='price'>限时免费</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";html2+="<div class='column2' onclick='af(this);'cno='"+course[i].c_no+"' watch='"+course[i].watch+"' >"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	  						 	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";
+  	  			
+					}
+  	  					 
+  	  				}
+  	  			}	
+  	  				//$("#lb_imgs").html(lb);
+  	  				$("#div_video").append(html2);
+  	  				
+  	  		}else if(user.role==1&&user.state==0){
+  	  			
+  	  			var html="";
+  	  			var html2="";
+  	  				for(var i=0; i<course.length;i++){
+  	  					 
+  	  						var introduce= "";
+  	  				 
+  	  						if(course[i].introduce!= null){
+  	  					
+  	  						if(course[i].introduce.length>12){
+  	  							introduce=course[i].introduce.substring(0,12)+"...";
+  	  							 
+  	  						}
+  	  					}  		 				
+  	  			/* 	if(course[i].top==1&&course[i].type==0){
+  	  					 
+  	  					html+="<div onclick='detail(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"' style='width:100%;'>"+
+  	  					"<div style='width:100%;'><img src='"+pt_path+""+course[i].img+"' style='width:100%;height:55px;'>"+
+  	  					"<div style='position:absolute;top:120px;'>"+introduce+"</div><div style='position:absolute;top:120px;right:10px;'>"+course[i].date.substring(0,10)+"</div>"
+  	  					+"</div>"	
+  	  					+"</div>";
+  	  					$("#top_video").html(html);
+  	  				}else */ if(course[i].type==0&&course[i].is_show==1){
+  	  					
+  	  				if(course[i].is_xin==1){
+						a="<div class='list'>新</div>";
+					}	
+					if(course[i].type==1){
+						b="<div class='icon' style='background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+						
+					}else{    
+						 
+					b="<div class='icon' style='background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+					
+					}
+					z="<span>已购买</span>";
+						zz="<div class='price'>开始学习</div>";
+						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";
+					 
+						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+					
+					html2+="<div class='column2' onclick='af(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"'>"
+						+"<div class='b_bg'>"
+						+"<img src='"+course[i].img+"'>"
+						+""+a+""
+						+""+b+""
+						+"</div>"
+						+"<div class='b_text'   >"
+						+"<div class='b_title'>"
+						+""+name_size+""	
+						+""+z+""	
+						+"<div class='clearfix'></div></div>"	
+						+""+zz+""
+						+""+zzz+""
+						+"<div class='mes'>"								 
+						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+						+"<div class='view2'>"	
+						+"<img src='../../../images/hot/view.png'></div>"	
+						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+						+"<div class='clearfix'></div></div></div>"		
+						+"<div class='clearfix'></div></div>";
+					
+  	  					
+  	  				}
+  	  			}$("#div_video").append(html2);
+  	  		}else if(user.role==3&&user.state==0){
+  	  			var html="";
+  	  			var html2=""; var lb ="";
+  	  				for(var i=0; i<course.length;i++){
+  	  					 
+  	  						var introduce= "";
+  	  				 
+  	  						if(course[i].introduce2!= null){
+  	  					
+  	  						if(course[i].introduce2.length>12){
+  	  							introduce=course[i].introduce2.substring(0,12)+"...";
+  	  							 
+  	  						}
+  	  					}  		 				
+  	  				//if(course[i].top==1&&course[i].type==0){
+  	  				//lb+="<li onclick='detail(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"' ><img  src='"+pt_path+""+course[i].img+"' class='lb_img'> </li>";
+  	  					
+  	  					/* html+="<div onclick='detail(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"' style='width:100%'>"+
+  	  					"<div style='width:100%;position:absolute;' ><img src='"+pt_path+""+course[i].img+"' style='width:100%;'>"+
+  	  					"<div style='position:absolute;bottom:10px;background-color: #5C5954;color:#fff;width:291px;line-height: 20px;'>"+introduce+"</div><div style='position:absolute;bottom:10px;right:10px;background-color: #5C5954;color:#fff;line-height: 20px;'>"+course[i].date.substring(0,10)+"</div>"
+  	  					+"</div>"	
+  	  					+"</div>";
+  	  					$("#top_video").html(html); */
+  	  				/* }else */ if( course[i].type==0&&course[i].is_show==1){
+  	  					
+  	  				if(course[i].is_xin==1){
+						a="<div class='list'>新</div>";
+					}	
+					if(course[i].type==1){
+						b="<div class='icon' style='background:url(../../../images/hot/video.png) no-repeat;background-size:100%;'></div>";
+						
+					}else if(course[i].type==0){   
+						 
+					b="<div class='icon' style='background:url(../../../images/hot/audio.png) no-repeat;background-size:100%;'></div>";
+						
+					}
+  	  					
+					if(course[i].isBuy!=1&&course[i].is_free==1){
+							z="<span style='background:#cccccc;'>未购买</span>";
+  						zz="<div class='price'>￥"+toDecimal2(course[i].price/100)+"/年</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";
+  						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+  						
+  						html2+="<div class='column2' onclick='bf(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"'>"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	
+  						+""+z+""	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";	
+						
+					}else if(course[i].isBuy==1){
+						
+							z="<span style='background:#2dc158;'>已购买</span>";
+  						zz="<div class='price'>开始学习</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";
+  						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+  						
+  						html2+="<div class='column2' onclick='af(this);' cno='"+course[i].c_no+"' watch='"+course[i].watch+"'>"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	
+  						+""+z+""	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";	
+  						
+					}else if(course[i].is_free==-1){
+						
+						if(course[i].c_name.length>=8){
+								
+								name_size="<h1>"+course[i].c_name.substring(0,8)+" ...  </h1>";
+							}else{
+								
+							name_size="<h1>"+course[i].c_name+"</h1>";
+							}
+  						zz="<div class='price'>限时免费</div>";
+  						zzz="<div class='doc'>主讲："+course[i].teacher+"</div>";html2+="<div class='column2' onclick='af(this);'cno='"+course[i].c_no+"' watch='"+course[i].watch+"' >"
+  						+"<div class='b_bg'>"
+  						+"<img src='"+course[i].img+"'>"
+  						+""+a+""
+  						+""+b+""
+  						+"</div>"
+  						+"<div class='b_text'   >"
+  						+"<div class='b_title'>"
+  						+""+name_size+""	  						 	
+  						+"<div class='clearfix'></div></div>"	
+  						+""+zz+""
+  						+""+zzz+""
+  						+"<div class='mes'>"								 
+  						+"<div class='view1'><img src='../../../images/hot/time.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].date.substring(0,10)+"</div>"		
+  						+"<div class='view2'>"	
+  						+"<img src='../../../images/hot/view.png'></div>"	
+  						+"<div class='b_numb'>"+course[i].watch+"</div>"	
+  						+"<div class='clearfix'></div></div></div>"		
+  						+"<div class='clearfix'></div></div>";
+  	  			
+					}
+  	  					 
+  	  				}
+  	  			}	
+  	  				//$("#lb_imgs").html(lb);
+  	  				$("#div_video").append(html2);
+  	  				
+  	  		}
+  	  			
+  	  	}
+  	  });
+  		
+  	}
+  	
+  	
+  	
+  		
+  	function detail(obj){
+  		 
+  		var c_no=$(obj).attr("cno");
+  		
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+		window.location.href=pt_path+'jsp/wx/course/voice_Detail.html';
+	}
+  	
+  	function af(obj){
+ 		 
+  		var c_no=$(obj).attr("cno");
+  		
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+		window.location.href=pt_path+'jsp/wx/course/buy_voice.html';
+	}
+	function bf(obj){
+		 
+  		var c_no=$(obj).attr("cno");
+  		
+  		localStorage.setItem("c_no", c_no );
+		
+  		var watch=$(obj).attr("watch");
+  		
+  		localStorage.setItem("watch", watch);
+  		
+  		
+		window.location.href=pt_path+'jsp/wx/course/bf_voice.html';
+	}
+  	
+ 	function go_special(){
+  		
+  		window.location.href=pt_path+'jsp/wx/course/special.html';
+  	}
+  	
+ 	//制保留2位小数，如：2，会在2后面补上00.即2.00    
+	function toDecimal2(x) {    
+	    var f = parseFloat(x);    
+	    if (isNaN(f)) {    
+	        return false;    
+	    }    
+	    var f = Math.round(x*100)/100;    
+	    var s = f.toString();    
+	    var rs = s.indexOf('.');    
+	    if (rs < 0) {    
+	        rs = s.length;    
+	        s += '.';    
+	    }    
+	    while (s.length <= rs + 2) {    
+	        s += '0';    
+	    }    
+	    return s;    
+	}
+  	</script>
+  
+</html>

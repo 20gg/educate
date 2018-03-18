@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+  		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+    
+     
+
+  </head>
+  
+  <body style="margin: 0px; padding: 0px; background-color: #ededed;">
+  
+  	<div style="margin: 10px; padding: 10px; background-color: #fff;">
+  		 
+  		 <div style="height: 60px; line-height: 60px; color: #565656; ">
+  		 	奖学金：<span style="color: #2DC158;" id="scholarship"></span>
+  		 </div>
+  		  <div style="height: 30px; line-height: 30px; color: #565656; border-top: 1px solid #ddd; ">
+  		 	提现金额
+  		 </div>
+  		  <div style="height: 60px; line-height: 60px; color: #565656; font-size: 18px; ">
+  		 	￥<input type="text" id="txmoney"  readonly="readonly"
+  		 	style="height: 36px;outline: none;-moz-appearance:none; -webkit-appearance:none; border: none; width: 80%;font-size: 18px;  ">
+  		 </div>
+  		  <div style="height: 30px; line-height: 30px; color: red; text-align: center; font-size: 12px;">提现红包金额不大于200元</div>
+  		   
+  	</div>
+  	
+  	 <button id="tx_button" onclick="commit_tx();" style="width: 60%; margin-left: 20%; margin-right: 20%; margin-top:30px; border-radius: 4px;
+  		   height: 40px; line-height: 40px; border: none; background-color: #2DC158; color: #fff; font-size: 20px;">提现</button>
+    
+     
+    
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/keyborder.js"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>
+<script type="text/javascript">
+
+//var openid = "oLir8jsYupMTLDJnaWjdVC-l7OJE";
+
+var share_ul="tixian";
+
+var input=document.getElementById("txmoney");
+
+input.onclick = function(){
+	  
+	if( parseFloat($(this).val())==0){
+		$(this).val("");
+	} 
+	new KeyBoard(input);
+	  
+};
+
+var my_scholarship = 0;
+
+$(function name() {
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/wxpay/get_tx.do',
+  		dataType:"json",
+  		data:{"openid":openid},
+  		success: function(data){
+  			
+  			my_scholarship = data[0].user.scholarship;
+  			
+  			$("#scholarship").text(my_scholarship/100+"元");
+  		}
+	});
+	
+});
+
+function commit_tx(){
+	
+	$("#tx_button").attr("disabled",true); 
+	
+	var txmoney = $("#txmoney").val();
+	 
+	
+	if(txmoney == ""|| txmoney<= 0){
+		
+		$("#tx_button").attr("disabled",false);
+		
+		return false;
+	}
+	
+	if(txmoney > 200){
+		$("#txmoney").val("");
+		
+		$("#tx_button").attr("disabled",false);
+		
+		return false;
+	}
+	
+	if(txmoney > my_scholarship/100){
+		$("#txmoney").val(""); 
+		$("#tx_button").attr("disabled",false); 
+		return false;
+	}
+	
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/wxpay/send_red_packet.do',
+  		dataType:"json",
+  		data:{"openid":openid,"txmoney":txmoney},
+  		success: function(data){
+  			
+  			 
+  		}
+	});
+
+	
+	
+}
+
+ 
+</script>
+ 
+</html>

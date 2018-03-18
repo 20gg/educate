@@ -1,0 +1,737 @@
+@charset "utf-8";
+*{
+	font-family: fantasy;
+}
+img{
+	vertical-align:middle;
+	
+}
+.jgdiv{
+	width: 100%;
+	position: relative;
+	background: transparent;
+	height: 10px;
+	display: block;
+	clear:both
+}
+.xxdiv{
+	width: 100%;
+	position: relative;
+	background: transparent;
+	height: 1px;
+	border-bottom: 1px dashed ;
+}
+.banner{ width:100%; overflow:hidden;}
+.banner img{width:100%; float:left;}
+
+.banner{
+	
+	position: relative;
+	width: 100%;
+}
+
+ .banner #bannerlogo{
+	position: absolute;
+
+	width:50px;
+	height: 50px;
+	border-radius: 50px;
+	border: 2px solid red;
+	bottom: 15px;
+	left:15px;
+	z-index: 2;
+}
+.banner #shopname{
+	position: absolute;	
+
+	font-size: 16px;
+	color: #FFFFFF;
+	bottom: 44px;
+	left:80px;
+	z-index: 2;
+}
+.banner #changeshop{
+	
+	position: absolute;	
+
+	font-size: 12px;
+	
+	bottom: 15px;
+	left:80px;
+	z-index: 2;
+	background: #F0F0F0;
+	border-radius: 2px;
+	width:40px;
+	height:20px;
+	line-height: 20px;
+	color: #33333;
+	text-align: center;
+}
+
+.caidan{
+	background: #FFFFFF;
+	position: relative;
+	
+	height: 90px;
+	
+	
+}
+
+.couponlist,.courselist{
+
+	width: 100%;
+	background-color: #FFFFFF;
+	height:auto;
+	min-height: 60px;
+	padding-top: 10px;
+	display: inline-block;
+	
+	float:left
+}
+.couponmian{
+	width:92%;
+	margin-left: 4%;
+
+	position: relative;
+	height:100%;
+	
+	
+}
+.maincourse{
+	width:92%;
+	margin-left: 4%;
+	display: inline-block;
+	position: relative;
+	height:100%;
+	border-top:1px solid #f0f0f0;
+	padding-top: 10px;
+	padding-bottom:10px;
+	border-bottom: 1px solid #f0f0f0;
+	
+	
+	}
+.courselist .leftcorse{
+	width: 80%;
+	height:100%;
+	float:left;
+	display: inline-block;
+	line-height: 35px;
+
+	position: relative;
+	
+}
+.courselist .rightcorse{
+	width: 20%;
+	height:100%;
+	float:right;
+	display: inline-block;
+	line-height: 26px;
+	 
+	position: relative;
+	text-align: center
+}
+
+.leftcorse .courseone{
+	
+	position: relative;
+	width: 100%;
+	line-height: 25px;
+	text-align: left;
+}
+.leftcorse .courseone img{
+	width:5px;
+	
+}
+
+.leftcorse .courseone  b{
+	
+	margin-left: 6px;
+	font-size: 12px;
+	color:#666;
+	font-weight: 100;
+	font-family: fantasy;
+}
+.rightcorse img.startVoice{
+	width:75%;
+	margin-top: 10px;
+}
+.rightcorse  b{
+	
+	width:100%;
+	display: inline-block; 
+	line-height: 24px;
+	text-align: left;
+	
+}
+.rightcorse  b img{
+	width:13px;
+}
+
+
+.rightcorse  b span{
+	
+	font-size: 13px;
+	font-family: fantasy;
+	color:#585858
+}
+
+
+.couponlist img.bgimg{
+	
+	position:absolute;
+	top:0;
+	left:0;
+	margin: 0;
+	padding: 0;
+	max-height:100%;
+	width:100%;
+}
+.piclist{
+	position: relative;
+	width: 100%;
+	background: #FFFFFF;
+	position: relative;
+	
+	
+}
+.couponone{
+	position: relative;
+
+	display: inline-block;
+	height:auto;
+}
+.couponone .imgdiv{
+	width:100%;
+	
+	position: relative;
+	display: inline-block;
+	height:auto;
+}
+.couponone img{
+	width:100%;
+	
+	position: relative;
+	display: inline-block;
+	border-radius:6px;
+}
+.couponone img.videoicon{
+	
+	position: absolute;
+	width:24px;
+	right:6px;
+	bottom:10px;
+	opacity:0.7;
+}
+
+.couponone.img1,.couponone.img2{
+	margin-right: 3.5%;
+}
+
+.couponone b{
+	
+	width: 95%;
+
+	display: inline-block;
+	line-height: 26px;
+	padding-top: 6px;
+	color:#646464;
+	font-size: 13px;
+	font-weight: 300;
+	text-align: left;
+}
+.onecd{
+	
+	 margin: 0;
+    padding: 0;
+	z-index:1;
+	height:80px;
+	position: relative;
+    display: inline-block;
+    text-align: center;
+   
+}
+.onecd .cdname{
+	position: absolute;
+	bottom: 5px;
+	font-size:12px ;
+	color:#777777;
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+}
+.checkon .cdname{
+	color:red;
+}
+.checkon .bordercd{
+	
+	width: 70%;
+	position: absolute;
+	margin-left: 15%;
+	bottom: 0;
+	border-bottom: 2px solid red;
+}
+ .icons{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	
+	width:30px;
+	margin-top: 15px;
+	z-index:2;
+	 display: inline-block;
+}
+
+ 
+
+
+
+
+
+
+.onetitle{
+	position: relative;
+	width: 100%;
+	
+	background: #FFFFFF;
+	display:flex;
+}
+.onetitle img{
+	width:100%;
+	position: absolute;
+	left:0;
+	top:0;
+}
+.onetitle h2{
+	
+	
+	
+	font-size: 16px;font-weight:400;text-align:left;margin-left:25px;
+	display: inline-block;
+	height:50px;
+	line-height: 50px;
+	float:left;
+	position: relative;
+}
+
+.tqmarea{
+	position: relative;
+	width: 100%;
+
+	min-height:100px;
+	background: #FFFFFF;
+	display: block;
+	padding-top: 12px;
+
+		padding-bottom: 12px;
+	display: inline-table;
+}
+.tqmarea.imglist1{
+	
+	display: table-cell;
+}
+
+.tqmarea.imglist2{
+	
+	display: table-cell;
+}
+.tqmarea.imglist1 a{
+	width: 100%;
+
+	position: relative;
+	display: inline-block;
+	text-align: center;
+}
+.tqmarea.imglist2 a{
+	width: 50%;
+
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	float:left;
+}
+.tqmarea.imglist3 a{
+	width: 33%;
+
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	float:left;
+}
+.tqmarea.imglist1 a img{
+	width:92%;
+	position: relative;
+	display: inline-block;
+	/* vertical-align:middle; */
+	box-sizing: border-box;
+}
+.tqmarea.imglist2 a img{
+	width:88%;
+	position: relative;
+	display: inline-block;
+	
+	
+}
+
+.imglist2 a.oimg1  img
+{
+margin-left:6px;
+}
+.imglist2  a.oimg2  img
+{
+margin-right: 6px;
+}
+
+.goodsarea{
+	
+	position: relative;
+	width: 100%;
+	background: #ffffff;
+}
+.goodsarea .title{
+	width:100%;
+	height:50px;
+	text-align:center;
+	line-height:50px;
+	background: url(1.jpg) no-repeat;
+	background-position: 0 0;
+	background-size:100% 100%;
+	font-size: 18px;
+	 
+	font-weight: 600;
+	color:#333
+}
+.goodsarea .title b{
+	position:absolute;
+	right:20px;
+	font-size: 12px;
+	font-weight: 200
+}
+
+.goodsarea .title img{
+	
+	width:13px;
+	margin-right: 3px
+}
+
+.goodsbtn{
+	position:absolute;
+	right:0px;
+	bottom:16px;
+	width:auto;
+	min-width:70px;
+	height:14px;
+	line-height:14px;
+	background: url(goodsbtn.png) no-repeat;
+	background-position: 0 0;
+	background-size:100% 100%;
+	color:#FFFFFF;
+	font-size: 9px;
+	text-align: center;
+	font-family: none;
+	display: inline-block;
+}
+.goods-title span.bq{
+	
+	height:20px;
+	line-height: 10px;
+	display: inline-block;
+	border:1px solid #eeeeee;
+	border-radius:15px;
+	padding: 3px;
+	padding-left:5px;
+	padding-right: 5px;
+	min-width: 80px;
+	text-align: center;
+	font-size:10px
+		
+}
+.weiquankan{
+	position: relative;
+	width:100%;
+	height:50px;
+	text-align: center;
+}
+ 
+.weiquankan span{
+	
+	width:100%;
+	display:inline-block;
+	height:auto
+}
+/*
+.weiquankan span:hover{
+	
+	color:red;
+	border-color: red
+} */
+body{
+	padding-bottom: 60px;
+}
+.textdiv,.hotdiv{
+	position: relative;
+	width: 100%;
+	background: #FFFFFF;
+	
+}
+
+.textdiv .texttou{
+	height: 33px;
+	position: relative;
+	width: 100%;
+	line-height:33px;
+	background-color: #ffffff;
+	text-align: left;
+	font-size: 11px;
+	color:#aaa;
+	padding-top: 12px
+	
+}
+.textdiv .texttou img{
+	
+	width: 21px;
+	margin-left: 15px;
+	margin-right: 10px
+	
+}
+.textdiv p{
+
+	height: 45px;
+	line-height:45px;
+	padding-left: 13px;
+	background: #FFFFFF;
+	background-image: url(../images/tqm/more.jpg);
+	background-repeat: no-repeat;
+	background-position: 96% 40%;
+
+	background-size:12px 12px; 
+	font-size: 13px;
+	padding-bottom: 5px;
+	text-align:left
+		
+}
+.hottou{
+	height: 50px;
+	line-height:50px;
+	width:100%;
+	background: #FFFFFF;
+	background-image: url(../images/tqm/more.jpg);
+	background-repeat: no-repeat;
+	background-position: 96% 43%;
+
+	background-size:12px 12px; 
+	font-size: 13px;
+	padding-bottom: 5px;
+	text-align:left;
+	position: relative;
+}
+
+
+
+.hottou span{
+	
+	color: #1a1817;
+font-size: 16px;
+font-weight: 500;
+text-align: left;
+height: 25px;
+padding-left: 10px;
+border-left: 3px solid #2DC158;
+margin-left: 15px;
+line-height: 25px;
+display: inline-block;
+
+}
+.hottou  b{
+	color:#888;
+	font-size: 13px;
+	font-family:"微软雅黑";
+	float:right;
+	margin-right: 30px;
+	font-weight: 200
+}
+.hotdiv .hotdivgoods{
+		width: 92%;
+		margin-left:4%;
+	background-color: #FFFFFF;
+	position: relative;
+	height:auto;
+	min-height: 60px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: inline-block;
+	text-align: none;
+	border-bottom: 1px solid #f0f0f0
+}
+.hotdiv .hotdivgoods .hotone{
+	position: relative;
+	float:left;
+	display: inline-block;
+	height:auto;
+	overflow: hidden;
+	
+	border-radius:5px;
+}
+
+.hotdiv .hotdivgoods .hotone  img{
+	width: 100%;
+	position: relative;
+	display: inline-block;
+	border-radius:6px
+}
+
+.hotdiv .hotdivgoods .hotone  .imgdiv{
+	width:100%;
+	
+	position: relative;
+	display: inline-block;
+	height:auto;
+}
+
+.hotdiv .hotdivgoods .hotone  img.videoicon{
+	
+	position: absolute;
+	width:24px;
+	right:6px;
+	bottom:10px;
+	opacity:0.7;
+}
+
+
+
+
+
+
+
+
+
+
+.hotone.img1,.hotone.img2{
+	margin-right: 3%;
+}
+.hotdiv .hotdivgoods .hotone b{
+text-align: left;
+	width: 95%;
+	font-family:"微软雅黑";
+	display: inline-block;
+	line-height: 20px;
+	padding-top: 6px;
+	color:#676767;
+	font-size: 12px;
+	font-weight: 300
+	
+	
+}
+.hotdiv .hotdivgoods .hotone .pmspan{
+	
+	position: absolute;
+	top:0;
+	left:0;
+
+	width:20px;
+	height:20px;
+	color:#ffffff;
+	text-align: center;
+	font-weight: 700;
+	font-size: 11px;
+	display: block;
+	background:#2DC158;
+	line-height: 25px;
+	border-bottom-right-radius:5px
+	
+	
+	
+}
+
+.textdiv a{
+	width: 100%;
+	background: #FFFFFF;
+	font-size: 15px;
+	
+}
+
+
+#actionstore{
+	
+	position:absolute;
+	width:70px;
+	right:0;
+	top:38%;
+	height:65px;
+	background: transparent;
+	text-align: center;
+}
+#showaction{
+	width:60px;
+	height:27px;
+	background-color:#F03232;
+	color:#FFFFFF;
+	font-size: 13px;
+	
+	display: block;
+	text-align: right;
+	border-radius:3px;
+	line-height: 27px;
+	position: relative;
+	padding-right: 3px
+}
+
+
+#showaction img{
+	
+	position:absolute;
+	left:5px;
+	width:36px;
+	top:-38%;
+clip:rect(15px 20px 40px 0px);
+
+
+}
+#showaction.checking{
+	font-size:12px;
+	background: #ffffff;
+	color:#F03232
+}
+ #showaction.checking  img{
+	
+	position:absolute;
+	left:-15px;
+	width:36px;
+	top:-38%;
+clip:rect(15px 60px 40px 18px);
+
+
+}
+#offshopnum{
+	
+	color:#FFFFFF;
+	font-size: 13px;
+	
+	position: relative;
+	display: block;
+	width:63px;
+	text-align: center;
+}
+
+
+
+
+
+
+/**查看全部***/
+b.commonb{
+	
+	font-family:\"微软雅黑\";
+	 font-weight:none;
+	 width:96%;
+	 text-align:center;
+	 display:inline-block;
+	 height:50px;
+	 line-height: 50px;
+	 margin: 0;
+	 padding: 0;
+	 font-size: 15px;
+	 font-weight: 600;
+	 color:#666;
+	 margin-left: 2%
+}

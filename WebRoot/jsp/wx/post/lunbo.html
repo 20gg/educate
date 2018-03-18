@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>lunbo.html</title>
+	
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	
+	<link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/reset.css"/> 
+	<link rel="stylesheet" type="text/css" href="../../../js/lunbo/css/swiper.min.css"/>
+
+  </head>
+  
+  <body>
+  
+  <div class="swiper-container">
+		<ul class="swiper-wrapper">
+			<li class="swiper-slide">
+				<a href="http://www.baidu.com"  class="custom-url">
+					<img src="../../../js/lunbo/img/1.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+			<li class="swiper-slide">
+				<a href="http://www.baidu.com" class="custom-url">
+					<img src="../../../js/lunbo/img/2.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+			<li class="swiper-slide">
+				<a href="http://www.baidu.com"  class="custom-url">
+					<img src="../../../js/lunbo/img/3.jpg">
+					<div>111111111<span>222222</span></div>
+				</a>
+			</li>
+		</ul>
+		<div class="swiper-pagination"></div>
+	</div>
+    
+  </body> 
+
+ <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/lunbo/js/swiper-3.2.5.min.js"></script>
+<script type="text/javascript" src="../../../js/lunbo/js/banner-swiper.js"></script>
+<script type="text/javascript">
+	 $(function () {
+	 	
+	 	init_lunbo();
+	 	
+	 });
+	 
+var pagi = null, time = null, loo = null;
+var swiper;
+
+function init_lunbo () {
+	if ($(".swiper-wrapper .swiper-slide").length > 1) {
+		pagi = ".swiper-pagination";
+		time = "2500";
+		loo = true;
+	} else {
+		pagi = null;
+		time = null;
+		loo = null;
+	}
+	
+	swiper = new Swiper('.swiper-container', {
+		pagination : pagi,
+		paginationClickable : true,
+		spaceBetween : 0,
+		centeredSlides : true,
+		autoplay : time,
+		loop : loo,
+		autoplayDisableOnInteraction : false
+	});
+} 
+
+	</script>
+</html>

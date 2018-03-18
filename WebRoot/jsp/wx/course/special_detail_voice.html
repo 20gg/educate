@@ -1,0 +1,1101 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>到答课堂</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+     
+    <link rel="stylesheet" href="../../../css/touxiang.css"/>
+    <link rel="stylesheet" href="../../../css/tanchu.css" /> 
+    <link rel="stylesheet" href="../../../css/wx/af_order.css" type="text/css">
+	<link rel="stylesheet" href="../../../js/qq_video/audio.css?v=1" />
+	 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
+		
+  </head>
+  <style type="text/css">
+   .load_tc_back{
+  width:100%;
+	height: 100%;
+	position: fixed;
+	 
+	top:0px;
+	left: 0px;
+	z-index: 10001;
+	overflow:hidden;
+	background:rgba(0,0,0,0.6);
+  
+  }
+  html,body{
+  width: 100%;
+  margin: 0px;
+  padding:0px;
+  
+  overflow-x:hidden; 
+  }
+  
+  .tl{
+				max-width:70%;
+				display:inline-block;
+				line-height:30px;
+				text-overflow:ellipsis;
+				white-space:nowrap;
+				text-align:left;
+				font-size:16px;
+				overflow:hidden;
+			}
+			.ab{
+				float:right;
+				font-size:14px;
+				line-height:30px;
+				color:#ffa42f;
+			}
+			.ab img{
+				width:14px;
+			}
+		
+  
+
+.tc_ts_div_sure {
+	width: 100px; height: 30px;  border:0px;background-color: #fff;color:#2CC159;
+			    font-size: 16px;  
+}
+.tc_ts_div_sure2 {
+	width: 110px; height: 30px;  border:0px;background-color: #2CC159;color:#fff;
+			    font-size: 13px;margin-left: 40px;
+}
+
+ .menu_css{width: 20%;float: left;font-size: 12px;
+ 	}
+.menu_style{
+	position: relative;
+    bottom: 0px;
+    border-top: 1px solid #dcdcdc;
+	width: 100%;
+	float: left;
+	line-height: 25px;
+	text-align: center; 
+	padding-top: 5px;
+	
+}
+  #context{
+position: relative;
+width:100%;
+padding: 0;
+margin: 0;
+}
+#context p{
+padding: 0;
+margin: 0;
+width:auto;
+max-width: 92%;
+margin-left: 4%;
+position: relative;
+}
+#context img{
+padding: 0;
+margin: 0;
+width:auto;
+max-width: 90%;
+
+/* vertical-align: middle; */
+position: relative;
+
+}
+
+ .watch_css{
+  
+  margin-left:2%;float:left;width:38%;font-size:12px;color:#969696;line-height:16px;
+  }
+  
+  .notice_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;padding-top:10px;padding-bottom:10px;}
+.notice_box .notice{width:92%;margin:auto auto;}
+.notice_box .notice .head{float:left;width:36px;height:36px;border-radius:50%;border:1px solid #2DC158;}
+.notice_box .notice .head img{width:100%;display:block;border-radius:50%;}
+.notice_box .notice h1{float:left;width:66%;line-height:20px;color:#7e7e7e;font-size:12px;text-align:left;margin-left:3%;margin-top:10px;}
+.notice_box .notice span{float:right;width:16%;height:20px;margin-top:10px;font-size:14px;color:#2DC158;line-height:20px;text-align:center;border-radius:12px;border:1px solid #2DC158;}
+ 
+
+  </style>
+  
+  <body >
+  	
+   
+			<!--音频播放器 封装  -->
+   <div class="audio" id="yinpin_1">
+  		<div class="audio_title"><h1 id="audio_info">互联网营销案例分析</h1></div>
+  		<audio id="music" controls="controls" ></audio> 
+  		<!-- 播放器_弹出 -->
+   		<div id="video_tc" class="video_tc" >
+   			<div id="video_tc_page" class="video_tc_page">
+   				<div class="video_tc_title" id="video_tc_title">提示</div>
+   				<div class="video_tc_text"  id="video_tc_text"></div>
+   				<div class="video_tc_button"  id="video_tc_button" onclick="video_tc_sure(this);" code="1"></div>
+   			</div> 
+   		</div> 
+  		
+  	</div>
+   
+  
+    
+    <div id="top_video" class= "cont"></div>
+    
+    
+      <div class="notice_box">
+			<div class="notice">
+				<div class="head">
+					<img src='../../../img/study/lo.jpg'>
+				</div>
+				<h1>到答课堂丨全年至少100节精品课程</h1>
+				<span  onclick="go_vip2()">订阅</span>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+   
+    
+    <div  class="other">
+    
+    	<div class="title">
+				<span></span>
+				<h1>其它课程</h1>
+				<div class="clearfix"></div>
+			</div>
+    
+    	
+    	<div id="other_video" >
+    	
+    	
+    	</div>
+    
+    </div>
+  	
+  	<br><br><br><br>
+  		<div class="menu_style"  id="menu_id"  style="position: fixed; background-color: #fff;z-index: 100;bottom: 0px;">
+  	<div class=" menu_css" onclick="go_top();"><img src='../../../img/wx/sy.png' style="width: 22px;height: 22px;"><br>首页</div>	
+  	<div class=" menu_css"  onclick="discuss();"><img src='../../../img/wx/hudong.png' style="width: 22px;height: 22px;"><br>互动问答</div>		
+  	<div class=" menu_css" onclick="share_show();" id="dy_div" ><img id="dy_img" src='../../../img/wx/py_ico.png' style="width: 22px;height: 22px;"><br>请朋友看</div>		
+  		<div class=" menu_css" onclick='pay_menoy();'><img src='../../../img/wx/study_ico.png' style="width: 22px;height: 22px;"><br>购买专题</div>	
+  	<div class=" menu_css" onclick="collection();" id="collect_id"><img id="sc_img" src='../../../img/wx/scc.png' style="width: 22px;height: 22px;"><br>收藏</div>
+  
+  	</div>
+  	
+  	 
+  	
+  	 <div  class="load_tc_back" style="display: none;"  id="myts">
+ 		 
+		<div style="position: fixed;bottom: 0px;left: 0px;width:100%">	 
+		<input type="text" placeholder="内容不能超过400个字" maxlength="400" style="width: 100%;height: 100px;"id="val">
+		 </div>
+		  
+		 
+		<div  style="position: fixed;bottom: 0px;left: 0px;" >
+			 <button class="tc_ts_div_sure" onclick="close_it();">取消</button> 
+			 <button class="tc_ts_div_sure2" onclick="sub_discuss();">发表</button>
+		</div> 
+ 	 
+ 	</div>
+ 	
+ 	
+ 	
+ 	<div class="load_tc_back" style="display: none;" id="myload">
+<div class="load_tc_page">
+	<div class="load_tc_img">
+	</div>
+</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px;float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+ 	
+ 	
+  </body>
+   <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+   <script type="text/javascript">
+  var c_no="";
+  var top_openid ="";
+  var share_code="";
+  $(function() {
+	   c_no = Get_String("c_no"); 
+	   top_openid = Get_String("share_id");
+		if(c_no == null || c_no == ""){
+			c_no = localStorage.getItem("c_no");
+		 }else{
+			 localStorage.setItem("c_no", c_no);
+		 }
+		
+		if(share_code==""||share_code==null){
+				
+				share_code=0;
+			}
+		
+ });  
+  
+  </script>
+   
+   <script type="text/javascript" src="../../../js/wx/wx_sq2.js"></script> 
+  <script type="text/javascript" src="../../../js/wx/test.js?v=0.5"></script>   
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript" src="../../../js/qq_video/music.js"></script>
+   <script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+  <script type="text/javascript">
+  
+  var url_c=[];
+  var dy = 0;
+  var sc = 0;
+  var is_free ="";
+  
+ //var openid="ok4o7waQyK5dri1qmHs9fIxhJY58";
+  	
+ 
+  		 
+ var watch=localStorage.getItem("watch");
+ 
+function to_add_watch(c_no){
+	 
+	 $.ajax({
+	  		type:"post",
+	  		url: pt_path +'course/watched.do',
+	  		
+	  		data:{id:c_no},
+	  		dataType:"text"
+	  		
+		});
+	 
+ }
+	
+function Get_String(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if ( r != null ){
+       return unescape(r[2]);
+    }else{
+       return null;
+    } 
+}
+
+var share_url = "http://www.daodaketang.com/educate/jsp/wx/course/af_special_buy_voice.html?c_no=";
+  		 
+var share_ul="specia_detail_voice";	 
+
+var share_title_name="";
+var share_title_main="";
+var share_title_img="";
+var study_log="";
+
+var get_share_ul=Get_String("share_ul");
+  		 
+$(function() {
+	wx_page_init();
+});
+  		
+  		
+function set_top(){
+	
+	 if(top_openid != null && top_openid != ""){
+		 $.ajax({
+				type:"post",
+				dataType:"json",
+				url:pt_path+"top/set_top.do",
+				data : {"openid":openid,"top_openid":top_openid,"share_ul":get_share_ul},
+				success : function(data){
+					
+				}
+		 });
+	 } 
+}
+
+
+
+function test_2(){
+	
+	if(c_no == null || c_no == ""){
+		c_no = localStorage.getItem("c_no");
+	 }else{
+		 localStorage.setItem("c_no", c_no);
+	 }
+		
+		
+		$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/course_dt.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"open_id":openid},
+	  		success: function(data){
+	  			var course=data[0].ccourse_list;
+	  			var special=data[0].special;
+	  			//share_title_name=special.share_title;
+	  		//	var str_bule=special.introduce2;
+	  			var list_string=data[0].list_string;
+	  			//var str_sharee_img=special.sharee_img;
+	  			
+	  			
+	  			/* 	if(str_sharee_img==null ||str_sharee_img==""){
+	  					share_title_img="http://www.daodaketang.com/educate/img/logo.jpg";
+	  				}else{
+	  					
+	  					share_title_img=str_sharee_img;
+	  				}
+	  			 */
+	  			
+	  		/* 	if(str_bule==null || str_bule==""){
+	  				share_title_main="我发现了一些好玩有趣的东西，快来看看吧！";
+	  			}else{
+	  				
+	  				if(str_bule.length>30){
+	  					share_title_main=str_bule.substring(0,30);
+	  				}else{
+	  					share_title_main=str_bule;
+	  				}
+	  				
+	  			} */
+	  			
+	  			var free_time=course[0].audition*60;
+	  			 
+	  			var c_obj = {"continue_time":20,"title":"提示","text":"已经看了一部分！","button":"继续播放"};
+	  			
+	  			var s_obj = {"stop_time":free_time,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+	  			
+	  			var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+	  			
+	  		/* 	this_vid = course[0].url;
+			 
+	  			video_init(course[0].url,"1253819261",null,null,s_obj,null); */
+	  			
+	  			this_vid =course[share_code].sourceurl;
+				 
+  				init_audio("music",this_vid,null,s_obj,null,course[0].c_name);
+	  			
+	  			//video_init(special.url[0].vid,"1253819261",null,c_obj,s_obj,null);
+	  			
+  				url_c=course;
+	  			
+	  			
+	  		}
+		
+		});
+	
+}
+
+ 
+
+
+
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+	
+  		/* 	var c_obj = {"continue_time":20,"title":"提示","text":"已经看了一部分！","button":"继续播放"};
+  			
+  			var s_obj = {"stop_time":30,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+  			
+  			var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"}; */
+  			
+  			//视频的防盗链接  使用是  视频的id 与appid 传 null
+  			//var video_url = "http://1253790856.vod2.myqcloud.com/e985cdd5vodtransgzp1253790856/e0dc21e79031868222951683144/f0.f20.mp4?sign=xxxxxx&t=55bb9b80";
+  			//var varr = [];
+  			//varr.push();
+  			//视频id ,appid,防盗链接数组，继续播放设置，试看播放设置，播放结束设置
+  	 
+  	var a=""; var b="";  
+  			
+  		$.ajax({
+  		type:"post",
+  		url: pt_path +'/course/special_detail.do',
+  		dataType:"json",
+  		data:{"c_no":c_no,"watch":watch,"open_id":openid},
+  		success: function(data){
+  			
+  			// alert(data[0].dy);
+  			
+  			dy = data[0].dy;
+  			sc = data[0].sc;
+  			
+  			if(data[0].user.role == 1){
+  				dy =1;
+  			}
+  			
+  			if(dy > 0){
+  			//	$("#dy_img").attr("src",pt_path+"/img/wx/dy2.png");
+  			//	$("#dy_div").css("color","#2dc158");
+  			}else{
+  		//		$("#dy_img").attr("src",pt_path+"/img/wx/order.png");
+  			//	$("#dy_div").css("color","#333333");
+  			} 
+  			
+  			if(sc > 0){
+  				$("#sc_img").attr("src",pt_path+"/img/wx/scc2.png");
+  				$("#collect_id").css("color","#2dc158");
+  			}else{
+  				$("#sc_img").attr("src",pt_path+"/img/wx/scc.png");
+  				$("#collect_id").css("color","#333333");
+  			}
+  			
+  			 
+  			var course_list=data[0].ccourse_list;
+  			
+  			 
+				share_title_name=course_list[0].c_name;
+			  	share_title_img=course_list[0].img;
+			  	share_title_main=course_list[0].text_text;
+  			
+  			 var user=data[0].user;
+  			  
+  			study_log=data[0].study_log;
+  			
+  			
+  			var c_obj = {"continue_time":20,"title":"提示","text":"已经看了一部分！","button":"继续播放"};
+  			
+  			var s_obj = {"stop_time":30,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+  			
+  			var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+  			
+  				if(user.role==0&&user.state==0){
+  					var html="";
+  					var html2="";
+  				
+  					this_vid = course_list[0].sourceurl;
+  				
+  					
+ 					 init_audio("music",this_vid,null,s_obj,null,course_list[0].c_name);
+  					
+  					
+  					 var toop=course_list[share_code].c_no;
+  					 
+  					 
+  					 for(var lo=0;lo<course_list.length;lo++){
+  						 
+  						if(toop==course_list[lo].c_no&&course_list[lo].is_show==1){
+  			  				
+  	  			  			if(course_list[lo].c_name.length>=8){
+  	  							
+  	  							name_size=course_list[lo].c_name;
+  	  						}else{
+  	  							
+  	  						name_size=course_list[lo].c_name;
+  	  						} 
+  	  			  				
+  	  			  			
+  	  			  		var t = course_list[lo].text_text;
+	  			  			
+  	  			  		if(t.length > 20){
+  	  	  					t = t.substring(0,20)+"...";
+  	  					} 
+  	  			  			
+  	  			  				html+="<div class='detail' ><span onclick='go_vip();'>每周2节，全年至少100节实战管理大课</span>"
+  	  			  				
+  	  			  			+"<div class='tl' id='to_name'>"+name_size+"</div><div  class='ab' id='a_id' onclick='zhanka(this);'    val='"+course_list[lo].text+"' html='"+course_list[lo].text_text+"' >课程详情  <img src='../../../images/hot/arrow.png'></div>"
+  	  			  				+"<div class='clearfix'></div><div id='go_kai'> <div style='color:#9F9F9F;' id='context'>"+t+"</div></div></div>";
+  	  			  		 	
+  	  			  				}
+  						 
+  					 }	$("#top_video").html(html); 
+  					 
+  					 
+  					 
+ 						if(course_list.length==1){
+  						 
+  						 
+						 $("#other_video").html("<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无其它课程</span>");
+	  						
+	  						 
+	  					 }else{
+	  						 var op=0;
+	  	  					for(var i=0;i<course_list.length;i++){  			
+	  	  			  			if(course_list[i].type==0&&course_list[i].is_show==1 ){
+	  	  			  				
+	  	  			  			op++;
+  			  					var colo="";
+  			  					if(i==share_code){
+  			  						colo="style='color:#2DC158;'";
+  			  					}
+  			  					if(course_list[i].is_xin==1){
+  			  						a="<div class='list'>新</div>";
+  			  						}	
+  							 
+  								if(course_list[i].c_name.length>=8){
+  									
+  									name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+  								}else{
+  									
+  								name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+  								}
+	  	  								
+	  	  								
+	  	  								html2+="<div class='column2' id='colum_id"+i+"' onclick='detail(this);'   img='"+course_list[i].img+"' free_time='"+course_list[i].audition*60+"' cno='"+course_list[i].c_no+"' watch='"+course_list[i].watch+"' code='"+i+"' vid='"+course_list[i].sourceurl+"' c_name='"+course_list[i].c_name+"' ><div class='b_bg' ><img src='"+course_list[i].img+"'>"+a+"<div class='time_bg'></div>"
+	  	  								+"<div class='time'>"+course_list[i].date.substring(0,10)+"</div></div><div class='b_text'>"
+	  	  								+""+name_size+""
+	  	  								+"<div class='doc'>主讲"+course_list[i].teacher+"</div>"
+	  	  								+"<div class='mes'><div class='view1'><img src='../../../images/hot/clock.png'></div>"
+	  	  								+"<div class='b_numb'>"+formatSeconds(course_list[i].time)+"</div><div class='view2'><img src='../../../images/hot/view.png'></div>"
+	  	  								+"<div class='watch_css'>"+course_list[i].watch+"</div><div class='clearfix'></div></div></div><div class='clearfix'></div></div>";
+	  	  								
+	  	  								  
+	  	  																																																																												
+	  	  			  				}	
+	  	  			  			}$("#other_video").html(html2);
+	  	  			  		$("#colum_id"+0).hide();
+	  					 }
+  					 
+  					
+  				}else if(user.role==1&&user.state==0){
+  		  			
+  						$("#order_aa").hide();
+  						
+  					
+  		  			var html="";
+  		  			var html2="";
+  		  			this_vid = course_list[0].sourceurl;
+  				 
+				 init_audio("music",this_vid,null,null,e_obj,course_list[0].c_name);
+				 
+				 
+  		  		 var toop=course_list[share_code].c_no;
+  		  		 
+  		  		 
+  		  		for(var lo=0;lo<course_list.length;lo++){
+						 
+						if(toop==course_list[lo].c_no&&course_list[lo].is_show==1){
+			  				
+	  			  			if(course_list[lo].c_name.length>=8){
+	  							
+	  							name_size=course_list[lo].c_name;
+	  						}else{
+	  							
+	  						name_size=course_list[lo].c_name;
+	  						} 
+	  			  			
+	  			  		var t = course_list[lo].text_text;
+	  			  			
+  	  			  		if(t.length > 20){
+  	  	  					t = t.substring(0,20)+"...";
+  	  					} 
+	  			  				
+	  			  				html+="<div class='detail' ><span onclick='go_vip();'>每周2节，全年至少100节实战管理大课</span>"
+	  			  				+"<div class='tl' id='to_name'>"+name_size+"</div><div  class='ab' id='a_id' onclick='zhanka(this);'    val='"+course_list[lo].text+"' html='"+course_list[lo].text_text+"' >课程详情  <img src='../../../images/hot/arrow.png'></div>"
+	  			  				
+	  			  				+"<div class='clearfix'></div><div id='go_kai'> <div style='color:#9F9F9F;'>"+t+"</div></div></div>";
+	  			  		 	
+	  			  				}
+						 
+					 }	$("#top_video").html(html); 
+					
+					 
+						if(course_list.length==1){
+	  						 
+	  						 
+							 $("#other_video").html("<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无其它课程</span>");
+		  						
+		  						 
+		  					 }else{
+		  						 var op=0;
+		  						for(var i=0;i<course_list.length;i++){  			
+		  				  		 if(course_list[i].type==0&&course_list[i].is_show==1 ){
+		  				  			 
+		  				  			op++;
+	  			  					var colo="";
+	  			  					if(i==share_code){
+	  			  						colo="style='color:#2DC158;'";
+	  			  					}
+	  			  					if(course_list[i].is_xin==1){
+	  			  						a="<div class='list'>新</div>";
+	  			  						}	
+	  							 
+	  								if(course_list[i].c_name.length>=8){
+	  									
+	  									name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+	  								}else{
+	  									
+	  								name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+	  								}
+		  									
+		  									
+		  									
+		  									
+		  									html2+="<div class='column2'id='colum_id"+i+"' onclick='detail(this);' img='"+course_list[i].img+"'    free_time='"+course_list[i].audition*60+"' cno='"+course_list[i].c_no+"' watch='"+course_list[i].watch+"' code='"+i+"'  vid='"+course_list[i].sourceurl+"' c_name='"+course_list[i].c_name+"'><div class='b_bg' ><img src='"+course_list[i].img+"'>"+a+"<div class='time_bg'></div>"
+		  									+"<div class='time'>"+course_list[i].date.substring(0,10)+"</div></div><div class='b_text'>"
+		  									+""+name_size+""
+		  									+"<div class='doc'>主讲"+course_list[i].teacher+"</div>"
+		  									+"<div class='mes'><div class='view1'><img src='../../../images/hot/clock.png'></div>"
+		  									+"<div class='b_numb'>"+formatSeconds(course_list[i].time)+"</div><div class='view2'><img src='../../../images/hot/view.png'></div>"
+		  									+"<div class='watch_css'>"+course_list[i].watch+"</div><div class='clearfix'></div></div></div><div class='clearfix'></div></div>";
+		  									
+		  									  
+		  																																																																													
+		  				  				}	
+		  				  			}$("#other_video").html(html2);
+		  				  		$("#colum_id"+0).hide();
+		  					 }
+					 
+					
+  		  		}else if(user.role==3&&user.state==0){
+  		  			
+  		  		var html="";
+				var html2="";
+				
+				 
+				this_vid = course_list[0].sourceurl;
+				
+				 
+	  				 
+				 init_audio("music",this_vid,null,s_obj,null,course_list[0].c_name);
+  		  				
+  		  		 var toop=course_list[share_code].c_no;
+  		  		 
+  		  		 
+  		  		for(var lo=0;lo<course_list.length;lo++){
+						 
+						if(toop==course_list[lo].c_no&&course_list[lo].is_show==1){
+			  				
+	  			  			if(course_list[lo].c_name.length>=8){
+	  							
+	  							name_size=course_list[lo].c_name;
+	  						}else{
+	  							
+	  						name_size=course_list[lo].c_name;
+	  						} 
+	  			  			
+	  			  			
+	  			  		var t = course_list[lo].text_text;
+  			  			
+  	  			  		if(t.length > 20){
+  	  	  					t = t.substring(0,20)+"...";
+  	  					}
+	  			  				
+	  			  				html+="<div class='detail' ><span onclick='go_vip();'>每周2节，全年至少100节实战管理大课</span>"
+	  			  				+"<div class='tl' id='to_name'>"+name_size+"</div><div  class='ab' id='a_id' onclick='zhanka(this);'    val='"+course_list[lo].text+"' html='"+course_list[lo].text_text+"' >课程详情  <img src='../../../images/hot/arrow.png'></div>"
+	  			  				
+	  			  				+"<div class='clearfix'></div><div id='go_kai'> <div style='color:#9F9F9F;'>"+t+"</div></div></div>";
+	  			  		 	
+	  			  				}
+						 
+					 }	$("#top_video").html(html); 
+					
+					 
+					 if(course_list.length==1){
+  						 
+  						 
+						 $("#other_video").html("<span style='font-size: 14;color: #646464;display: block;margin-left:10px;text-align: center; line-height: 62px;'>暂无其它课程</span>");
+	  						
+	  						 
+	  					 }else{
+	  						 var op=0;
+	  						for(var i=0;i<course_list.length;i++){  			
+	  				  		if(course_list[i].type==0&&course_list[i].is_show==1 ){
+	  				  					
+	  				  		op++;
+			  					var colo="";
+			  					if(i==share_code){
+			  						colo="style='color:#2DC158;'";
+			  					}
+			  					if(course_list[i].is_xin==1){
+			  						a="<div class='list'>新</div>";
+			  						}	
+							 
+								if(course_list[i].c_name.length>=8){
+									
+									name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+								}else{
+									
+								name_size="<div class='b_title' "+colo+">"+op+"."+course_list[i].c_name+"</div>";
+								}
+	  									
+	  									
+	  									
+	  									
+	  									html2+="<div class='column2' id='colum_id"+i+"' onclick='detail(this);' img='"+course_list[i].img+"' free_time='"+course_list[i].audition*60+"'  cno='"+course_list[i].c_no+"' watch='"+course_list[i].watch+"' code='"+i+"' vid='"+course_list[i].sourceurl+"' c_name='"+course_list[i].c_name+"' ><div class='b_bg' ><img src='"+course_list[i].img+"'>"+a+"<div class='time_bg'></div>"
+	  									+"<div class='time'>"+course_list[i].date.substring(0,10)+"</div></div><div class='b_text'>"
+	  									+""+name_size+""
+	  									+"<div class='doc'>主讲"+course_list[i].teacher+"</div>"
+	  									+"<div class='mes'><div class='view1'><img src='../../../images/hot/clock.png'></div>"
+	  									+"<div class='b_numb'>"+formatSeconds(course_list[i].time)+"</div><div class='view2'><img src='../../../images/hot/view.png'></div>"
+	  									+"<div class='watch_css'>"+course_list[i].watch+"</div><div class='clearfix'></div></div></div><div class='clearfix'></div></div>";
+	  									 																																																																			
+	  				  				}	
+	  				  			}$("#other_video").html(html2);
+	  				  		$("#colum_id"+0).hide();
+	  					 }
+					
+  				}
+  		  			 
+  		}
+	
+  });
+  		test_2();
+  		set_top();
+	}
+  		
+}
+  		
+ var is_zk =1;
+  	function zhanka(obj){
+  		 
+  		var text=$(obj).attr("val");
+  		var text_html=$(obj).attr("html");
+  		  
+  		if(is_zk ==0){
+				if(text_html.length > 20){
+					text_html = text_html.substring(0,20)+"";
+			}  
+			$("#a_id").html("收起详情<img src='../../../images/hot/2.png'>"); 
+	  			$("#go_kai").html("<div style='color:#9F9F9F;'>"+text_html+"</div>");
+			  
+			is_zk = 1;
+		}else{
+				 
+					
+			$("#a_id").html("课程详情<img src='../../../images/hot/arrow.png'>");
+  			
+  			$("#go_kai").html("<div style='color:#9F9F9F;'>"+text+"</div>");
+				 
+			is_zk = 0;
+		}	
+  	}
+  
+function collection(){
+  		
+  		 
+  		
+  		if(sc == 0){
+  			 
+  			$.ajax({ 
+  		  		type:"post",
+  		  		url: pt_path +'/course/special_collection_log.do',
+  		  		dataType:"json",
+  		  		data:{"c_no":c_no,"open_id":openid}, 
+  		  		success: function(data){
+  		  		 
+  		  			sc = 1;
+  	  				$("#sc_img").attr("src",pt_path+"/img/wx/scc2.png");
+  	  				$("#collect_id").css("color","#2dc158");
+  	  			alert("已加入收藏夹,请在我的收藏中查看");
+  		  		}
+  		  	});
+  		}else{
+  			
+  			
+  			
+  			$.ajax({ 
+  		  		type:"post",
+  		  		url: pt_path +'/top/delete_collection.do',
+  		  		dataType:"json",
+  		  		data:{"c_no":c_no,"openid":openid}, 
+  		  		success: function(data){
+  		  			
+  		  			sc = 0; 
+  	  				$("#sc_img").attr("src",pt_path+"/img/wx/scc.png"); 
+  	  				$("#collect_id").css("color","#333333");
+  		  		}
+  		  	});
+  		} 
+  		
+}
+  	 
+  	 function detail(obj){
+  		 $(".column2").find(".b_title").css("color","#323232");
+  		 $(obj).find(".b_title").css("color","#2DC158");
+  		 
+  		$(".column2").show();
+  		 $(obj).hide();
+  		$(document.body).scrollTop(0);
+		var watch22=$(obj).find(".watch_css").text();
+  		
+  		
+  		$(obj).find(".watch_css").text(Number(watch22)+1);
+  		 
+  		var code = $(obj).attr("code");
+  		var free_time = $(obj).attr("free_time");
+  		
+  		var vid = $(obj).attr("vid");
+  		var c_name = $(obj).attr("c_name");
+  		var img=$(obj).attr("img");
+  		
+  		if(img==null ||img==""){
+			share_title_img="http://www.daodaketang.com/educate/img/logo.jpg";
+		}else{
+			
+			share_title_img=img;
+		}
+	 
+
+		share_title_main=url_c[code].text_text;
+	
+		share_title_name=name;
+		
+		share_code=code;
+		sharewx();
+  		
+  		$("#to_name").text(c_name);
+  	
+  		var c_no = $(obj).attr("cno");
+  		to_add_watch(c_no);
+		var c_obj = {"continue_time":0,"title":"提示","text":"您还未开始学习","button":"开始学习"};
+		
+		var s_obj = {"stop_time":free_time,"title":"提示","text":"试看结束，请订阅！","button":"确定"};
+		
+		var e_obj ={"title":"提示","text":"播放结束，请答卷！","button":"确定"};
+		
+			 
+		if(study_log.length>0){
+			//alert(study_log);
+			c_obj.continue_time = study_log[code].see_time; 
+			c_obj.text = "已经观看了"+study_log[code].see_time+"秒";
+		}else{
+			 c_obj = null;
+		}
+		
+		if(dy > 0){
+			s_obj = null;
+		}
+		
+		this_vid = url_c[code].sourceurl;
+		init_audio("music",this_vid,null,s_obj,null,c_name);
+		 
+		this_cid = url_c[code].c_no;//视频编号
+  	
+		$("#a_id").attr("val",url_c[code].text);
+		$("#a_id").attr("html",url_c[code].text_text);
+  	
+		var tt = url_c[code].text_text;
+		if(tt > 20){
+			tt = tt.substring(0,20)+"";
+		}  
+		$("#a_id").html("收起详情<img src='../../../images/hot/2.png'>"); 
+			$("#go_kai").html("<div style='color:#9F9F9F;'>"+tt+"</div>");
+		  
+		is_zk = 1;
+  		 		
+  	 }
+  	 
+  	function ts_show(msg){
+	
+	$("#ts_msg").html(msg);
+	$("#myts").show();
+}
+  	function close_it(){
+  		var change2=document.getElementById("discuss_div");
+		 if (change2.style.display == "inline") {
+			 change2.style.display = "none";
+	        }
+  		$("#myts").hide();
+  	}
+
+	function discuss(){
+		
+		
+		var c_no1=localStorage.getItem("c_no");
+		
+		localStorage.setItem("c_no", c_no1);
+		 
+		location.href = pt_path +"/jsp/wx/art/comment.html"; 
+  
+	}
+	
+	function sub_discuss(){
+				
+			
+		var val=$("#val").val();
+		//var c_no=localStorage.getItem("c_no");
+		 
+			$.ajax({
+	  		type:"post",
+	  		url: pt_path +'/course/course_discuss.do',
+	  		dataType:"json",
+	  		data:{"c_no":c_no,"open_id":openid,"val":val},
+	  		
+	  		success: function(data){
+	  			if("success"==data[0].result) 	{
+	  				
+	  				var change2=document.getElementById("discuss_div");
+	  				 if (change2.style.display == "inline") {
+	  					 change2.style.display = "none";
+	  					 
+	  					  
+	  					$("#myts").hide();
+	  			      }
+	  			}	
+	  		}
+	  	});
+		
+	}
+	
+	
+	 function go_order() {
+		// var c_no=localStorage.getItem("c_no");
+ 		  
+ 			$.ajax({
+ 		  		type:"post",
+ 		  		url: pt_path +'/course/pay_money.do',
+ 		  		dataType:"json",
+ 		  		data:{"c_no":c_no,"open_id":openid},
+ 		  		
+ 		  		success: function(data){
+ 		  			if("success"==data[0].result) 	{
+ 	 
+ 		  				alert("购买成功");
+ 		  					 
+ 		  			       
+ 		  			}else if("is_have"==data[0].result){
+ 		  				
+ 		  				alert("已经购买过");
+ 		  			}	
+ 		  		}
+ 		  	});
+	}
+	 
+	 function go_dinggou(){
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html'; 
+		 
+	 }
+	 
+	 function go_buy(){
+		 var c_no1 = localStorage.getItem("c_no");
+		 
+		 if(is_free =="-1"){
+			 alert("限时免费的课程暂时无法购买，喜欢的话可以先收藏");
+		 }
+		 
+		 //localStorage.setItem("c_no", c_no);
+		 	if(dy < 1 && is_free =="1"){
+		 		window.location.href=pt_path+"wxpay/into_buy.do?c_no="+c_no1+"&openid="+openid+"&kind=1"; 
+		 	}
+			
+			 
+		 }
+	
+	 
+	 function audio_stop_event(){
+		var c_no1 = localStorage.getItem("c_no");
+		if(dy < 1  ){
+			 window.location.href=pt_path+"wxpay/into_buy.do?c_no="+c_no1+"&openid="+openid+"&kind=2"; 
+		}
+		
+		 
+	}
+
+ function video_end_event(){
+			
+	alert("点击了视频播放结束结束！");
+} 
+		 
+ function add_study(see_time,is_end){
+		
+	// var c_no=localStorage.getItem("c_no");
+	 var is_buy = 0; // 0 未购买  1已购买
+	 if(dy > 0){
+		 is_buy = 1;
+	 }
+	  
+		 $.ajax({
+				type:"post",
+				url: pt_path +"/study/add_study.do",
+				dataType:"json",
+				data:{"see_time":parseInt(see_time) ,"is_end":is_end,"openid":openid,"c_no":c_no,"is_buy":is_buy,"type":1},
+				success: function(data){
+					
+				}
+		 });
+	}
+ 
+ function go_top(){
+	 
+	 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+ }
+ 
+ function toDecimal2(x) {    
+	    var f = parseFloat(x);    
+	    if (isNaN(f)) {    
+	        return false;    
+	    }    
+	    var f = Math.round(x*100)/100;    
+	    var s = f.toString();    
+	    var rs = s.indexOf('.');    
+	    if (rs < 0) {    
+	        rs = s.length;    
+	        s += '.';    
+	    }    
+	    while (s.length <= rs + 2) {    
+	        s += '0';    
+	    }    
+	    return s;    
+	}
+ 
+ 
+//分钟转化成时分秒
+
+ function formatSeconds(value) {
+
+  	    var theTime = parseInt(value);// 秒
+
+  	    var theTime1 = 0;// 分
+
+  	    var theTime2 = 0;// 小时
+
+  	    if(theTime > 60) {
+
+  	        theTime1 = parseInt(theTime/60);
+
+  	        theTime = parseInt(theTime%60);
+
+  	            if(theTime1 > 60) {
+
+  	            theTime2 = parseInt(theTime1/60);
+
+  	            theTime1 = parseInt(theTime1%60);
+
+  	            }
+
+  	    }
+
+  	        var result = ""+parseInt(theTime)+"秒";
+
+  	        if(theTime1 > 0) {
+
+  	        result = ""+parseInt(theTime1)+"分"+result;
+
+  	        }
+
+  	        if(theTime2 > 0) {
+
+  	        result = ""+parseInt(theTime2)+"小时"+result;
+
+  	        }
+
+  	    return result;
+
+  	}
+ function go_vip(){
+		
+		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+	}
+ function close_share(){
+		$("#myshare").hide();
+}
+function share_show(){
+	
+		$("#myshare").show();
+}
+
+function go_study_log(){
+	 window.location.href=pt_path+'jsp/wx/Guyang/study.html';
+}
+
+function pay_menoy(){
+	 
+	var  special_no=localStorage.getItem("c_no");
+	 
+	 window.location.href=pt_path+"wxpay/into_buy.do?c_no="+special_no+"&openid="+openid+"&kind=2";
+ }
+function go_vip2(){
+	 
+	window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+		 
+	 }
+  </script>
+</html>

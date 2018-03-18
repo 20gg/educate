@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+      <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+   	<link rel="stylesheet" href="../../../css/wx_menu.css">
+   	<link rel="stylesheet" href="../../../css/touxiang.css">
+	<link rel="stylesheet" href="../../../css/post.css"> 
+  </head>
+  	<style type="text/css">
+  	.div_order{
+  		width:60%;float:left;margin-left: 15px;  
+  	}
+  	
+  	body{background:#f6f7f9;}
+.top_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.top_box .top{width:92%;height:60px;margin:auto auto;}
+.top .head{width:14%;float:left;height:40px;margin-top:10px;}
+.top .head img{height:100%;display:block;    border-radius: 50%;}
+.top .name{width:40%;float:left;margin-left:2%;text-align:left;line-height:60px;color:#323232;font-size:17px;}
+.top span{display:block;float:right;width:26%;height:30px;margin-top:10px;margin-top:15px;border-radius:15px;text-align:center;line-height:30px;font-size:14px;color:#fff;background:#2dc158;}
+
+.top .lel{width:4%;float:left;margin-left:2%;margin-top:24px;}
+.top .lel img{width:100%;display:block;}
+
+.more{background:#fff;width:100%;margin:auto auto;border-top:1px solid #eee;border-bottom:1px solid #eee;color:#888;font-size:16px;line-height:50px;text-align:center;}
+
+  	
+  	</style>
+   
+  <body style="margin: 0px;">
+  
+  <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="../../../images/buy/231_03.png">
+			</div>
+			<div class="name" id="my_name">小不点要读书</div>
+			<div class="lel" id="leve_1">
+				<img src="../../../images/subscribed/level.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+  
+  <!-- <div id="html_1" style='width: 100%;float:left;border-bottom:5px solid #f2f2f2;padding-bottom: 10px;'>
+  
+  </div> -->
+  
+  <div class="post_head" >
+  <div class="head_d" style="border-bottom: 1px solid #f4f4f4;width: 100%"><b>|</b>&nbsp;已订购课程</div>
+  </div>
+  
+  
+   <div id="other_video" style="width: 100%;"></div>
+    
+     <div class="more" id="more">加载更多</div>
+      <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one"  onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy2.png"></div>
+			<div class="menu_cx menu_green">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x  ">奖学金</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x ">我的</div>
+		</div>
+	</div>
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public.js"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript">
+ 	//var openid="oLir8jsziazLpKT0b6JSSbQ0icR4";
+  		
+ 	 $(function (){
+ 		 
+ 		 	$.ajax({
+ 		 	
+ 		 		type:"post",
+ 		  		url: pt_path +'/user/show_course_order.do',
+ 		  		dataType:"json",
+ 		  		data:{"open_id":openid},
+ 		  		success: function(data){  
+ 		  			var course_order=data[0].course_order;  var user =data[0].user;
+ 		  			var html=""; var html2="";  var a=""; var b=""; var order="";
+ 		  			
+ 		  			if(data[0].user.head != null && data[0].user.head != ""){
+ 		  				$("#head_img").attr("src",data[0].user.head );
+ 		  			} 
+ 		  			
+	  				if(data[0].user.role==0){
+	  					$("#my_name").text(data[0].user.name);
+	  					$("#my_name").after("<span onclick='go_vip();'>会员升级</span>");
+	  					$("#leve_1").hide();
+	  				}else if(data[0].user.role==1){
+	  					$("#leve_1").show();
+	  					$("#my_name").text(data[0].user.name);
+	  					
+	  				}
+	  				
+	  				if(course_order.length > 0){
+	  					$("#more").hide();
+	  				}else{
+	  					$("#more").show();
+	  					$("#more").text("暂无订购");
+	  				}
+ 		  			
+ 		  			if(user.role==0&&user.state==0){
+ 		  			 
+ 		  				 
+		  			
+		  			for(var i=0;i<course_order.length;i++){
+		  				
+		  				var t = course_order[i].text;
+		  				
+		  				if(t.length>40){
+		  					t = t.substring(0,40)+"..."; 
+		  				}
+		  				 
+		  				if(course_order[i].is_order==0){
+			  				order="<div class='div_order'><div style='float:left;'>"+course_order[i].c_name+"</div><br><div style='float:left;font-size:14px;color:#999;width:100%;  height: 60px;'>"+t+"</div><br><div style='float:left;width:100%;font-size:12px;margin-top:5px;'><div style='float:left;color:#F4B56A;width:40%;'>主讲:"+course_order[i].teacher+"</div><div style='float:left;width:40%;margin-left:35px; color: #969696 ;  text-align: right; ' > "+course_order[i].date_1.substring(0,10)+"</div></div></div>"; 		
+						}else{
+							order="<div class='div_order'><div style='float:left;'>"+course_order[i].c_name+"</div><br><div style='float:left;font-size:14px;color:#999;width:100%;  height: 60px;'>"+t+"</div><br><div style='float:left;width:100%;font-size:12px;margin-top:5px;'><div style='float:left;color:#F4B56A;width:40%;'>主讲:"+course_order[i].teacher+"</div><div style='float:left;width:40%;margin-left:35px; color: #969696 ;  text-align: right; ' > "+course_order[i].date_1.substring(0,10)+"</div></div></div>";
+						}
+						if(course_order[i].is_xin==1){
+							a="<img src='../../../img/wx/xin.png' style='width:5%;position:absolute;  margin-left: 5px; margin-top: 8px;   border-radius: 6px 0px 0px 0px;'>";
+						}	
+							if(course_order[i].type==1){
+						b="<img src='../../../img/wx/video.png' style='width:5%;position:absolute;left:80px;margin-top:80px;'>";
+						
+						}else{
+						b="<img src='../../../img/wx/voice.png' style='width:5%;position:absolute;left:80px;margin-top:80px;'>";						
+					}
+							 
+					html2+="<div onclick='detail(this);' t='"+course_order[i].type+"' cno='"+course_order[i].c_no+"' watch='"+course_order[i].watch+"' style='width:100%;float:left;border-bottom:1px solid #f2f2f2;padding-top:10px;padding-bottom:10px;background:#fff;'>"+
+						"<div style='width:30%;float:left;'>"+a+"<img src='"+course_order[i].img+"' style=' border-radius: 6px; width:100px;float:left;height:100px;margin-top:7%;  margin-left: 5px;'>"+b+"</div>" 
+						+""+order+""	
+						+"</div>";		
+		  			}
+		  		 
+				 $("#other_video").html(html2);
+					  				
+ 		  	}else{
+ 		  		  
+  						for(var j=0;j<course_order.length;j++){
+  							
+  							var t = course_order[j].text; 
+  			  				if(t.length>40){
+  			  					t = t.substring(0,40)+"..."; 
+  			  				}
+  							
+  							
+  							order="<div class='div_order'><div style='float:left;'>"+course_order[j].c_name+"</div><br><div style='float:left;font-size:14px;color:#999;width:100%; height: 60px;'>"+t+"</div><br><div style='float:left;width:100%;font-size:12px;margin-top:5px;'><div style='float:left;color:#F4B56A;width:40%;'>主讲:"+course_order[j].teacher+"</div><div style='float:left;width:40%;margin-left:35px;  color: #969696;   text-align: right; ' > "+course_order[j].date_1.substring(0,10)+"</div></div></div>";						 
+  							if(course_order[j].is_xin==1){
+  								a="<img src='../../../img/wx/xin.png' style='width:5%;position:absolute; margin-left: 5px; margin-top: 8px;     border-radius: 6px 0px 0px 0px;'>";
+  						 	}	
+  							if(course_order[j].type==1){
+  						b="<img src='../../../img/wx/video.png' style='width:5%;position:absolute;left:80px;margin-top:80px;'>";
+  						
+  						}else{
+  						b="<img src='../../../img/wx/voice.png' style='width:5%;position:absolute;left:80px;margin-top:80px;'>";						
+  					}
+  							html2+="<div onclick='detail(this);' t='"+course_order[j].type+"' cno='"+course_order[j].c_no+"' watch='"+course_order[j].watch+"' style='width:100%;float:left;border-bottom:1px solid #f2f2f2;padding-top:10px;padding-bottom:10px; background:#fff;'>"+
+  							"<div style='width:30%;float:left;'>"+a+"<img src='"+course_order[j].img+"' style=' border-radius: 6px;width:100px;float:left;height:100px;margin-top:7%; margin-left: 5px;'>"+b+"</div>" 
+  							+""+order+""	
+  							+"</div>";	
+  							
+  						}
+  					
+  					 $("#other_video").html(html2);
+ 		  		
+ 		  	}	 			  			
+ 	 }
+ 		 		
+ 	});
+ 		 	
+ 		 	 
+ 	 });
+ 	 
+ 	function detail(obj){
+ 		var c_no=$(obj).attr("cno"); 
+ 		
+ 		var type=$(obj).attr("t");
+ 		
+ 		var w = $(obj).attr("watch");
+ 		 
+ 		if(type == 0){
+ 			localStorage.setItem("c_no", c_no );
+ 			window.location.href=pt_path+'jsp/wx/course/buy_voice.html'; 
+ 			
+ 		}else if(type==1){
+ 			localStorage.setItem("c_no", c_no );
+ 			window.location.href=pt_path+'jsp/wx/course/buy_course.html';
+ 		}else{
+ 			
+ 			localStorage.setItem("c_no", c_no );
+ 			localStorage.setItem("watch", w );
+ 			
+ 			window.location.href=pt_path+'jsp/wx/course/af_special.html';
+ 		}
+	}
+ 	 
+ 	 
+function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+	}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+		
+	}
+	
+	
+function go_personal(){
+		
+		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+	}
+	
+	function go_my_order(){
+		
+		 
+		window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+		
+	}
+	
+function go_vip(){
+  		
+  		window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+  	}
+  
+function go_top(){
+	 
+	 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+}
+  </script>
+</html>

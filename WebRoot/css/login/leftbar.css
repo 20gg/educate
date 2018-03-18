@@ -1,0 +1,111 @@
+body {
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+td.topMenu {
+	font-size: 14px;
+	text-decoration: none;
+}
+
+td.dateTxt {
+	font-size: 12px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+td.topMenu a {
+	font-size: 14px;
+	text-decoration: none;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+td.txt {
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+}
+
+th.tabHead {
+	font-size: 12px;
+	font-weight: bold;
+	color: #0057a5;
+	text-decoration: none;
+	background-color: #e2f4fd;
+}
+
+table {
+	font-size: 12px;
+}
+
+td.leftTitle {
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+td.leftmenuTxt {
+	font-size: 12px;
+	color: #0057a5;
+	text-decoration: none;
+}
+
+td.leftmenu {
+	font-size: 12px;
+	color: #0057a5;
+	text-decoration: none;
+	text-align: center;
+}
+
+td.leftmenu a {
+	font-size: 12px;
+	color: #0057a5;
+	text-decoration: none;
+	text-align: center;
+}
+
+td.leftmenu a:link {
+	font-size: 12px;
+	color: #0057a5;
+	text-decoration: none;
+	text-align: center;
+}
+
+td.leftmenu a:hover {
+	font-size: 12px;
+	color: #ff0000;
+	text-decoration: none;
+	text-align: center;
+}
+
+td.treesline {
+	border: 1px solid #c4e0f9;
+}
+
+input.loginInput {
+	font-size: 14px;
+	color: #000000;
+	background-color: #6AB1EC;
+	height: 22px;
+	width: 170px;
+	padding-top: 4px;
+	border: 1px solid #d5dee9;
+}

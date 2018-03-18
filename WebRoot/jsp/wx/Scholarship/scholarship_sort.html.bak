@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+       <link rel="stylesheet" href="../../../css/wx_menu.css">
+
+  </head>
+  <style type="text/css">
+  
+  </style>
+  <body style="margin: 0px;">
+    	<div style="line-height: 40px;text-align: center;color: #4CAF50;border-bottom: 10px solid #f4f4f4;">奖学金排行榜</div>
+    	
+    	
+    	<div  id='html_1'></div>
+    	
+    <div id="html_2">
+    
+    
+    </div>
+    
+    
+      <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money2.png"></div>
+			<div class="menu_x menu_green">奖学金</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x ">我的</div>
+		</div>
+	</div>
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+  <script type="text/javascript">
+  		
+  var openid="123456";
+  $(function(){
+	  $.ajax({
+	  		type:"post",
+	  		url: pt_path +'/user/scholarship_sort.do',
+	  		dataType:"json",
+	  		data:{"open_id":openid},
+	  		success: function(data){ 
+	  			var html="";
+	  			var html2="";
+	  			var scholarship=data[0].scholarship;
+	  			var scholarship_list=data[0].scholarship_list;
+	  			 var cont=0;
+	  		
+	  	
+	  		    for(var i=0;i<scholarship_list.length;i++){
+	  		    	
+	  		    	cont++;
+	  		    	if(scholarship_list[i].open_id==openid){
+	  		    	 
+	  		    		html+="<div style='width:100%;float: left;border-bottom: 1px solid #f4f4f4; line-height: 65px;text-align: center;'><div style='width:10%;float: left;'> "+cont+" </div><div style='width:30%;float: left;'><img src='../../../img/wx/touxiang.png'></div>"
+	  		  		    	+"<div style='width:30%;float: left; '>自己</div>"
+	  		  		    	+"<div style='width:30%;float: left;color:#F4B56A; '>"+scholarship.scholarship+"元</div></div>";
+	  		  		    $("#html_1").html(html);
+	  		    	}
+	  		    		
+	  		    	
+	  		    	html2+="<div style='width:100%;float: left;border-bottom: 1px solid #f4f4f4;text-align: center;line-height:65px;' >"
+	  		    	+"<div style='width:10%;float: left;'>"+cont+"</div><div style='width:30%;float: left;'><img src='../../../img/wx/touxiang.png' '></div>"
+	  		      	+"<div style='width:30%;float: left;'>"+scholarship_list[i].name+"</div>"
+	  		    	+"<div style='width:30%;float: left;color:#F4B56A;'>"+scholarship_list[i].scholarship+"元</div></div>";
+	  		    	
+	  		    }$("#html_2").html(html2);
+	  		
+	  		
+	  		}
+	 
+	  });
+  });
+  	
+  function go_scholarship(){
+		
+		window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+	}
+	
+	function go_taolun(){
+		window.location.href=pt_path+'jsp/wx/post/post_area.html';
+		
+	}
+	
+	
+function go_personal(){
+		
+		window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+	}
+function go_my_order(){
+	
+	 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+	
+}
+  
+  </script>
+</html>

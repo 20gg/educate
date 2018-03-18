@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <title>到答课堂 </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    
+     <link rel="stylesheet" href="../../../css/wx_menu.css">
+     <link rel="stylesheet" href="../../../css/wx/personal/score.css" type="text/css">
+  </head>
+    
+  <body >
+  
+   <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+	<div class="a_link">
+			<div class="title">
+				<span></span>
+				<h1>个人学分信息</h1>
+				<div class="clearfix"></div>
+			</div>
+			<div class="mes">
+				<div class="name">
+					<h1>昵称：</h1>
+					<h2  id="my_name2"></h2>
+				</div>
+				<div class="mc">
+					<h1>目前排名：</h1>
+					<h2 id="pm"></h2>
+				</div>
+				<div class="score">
+					<h3 id="xf"></h3>
+				</div>
+				<div class="clearfix"></div>
+			</div>						
+		</div>
+		
+		<div class="top_b">
+			<div class="top">学分排行榜</div>			
+		</div>
+		
+	<div class="top_box" id="all_list">
+			<!-- <div class="a_top">
+				<div class="head">
+					<img src="../../images/burse/touxiang.png">
+					<div class="icon1">01</div>
+				</div>
+				<div class="right">
+					<div class="name">小不点要读书</div>
+					<div class="price">22545元</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div> -->
+	</div>
+		
+	
+	<div class="more" id="more" onclick="get_more();">加载更多</div>
+		
+	<br><br><br><br>
+    
+    <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one" onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x ">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me2.png"></div>
+			<div class="menu_x menu_green">我的</div>
+		</div>
+	</div>
+  </body>
+  <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script> 
+  <script type="text/javascript">
+  //var openid ="oLir8jsYupMTLDJnaWjdVC-l7OJE";
+  
+  var page_num =1;
+  var page_count =1;
+  
+  var this_score =0;
+  var this_sort = 0;
+   	
+  var share_ul="score_sort";
+  
+  $(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			get_data(1);
+		}
+		 
+	}
+  
+  
+
+  function get_more(){
+   	
+   	var page = page_num+1;
+   	
+   	get_data(page);
+  }
+
+  function get_data(page){
+  	
+  	$.ajax({
+    		type:"post",
+    		url: pt_path +'/study/query_score.do',
+    		dataType:"json",
+    		data:{"openid":openid,"page":page},
+    		success: function(data){
+    			
+    			if(data[0].user.head != null && data[0].user.head != ""){ 
+       				$("#head_img").attr("src",data[0].user.head);
+       			}else{ 
+       				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+       			}
+       			
+       			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+       			
+    			if(data[0].user.role!=1){
+    				$("#my_name").text(data[0].user.name);
+    				$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+    			}else {
+    				$("#my_name").text(data[0].user.name);
+    			}
+       			
+   				
+   				$("#my_name2").text(data[0].user.name);
+   				$("#xf").text(data[0].user.score+"分");
+   				
+   				var pm =""; 
+   				if(data[0].eq > 0){
+   					pm ="";
+   				} 
+   				var m = data[0].more+1; 
+   				pm = pm+"第"+m+"名"; 
+   				$("#pm").text(pm);
+    			
+    			
+    			page_num =data[0].page_num;
+    			page_count =data[0].page_num;
+    			
+    			if(page_num >= page_count){
+    				$("#more").hide();
+    			}else{
+    				$("#more").show();
+    			}
+    			
+    			var list =data[0].list;
+    			var html ="";
+    			
+    			for(var i=0; i<list.length;i++){
+    				
+    				if(i==0 && page_num == 1){
+    					this_score =list[i].score;
+    					this_sort = 1;
+    				}else{
+    					
+    					if(list[i].score < this_score){
+    						//排名变化
+    						this_sort = this_sort+1;
+    						this_score =list[i].score;
+    					} 
+    				}
+    				
+    				var ppp = (page_num-1)*20+i+1;
+    				
+    				var c ="icon1";
+    				if(ppp > 3){
+    					c ="icon2";
+    				} 
+    				var s="";
+    				if(ppp < 9){
+    					s ="0"+ppp;
+    				}else{
+    					s =""+ppp;
+    				}
+    				
+    				var img ="../../../images/burse/touxiang.png";
+    				if(list[i].head != null ){
+    					img = list[i].head;
+    				}
+    				
+    				var a ="<div class='a_top'> <div class='head'> <img src='"+img+"'> <div class='"+c+"'>"+s+"</div></div>"
+					+"<div class='right'> <div class='name'>"+list[i].name+"</div> <div class='price'>"+list[i].score+"分</div>"
+					+"<div class='clearfix'></div> </div> <div class='clearfix'></div> </div>";
+					
+    				html = html +a;
+    				 
+    			}
+    			
+    			$("#all_list").append(html);
+    			
+    		}
+  	});
+  }
+
+  
+function go_top(){
+	 
+	 window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+	 
+}
+  	
+function go_scholarship(){
+ 		
+ 	window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html?v=.1';
+}
+	
+function go_taolun(){
+ 	window.location.href=pt_path+'jsp/wx/post/post_area.html';
+ 		
+}
+	 
+function go_personal(){
+  		
+  	window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+}
+function go_vip(){
+		
+	window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+}
+function head_str(){
+	
+	var date = new Date();
+	
+	var h = date.getHours();
+	
+	var head_str = "";
+	
+	if(h<11){
+		head_str = ",上午好";
+	}else if(h<14){
+		head_str = ",中午好";
+	}else if(h<17){
+		head_str = ",下午好";
+	}else{
+		head_str = ",晚上好";
+	}
+	
+	return head_str;
+}
+  </script>
+</html>

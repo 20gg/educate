@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="Cache-Control" content="max-age=7200" />
+       <meta http-equiv="Expires" content="Mon, 20 Jul 2019 23:00:00 GMT" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="../../../css/tanchu.css" /> 
+     <link rel="stylesheet" href="../../../css/art.css" />
+
+  </head>
+  
+  <body class="my_body"  >
+    <div class="art_head" style="display: none;" id="div_gh">
+    	<div class="head_one"><div id="sort1"  onclick="art_sort(1);" class="head_choose">干货</div></div>
+    	<div class="head_one"><div id="sort2"  onclick="art_sort(2);" class="head_sort">精选</div></div>
+    	<div class="head_one"><div id="sort3"  onclick="art_sort(3);" class="head_sort">原创</div></div>
+    </div>
+    
+    <!-- <div class="art_page" id="recommend_art" onclick="into_art(this);" art_id="">
+    	<div class="art_page_a" id="reco_t">推荐标题</div>
+    	<div class="reco_other" >
+    	<div class="art_read">
+    	<img  id="reco_i" src=""></div>
+    	<div class="clearfix"></div>
+    	</div>
+    	<div class="reco_other">
+    		<button class="rou_jian " style="margin-right: 20px;">热荐</button>
+    		<div class="art_page_read" >
+    		<span class="art_read"><img src="../../../img/post/eye.png"></span><div id="reco_r" class="reco_r"></div></div>
+    		<div class="clearfix"></div>
+    		
+    	</div>
+    </div> -->
+    
+     <div class="art_page"  id="recommend_art" onclick="into_art(this);" art_id="">
+    		<div class="art_page_a">
+    			<div class="art_page_title" id="reco_t"></div>
+    	
+    			<div class="art_page_read">
+    			<button style="margin-right: 20px;float:left;height:20px;line-height:20px;border:none;border-radius:10px;color:#fff;font-size:12px;background:#2dc158;">热荐</button>
+    				<div style="height: 25px;">
+    			<span style="float:left;height:20px;"><img src="../../../img/post/eye.png" style='height:13px;'></span>	<div id="reco_r" style="line-height:20px;font-size:14px;float:left;color:#969696;margin-left:4px;font-family:arial;"></div>
+    			</div>
+    			</div>
+    		</div>
+    		<div class="art_page_b"><img  id="reco_i" src="../../../img/logo.jpg"></div>
+    	</div>
+    
+    
+    
+    <div id="all_art">
+    	<!-- <div class="art_page">
+    		<div class="art_page_a">
+    			<div class="art_page_title">标题标题标题标题标题</div>
+    			
+    	<div class="reco_other"> 
+    		<div class="art_read" >
+    		<img src="../../../img/post/eye.png"> &nbsp;<div id="reco_r">1234</div></div>
+    		<div class="clearfix"></div>
+    		
+    	</div>
+    			<div class="art_page_read">
+    				<span class="art_read" ><img src="../../../img/post/eye.png"> &nbsp;<span>1234</span></span>
+    			</div>
+    		</div>
+    		<div class="art_page_b"><img src="../../../img/post/taolun1.jpg"></div>
+    	</div>-->
+    </div>
+    
+    <div class="log_jia" id="jia_page" style="display: none;"><button onclick="jia_zai();">加载更多</button></div>
+    
+    <br><br><br>
+    <div class="load_tc_back" style="display: none;" id="myload">
+	<div class="load_tc_page">
+		<div class="load_tc_img">
+		</div>
+	</div>
+</div> 
+    
+  </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script>  
+<script type="text/javascript" src="../../../js/path.js"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+var page_num =1;
+var page_count =1;
+var sort = 1;
+
+//var openid="ok4o7wWpLhebjcpQ5kgzSiN7j6YQ";
+
+var share_ul="2";
+$(function() {
+	
+	wx_page_init()
+});
+ 
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){		   
+		  get_data(sort,1);
+	}
+	 
+}
+
+function get_data(s,p){
+	$("#recommend_art").hide();
+	$("#myload").show();
+	
+	 $.ajax({
+ 		type:"post",
+ 		url: pt_path +"/article/art_list.do",
+ 		dataType:"json",
+ 		data:{"sort":s,"page":p},
+ 		success: function(data){
+ 			$("#myload").hide();
+ 			$("#recommend_art").show();
+ 			$("#div_gh").show();
+ 			$("#jia_page").show();
+ 			$("#sort1").attr("class","head_sort");
+ 			$("#sort2").attr("class","head_sort");
+ 			$("#sort3").attr("class","head_sort");
+ 			
+ 			$("#sort"+s).attr("class","head_choose");
+ 			
+ 			page_num = data[0].page_num;
+  			page_count = data[0].page_count;  
+  			if(page_num >= page_count){
+  				$("#jia_page").hide();
+  			}else{
+  				$("#jia_page").show();
+  			}
+  			
+  			if(data[0].recommend != null && data[0].recommend.state == 1){
+  				$("#recommend_art").show();
+  				
+  				$("#recommend_art").attr("art_id",data[0].recommend._id);
+  				
+  				/* var a = data[0].recommend.title; 
+  				if(a.length>10){
+  					a = a.substring(0,10)+"..."; 
+  				} */
+  				
+  				$("#reco_t").text(data[0].recommend.title);
+  				$("#reco_i").attr("src",pt_path + data[0].recommend.img);
+  				$("#reco_r").text(data[0].recommend.read);
+  				 
+  			}else{
+  				$("#recommend_art").hide();
+  			}
+  			
+  			var list = data[0].art_list;
+  			
+  			if(list != null && list.length > 0){
+  				
+  				var html =""; 
+  				for(var i=0;i<list.length;i++){
+  					
+  					var a = "<div class='art_page' art_id='"+list[i]._id+"' onclick='into_art(this);'> "
+    				+"<div class='art_page_a'> <div class='art_page_title'>"+list[i].title+"</div> "
+    				+"<div class='art_page_read'><div class='reco_other'>  <div class='art_read' >"
+    				+"<img src='../../../img/post/eye.png' ><div class='reco_r'>"+list[i].read+"</div></div><div class='clearfix'></div></div></div>"
+    				+"</div> <div class='art_page_b'><img src='"+pt_path+list[i].img+"'></div> </div>";
+    				
+  					html = html+a; 
+  				}
+  				
+  				$("#all_art").append(html);
+  				
+  			}
+  			
+  			$("#myload").hide();
+ 		}
+	 });
+}
+
+
+function art_sort(code){
+	
+	sort = code;
+	
+	$("#all_art").html("");
+	
+	get_data(code,1);
+}
+
+function jia_zai(){
+	
+	var p = Number(page_num) + 1;
+	
+	if(p <= page_count){
+		get_data(sort,p);
+	}
+}
+
+function into_art(obj){
+	
+	var art_id = $(obj).attr("art_id"); 
+	localStorage.setItem("art_id", art_id);
+	
+	location.href = pt_path +"/jsp/wx/art/art_detail.html?v=5"; 
+}
+
+</script>
+</html>

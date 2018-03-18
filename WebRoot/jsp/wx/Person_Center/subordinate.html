@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/wx/personal/subordinate3.css" type="text/css">
+		<link rel="stylesheet" href="../../../css/wx_menu.css">
+		 <link rel="stylesheet" href="../../../css/tanchu.css" />
+	</head>
+	<body>
+		 <div class="top_box">
+		<div class="top">
+			<div class="head">
+				<img id="head_img" src="">
+			</div>
+			<div class="name" id="my_name"></div>
+			<div class="lel" id="leve_1">
+				<img id="role_img" src="../../../img/role/role0.png">
+			</div>
+			<div class="clearfix"></div>
+		</div>			
+	</div>
+	
+	
+		<div class="tx_box" id="html_1">
+			
+		</div>
+		
+		<div  id="html_2">
+		
+		
+		</div>
+		
+		
+		<div class='inv1' id="html_3" onclick="go_remind();">
+			
+			
+		</div>
+		
+		
+		
+	<!-- 	<div class="inv1">
+			<div class="nomal">已邀请普通学员 ：<a id="pt_num">3</a>位</div>
+			<div class="vip">已邀请VIP学员 ：<a id="vip_num">3</a>位</div>
+			<div class="clearfix"></div>
+		</div> -->
+		
+		
+		
+		  <!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one"  onclick="go_top();">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">你问我答</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money1.png"></div>
+			<div class="menu_x  ">边学边赚</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me2.png"></div>
+			<div class="menu_x menu_green">我的</div>
+		</div>
+	</div>
+	
+	
+	<div class="load_tc_back" style="display: none;" id="myload">
+	<div class="load_tc_page">
+		<div class="load_tc_img">
+		</div>
+	</div>
+</div> 
+	
+	</body>
+	
+	<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+<script type="text/javascript" src="../../../js/wx/wx_public2.js"></script>  
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script> 
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+<script type="text/javascript">
+
+//var openid="oLir8jsYupMTLDJnaWjdVC-l7OJE";
+
+	var share_ul="subordinate";
+	
+	
+	
+	
+	$(function(){
+		 
+		wx_page_init()
+	});
+
+	  
+	function wx_page_init(){
+		 
+		if(openid != null && openid!="null" && openid!=""){
+			  
+			  get_discuss(); 
+		}
+		 
+	}
+	
+	
+	function get_discuss(){
+		
+		var xia_open_id=localStorage.getItem("xia_open_id");
+		
+		  $.ajax({
+			  type:"post",
+		  		url: pt_path +'/user/show_my_classmate.do',
+		  		dataType:"json",
+		  		data:{"open_id":xia_open_id},
+		  		success: function(data){
+		  			
+		  			var html_a="";var html_b=""; var html_c="";
+		  			var aa="暂无";var bb="暂无";var cc="暂无"; var dd="";
+		  			 
+		  			if(data[0].user.head != null && data[0].user.head != ""){ 
+		   				$("#head_img").attr("src",data[0].user.head);
+		   			}else{ 
+		   				$("#head_img").attr("src",pt_path+"images/buy/231_03.png" );
+		   			}
+		   			
+		   			$("#role_img").attr("src",pt_path+"img/role/role"+data[0].user.role+".png");
+		   			
+					if(data[0].user.role!=1){
+						$("#my_name").text(data[0].user.name);
+						$("#my_name").after("<span onclick='go_vip();'>会员升级</span>"); 
+					}else  {
+						$("#my_name").text(data[0].user.name);
+					}
+		   			
+				
+					html_a="<div class='img'><img src='"+data[0].user.head+"'></div><h1>"+data[0].user.name+"</h1>";
+						
+					$("#html_1").html(html_a);
+					 
+					if(data[0].user.phone!=null&&data[0].user.phone!=""){
+						aa=data[0].user.phone;
+						
+					}	
+					
+					if(data[0].user.company!=null&&data[0].user.company!=""){
+						bb=data[0].user.company;
+						
+					}
+					
+					if(data[0].user.job!=null&&data[0].user.job!=""){
+						cc=data[0].user.job;
+						
+					}
+					var yxq = data[0].user.p1_date; 
+	  				if(data[0].user.p2_date != null){
+	  					yxq = data[0].user.p2_date;
+	  				} 
+					
+					html_b="<div class='time_box'>"
+						+"<h1>有效期到期时间：</h1>"	
+						+"<div class='time01'>"+yxq+"</div>"
+						+"<div class='clearfix'></div></div>"
+						+"<div class='time_box'>"
+						+"<h1>联系方式：</h1>"
+						+"<div class='cont'>"+aa+"</div>"
+						+"<div class='clearfix'></div></div>"
+						+"<div class='time_box'>"
+						+"<h1>学员企业：</h1><div class='com'>"+bb+"</div>"
+						+"<div class='clearfix'></div></div>"
+						+"<div class='time_box'><h1>学员职位：</h1><div class='pos'>"+cc+"</div>"
+						+"<div class='clearfix'></div></div>"
+						+"<div class='time_box'><h1>累计奖学金：</h1><div class='bur'>"+data[0].user.scholarship/100+"元</div>"
+						+"<div class='clearfix'></div></div>";
+					
+						$("#html_2").html(html_b);
+						 
+					
+						
+						if(data[0].user.role!=1){
+							dd="<span>提醒购买VIP</span>";
+						}else{
+							dd="<span>提醒续费</span>";
+						}
+						
+						html_c=dd;
+					
+						$("#html_3").html(html_c);
+						
+						$("#pt_num").text(data[0].pt_num);
+			  			$("#vip_num").text(data[0].vip_num);
+						
+					
+		  			 
+		  		}
+			  
+		  });
+		
+	}
+
+ 
+
+function go_scholarship(){
+	
+	window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+}
+
+function go_taolun(){
+	window.location.href=pt_path+'jsp/wx/post/post_area.html';
+	
+}
+
+function go_my_order(){
+	
+	 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+	
+}
+
+
+function go_personal(){
+	
+	window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+}
+
+function go_vip(){
+	
+	window.location.href=pt_path+'jsp/wx/Guyang/dinggou.html';
+}
+
+function go_top(){
+ 
+ window.location.href=pt_path+'jsp/pt/a_edit/show/1495714795.html'; 
+ 
+}
+
+function into_in(){
+
+//localStorage.setItem("openid", openid );
+window.location.href=pt_path+'jsp/wx/Scholarship/Invitation.html';
+
+}
+function head_str(){
+
+var date = new Date();
+
+var h = date.getHours();
+
+var head_str = "";
+
+if(h<11){
+	head_str = ",上午好";
+}else if(h<14){
+	head_str = ",中午好";
+}else if(h<17){
+	head_str = ",下午好";
+}else{
+	head_str = ",晚上好";
+}
+
+return head_str;
+}
+
+
+function  go_remind(){
+	var xia_open_id=localStorage.getItem("xia_open_id");
+	$("#myload").show();
+	$.ajax({
+		type:"post",
+  		url: pt_path +'/course/hi_xufei.do',
+  		dataType:"json",
+  		data:{"open_id":xia_open_id},
+  		success: function(data){
+  			
+  			
+  			if("success"==data[0].result){
+  				$("#myload").hide();
+  				alert("提醒成功");
+  			}else{
+  				$("#myload").hide();
+  				alert("对方可能还没有关注公众号或者被加入黑名单！");
+  			}
+  		 
+  		}
+	 
+	});
+	
+	
+}
+</script>
+</html>

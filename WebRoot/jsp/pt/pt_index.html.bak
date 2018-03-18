@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+    <title>教育在线管理系统</title> 
+     
+      <link rel="stylesheet" href="../../css/pt_menu.css" /> 
+      <link rel="stylesheet" href="../../css/pt_index.css" /> 
+  </head> 
+  <body class="pt_body" >
+  
+  <!-- 头部 -->
+  <div class="pt_head"></div> 
+ <!-- 主体 -->
+ 	<div class="pt_main" id="main_page">
+ 		
+ 		<!-- 左侧菜单 -->
+  		<div class="pt_left"  >
+  			<div class="treebox">
+				<ul class="menu"  id="all_menu">
+					
+					<!-- <li class="level1">
+						<a href="#none" class="current"><em class="ico ico1"></em>系统管理<i></i></a>
+						<ul class="level2" style=" display: block;">				
+							<li><a href="javascript:;">课程详情</a></li>
+							<li><a href="javascript:;">课程订单管理</a></li>
+							<li><a href="javascript:;">商城商品</a></li>
+							<li><a href="javascript:;">商城订单管理</a></li>
+							<li><a href="javascript:;">讨论版管理</a></li>
+							<li><a href="javascript:;">资源管理</a></li>
+							<li><a href="javascript:;">消息模板配置</a></li>
+							<li><a href="javascript:;">系统配置</a></li>
+						</ul>
+									
+					</li>
+					 
+					 <li class="level1">
+						<a href="#none"><em class="ico ico2"></em>讨论版管理<i></i></a>
+						<ul class="level2">
+							<li><a href="javascript:;">敏感字设置</a></li>
+								<li><a href="javascript:;">论帖管理</a></li>
+							
+						</ul>
+					</li>
+					<li class="level1">
+						<a href="#none"><em class="ico ico3"></em>用户管理<i></i></a>
+						<ul class="level2">
+							<li><a href="javascript:;">会员管理</a></li> 							 
+							<li><a href="javascript:;">管理员管理</a></li>
+						</ul>
+					</li> -->
+					<!-- <li class="level1">
+						<a href="#none" ><em class="ico ico1"></em>权限管理<i class="down"></i></a>
+						<ul class="level2" >
+							<li><a href="http://www.baidu.com" target="mainframe">角色管理</a></li>
+							<li><a href="javascript:;">角色权限</a></li> 
+						</ul>
+					</li>  -->
+					<!-- <li class="level1">
+						<a href="#none"><em class="ico ico4"></em>用户管理<i></i></a>
+						<ul class="level2">
+							<li><a href="javascript:;" target="mainframe">用户列表</a></li>
+							<li><a href="javascript:;">新增管理员</a></li> 
+						</ul>
+					</li> --> 
+		           
+				</ul>
+			</div>
+  		
+  		</div>
+  		
+  		<!-- 右侧内容 -->
+  		<div class="pt_rigth" id="right_page">
+  			 <iframe id="mainframe" name="mainframe"
+				src="http://www.baidu.com"
+		style="width: 100%; border: 0px;background:transparent;position: relative; frameborder:0 ;scrolling-y:none;scrolling-x:none; height: 100%;">
+		</iframe>
+  		</div>
+ 	</div>
+ 
+</body>
+
+<script src="../../js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="../../js/easing.js"></script>
+<script type="text/javascript" src="../../js/path.js" ></script>
+<script type="text/javascript">
+
+var main_h = 0;
+
+$(function () { 
+	var h = $(window).height(); 
+	main_h = h-60; 
+	$("#main_page").height(h-61);
+	
+//获取用户登录信息与菜单信息
+	
+	$.ajax({
+		type : "post",
+		dataType : "json",
+		url : pt_path + "login/into_pt.do", 
+		success : function(data){
+			
+			if(data[0].error_code == 0){
+				location.href = "../../jsp/pt/pt_login.html";
+			}else{
+				
+				//显示菜单
+				
+				if(data[0].menu_arr != null && data[0].menu_arr.length> 0){
+					
+					var menu = data[0].menu_arr;
+					
+					var m_html =""; 
+					var count = 0;
+					
+					for(var i=0;i<menu.length;i++){
+						
+						if(menu[i].grade == 1){ 
+							count ++;
+							
+							var menu_id = menu[i].menu_id;
+							var url_one =""; 
+							if(menu[i].is_url == 1 && menu[i].menu_url != null && menu[i].menu_url != ""){ 
+								url_one ="href='"+menu[i].menu_url+"'";
+							}
+							
+							var c1 = "";
+							var c2 ="";
+							if(count == 1){
+								c1 = " class='current'";
+								
+								c2 =" style=' display: block;' ";
+							}
+							
+							var m_one_two="";
+							
+							for(var j=0;j<menu.length;j++){
+								
+								if(menu[j].grade == 2 && menu[j].parent_id == menu_id){
+									
+									var m_two ="<li><a target='mainframe' href='"+menu[j].menu_url+"'>"+menu[j].menu_name+"</a></li> ";
+									
+									m_one_two = m_one_two +m_two;
+								}
+							}
+							
+							m_one_two ="<ul class='level2' "+c2+" >"+m_one_two+"</ul>";
+							
+							
+							var m_one ="<li class='level1'> <a "+url_one+"  "+c1
+							+" ><em class='ico "+menu[i].menu_img+"'></em>"+menu[i].menu_name+"<i></i></a> "+m_one_two+"</li>";
+							
+							m_html = m_html+ m_one;
+						}
+						 
+					} 
+					
+					$("#all_menu").html(m_html);
+					 
+				}else{
+					$("#all_menu").html("");
+				}
+				
+				init_menu() ;
+			}
+		}
+	});
+	
+	
+	 
+});
+
+//等待dom元素加载完毕.
+function init_menu() {
+	//等待dom元素加载完毕
+	$(".treebox .level1>a").click(function(){
+		$(this).addClass('current')   //给当前元素添加"current"样式
+		.find('i').addClass('down')   //小箭头向下样式
+		.parent().next().slideDown('slow','easeOutQuad')  //下一个元素显示
+		.parent().siblings().children('a').removeClass('current')//父元素的兄弟元素的子元素去除"current"样式
+		.find('i').removeClass('down').parent().next().slideUp('slow','easeOutQuad');//隐藏
+		 return false; //阻止默认时间
+	});
+}
+
+	
+ 
+</script>
+</html>

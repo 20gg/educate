@@ -1,0 +1,364 @@
+/*预览*/
+.app-preview {
+	float: right;
+	margin-top: 0px;
+	width: 338px;
+	border: 1px solid #DBDBDB;
+	border-radius: 18px 18px 0 0;
+	position: relative;
+}
+.app-preview:before {
+	content: "";
+	display: block;
+	height: 70px;
+	width: 338px;
+	border-bottom: none;
+	border-radius: 18px 18px 0 0;
+	background: url(../images/iphone_head.png) no-repeat center center;
+}
+.app-preview .wrap {
+	margin: 0 auto;
+	width: 320px;
+	min-height: 503px;
+	border: 1px solid #D5D5D5;
+	border-bottom: none;
+	background: #fff;
+}
+.app-preview .head {
+	margin: 0 auto;
+	width: 320px;
+	font-size: 16px;
+	color: #FFF;
+	line-height: 80px;
+	text-align: center;
+	height: 64px;
+	background: url(../images/common/titlebar.png) no-repeat left top;
+}
+.app-preview .preview {
+	position: relative;
+	background: #FFF;
+}
+.app-preview .preview.demo {
+	height:503px;
+}
+.view-btn {
+	border: 1px solid #cfcfcf;
+	background-color: #eee;
+}
+.preview {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	min-height: 439px;
+}
+.float-ad {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 1000;
+	width: 100%;
+	opacity: 0;
+	transition: all .8s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+}
+.slideDown {
+	transform: translate3d(-50%, -100%, 0);
+	-webkit-transform: translate3d(-50%, -100%, 0);
+	-moz-transform: translate3d(-50%, -100%, 0);
+	-ms-transform: translate3d(-50%, -100%, 0);
+}
+.fadeIn {
+	transform: translate3d(-50%, -50%, 0);
+	-webkit-transform: translate3d(-50%, -50%, 0);
+	-moz-transform: translate3d(-50%, -50%, 0);
+	-ms-transform: translate3d(-50%, -50%, 0);
+}
+body .modal-pop {
+	opacity: 1;
+	transform: translate3d(-50%, -50%, 0);
+	-webkit-transform: translate3d(-50%, -50%, 0);
+	-moz-transform: translate3d(-50%, -50%, 0);
+	-ms-transform: translate3d(-50%, -50%, 0);
+}
+.float-ad {
+	display: table;
+}
+.float-ad a {
+	display: table-cell;
+	vertical-align: middle;
+}
+.float-ad img {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+}
+.float-ad .close-ad {
+	position: absolute;
+	display: block;
+	top: -45px;
+	right: 20px;
+	width: 25px;
+	height: 25px;
+	border: 2px solid #EEE;
+	border-radius: 50%;
+	background: #000;
+	cursor: pointer;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+}
+.float-ad .close-ad:before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 12px;
+	top: 4px;
+	z-index: 2;
+	width: 2px;
+	height: 17px;
+	background: #FFF;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+.float-ad .close-ad:after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 12px;
+	top: 4px;
+	z-index: 2;
+	width: 2px;
+	height: 17px;
+	background: #FFF;
+	border-radius: 2px;
+	border-radius: 2px;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+}
+/*基本信息*/
+.layout_coupons_input {
+	float: left;
+}
+.information, .rule {
+	width: 580px;
+	padding: 0;
+	border-bottom-color: #FFF;
+}
+.layout_coupons_input h2 {
+	margin-bottom: 15px;
+	color: #333333;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 30px;
+	height: 30px;
+	border: 1px solid #E2E2E2;
+	background: #f8f8f8;
+	text-indent: 12px;
+}
+.preferential_name {
+	float: left;
+	width: 90px;
+	height: 36px;
+	margin-bottom: 15px;
+	line-height: 36px;
+	text-align: right;
+	white-space: nowrap;
+}
+.preferential_name em {
+	color: #ff3333;
+	font-style: normal;
+	line-height: 36px;
+}
+.content {
+	overflow: hidden;
+	margin: 0 0 15px 95px;
+}
+.content li {
+	float: left;
+	margin-right: 10px;
+}
+.content .img {
+	display: inline-block;
+	width: 130px;
+	height: 65px;
+	overflow: hidden;
+	position: relative;
+	vertical-align: middle;
+	position: relative;
+	border: 1px solid #CCC;
+}
+.content .img img {
+	max-height: 100%;
+	margin: auto;
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+	border: 0;
+}
+.content .img a {
+	display: block;
+	position: absolute;
+	z-index: 10;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	line-height: 20px;
+	height: 20px;
+	text-align: center;
+	color: #FFF;
+	background: rgba(0,0,0,0.80);
+}
+.content a.add {
+	display: inline-block;
+	padding-top: 10px;
+	width: 63px;
+	height: 53px;
+	text-align: center;
+	border: 1px solid #CCC;
+	color: #3c77da;
+	vertical-align: middle;
+}
+.content a.add span {
+	display: block;
+}
+.content input {
+	float: left;
+	height: 34px;
+	padding-left: 10px;
+	margin: 0;
+}
+.content input.w-455 {
+	width: 455px;
+}
+.content.time input {
+	width: 209px;
+}
+.content .line {
+	color: #b8b8b8;
+}
+.content ul.img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	height: auto;
+	border: none;
+}
+.img li {
+	margin-right: 5px;
+	float: left;
+	width: 85px;
+	height: 85px;
+}
+.img li label.add-img {
+	margin: 0;
+	padding: 0;
+	float: left;
+	display: block;
+	line-height: 81px;
+	height: 81px;
+	width: 81px;
+	text-align: center;
+	position: relative;
+	border: 2px dotted #dbdbdb;
+	cursor: pointer;
+}
+.img li label.add-img:after {
+	content: "";
+	display: block;
+	width: 42px;
+	height: 6px;
+	background: #CCC;
+	position: absolute;
+	left: 20px;
+	top: 38px;
+}
+.img li label.add-img:before {
+	content: "";
+	display: block;
+	height: 42px;
+	width: 6px;
+	background: #CCC;
+	position: absolute;
+	left: 38px;
+	top: 20px;
+}
+.img li input[type="file"] {
+	display: none;
+}
+.img li span {
+	display: block;
+	width: 83px;
+	height: 83px;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #DBDBDB;
+}
+.img li:last-child {
+	margin-right: 0;
+}
+.img li img {
+	max-height: 100%;
+	margin: auto;
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+	border: 0;
+}
+.content ul.img li span a {
+	display: none;
+}
+.content ul.img li span:hover a {
+	display: block;
+	width: 100%;
+	line-height: 22px;
+	height: 22px;
+	text-align: center;
+	color: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 2;
+	font-size: 12px;
+	background: rgba(0,0,0,0.60);
+}
+.content label, .content span {
+	float: left;
+	margin: 0 5px;
+	line-height: 36px;
+	vertical-align: top;
+	cursor: pointer;
+}
+input.mleft_10 {
+	margin-left: 10px;
+}
+.content label:first-child {
+	margin-left: 0;
+}
+.layout-button {
+	width: 100%;
+	text-align: center;
+}
+.layout-button .btn {
+	width: 200px
+}

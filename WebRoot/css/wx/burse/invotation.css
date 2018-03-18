@@ -1,0 +1,10 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+.bg1{width:100%;margin:auto auto;}
+.bg1 img{width:100%;display:block;}
+.inv{width:100%;margin:auto auto;background:#fff;margin-bottom:50px; }
+.inv span{width:40%;display:block;margin-left:30%;background:#2DC158;border-radius:6px;font-size:18px;color:#fff;text-align:center;line-height:44px;}

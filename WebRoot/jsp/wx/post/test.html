@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>到答课堂</title>
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+      
+    <link rel="stylesheet" href="../../../css/post.css"> 
+    <link rel="stylesheet" href="../../../css/wx_menu.css">
+    
+    <link rel="stylesheet" href="../../../css/tanchu.css" />
+
+  </head>
+  
+  <body class="my_body">
+  	<div class="post_area" style="margin-top: 0px;" >
+  		<div> 
+	  		<div class="area_page" > 
+	  			<div class="area_head"><img id="p_img" src="../../../img/post/head.png"></div>
+	  			 <div class="area_text">
+	  					<div class="text1" id="p_name"></div> 
+	  					<div class="text2" id="p_date"></div>
+	  			 </div>
+	  		 </div>
+		  	 <div id="p_title" style="margin-top: 10px;color:#323232;"></div>
+		  	 <div class="area_note" style="margin-top: 10px;color:#969696;" id="p_context"></div>
+	  	 </div> 
+	  	 <div class="area_zan">
+	  			<img class="zan_img" id="pzan_img" onclick="zan_p();" zan="0" src="../../../img/post/zan1.png"> &nbsp;
+	  			<span class="zan_num" id="pzan_num"></span>
+	  	</div>
+  </div>
+  
+  <div class="post_head" style="margin-top: 10px;  ">
+		<div class="head_d"><b>|</b>&nbsp;全部评论</div>
+		<div class="head_e"></div>
+  </div>
+  
+  <div id="all_log">
+  	<!-- <div class="post_area" style="margin-top: 0px;" >
+  		<div> 
+	  		<div class="area_page" > 
+	  			<div class="area_head"><img  src="../../../img/post/head.png"></div>
+	  			 <div class="area_text">
+	  					<div class="text1">fewfew</div> 
+	  					<div class="text2">dqdq</div>
+	  			 </div> 
+	  		 </div>
+		  	  <div class="log_page">
+		  	  	<div class="log_text">擦时间从扫除撒没开车吗，擦时间从扫除撒没开车吗，擦时间从扫除撒没开车吗，</div> 
+		  	  	<div class="log_clear"></div>
+		  	  </div>
+	  	 </div> 
+	  	 <div class="area_zan">
+	  			<img class="zan_img" pid="" onclick="zan(this);" zan="0" src="../../../img/post/zan1.png"> &nbsp;
+	  			<span class="zan_num" id="zan_num">123</span>
+	  	</div>
+  	</div> -->
+  	
+  	
+  </div>
+  
+  <div class="log_jia" id="jia_page"><button onclick="jia_zai();">加载更多</button></div>
+  
+  <div class="but_page1" id="but1_page">
+  		<div class="but_page_a">
+  			<div class="but_page_b" onclick="but2_show();"><span><img  src="../../../img/post/pl.png"></span>&nbsp;评论</div>
+  		</div>
+  		<div class="but_page_a">
+  			<div class="but_page_b" onclick="share_show();"><span><img  src="../../../img/post/fx.png"></span>&nbsp;分享</div>
+  		</div>
+  </div>
+  
+  
+  <div class="but_page2" style="display: none;" id="but2_page">
+  	<div class="but_page_c">
+  		<div class="but_page_d" onclick="but1_show();"><span><img  src="../../../img/post/pl.png"></span></div>
+  		<div class="but_page_e"><input type="text" id="add_context" maxlength="100" placeholder="说点什么吧"></div>
+  		<div class="but_page_f" onclick="send_info();">发送</div>
+  	</div>
+  </div>
+  
+  <br><br><br> 
+  
+ <div class="load_tc_back" style="display: none;" id="myload">
+	<div class="load_tc_page">
+		<div class="load_tc_img">
+		</div>
+	</div>
+</div> 
+
+<div class="tc_back_div" style="display: none;" id="myshare" onclick="close_share();">
+	<div style="width: 70%; height: 100px; float: right;">
+		 <img src="../../../img/post/share.png" style="width: 100%; height: 100%;">
+	</div>
+</div>
+	 
+ </body>
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript">
+var post_id ="";
+
+$(function() {
+	post_id = Get_String("post_id");
+
+	if(post_id == null){
+		 post_id = localStorage.getItem("post_id");
+	}else{
+		 localStorage.setItem("post_id", post_id);
+	}
+});  
+</script> 
+<script type="text/javascript" src="../../../js/wx/wx_aa.js?v=1"></script>
+<script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	wx_page_init();
+});
+ 
+function wx_page_init(){
+	
+	if(openid != null){
+		if(post_id == null || post_id == ""){
+			location.href = pt_path +"/jsp/wx/post/post_area.html"; 
+		}else{
+			 
+			get_log(1);
+		}
+		
+	}
+	  
+} 
+ 
+ //var openid ="oLir8jsyBKP6NESv7PpnqEYSd4Bw";
+
+function but2_show() {
+	
+	if(forbit == 0){
+		$("#but1_page").hide();
+		$("#but2_page").show();
+	}
+	 
+}
+
+function share_show(){
+	$("#myshare").show();
+}
+
+function close_share(){
+	$("#myshare").hide();
+}
+
+function but1_show(){
+	$("#but2_page").hide();
+	$("#but1_page").show();
+	
+}
+
+//var openid ="123456";
+var page_num =1;
+var page_count =1;
+
+var forbit = 0;
+
+
+
+
+
+function Get_String(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if ( r != null ){
+       return unescape(r[2]);
+    }else{
+       return null;
+    } 
+}
+
+function get_log(page){
+	
+	//var post_id = localStorage.getItem("post_id");
+	
+	//$("#myload").show();
+	
+	 $.ajax({
+ 		type:"post",
+ 		url: pt_path +"/area/query_post_log.do",
+ 		dataType:"json",
+ 		data:{"post_id":post_id,"page":page,"openid":openid},
+ 		success: function(data){
+ 			
+ 			//禁言
+  			if(data[0].user.forbit == null || data[0].user.forbit == 0){
+  				forbit = 0;
+  			}else if( data[0].user.forbit == 1){
+  				forbit = 1;
+  			}
+ 			
+ 			if(data[0].post.head != null && data[0].post.head !=""){
+  				$("#p_img").attr("src",data[0].post.head);
+  			} 
+ 			
+ 			$("#p_name").text(data[0].post.name);
+ 			$("#p_date").text(data[0].post.ctime);
+ 			$("#p_title").text(data[0].post.title);
+ 			$("#p_context").text(data[0].post.context);
+ 			$("#pzan_num").text(data[0].post.zan);
+ 			
+ 			if(data[0].post.zan_state == 1){
+ 				
+ 				$("#pzan_num").attr("class","zan_green"); 
+ 				$("#pzan_img").attr("zan",1); 
+ 				$("#pzan_img").attr("src","../../../img/post/zan2.png");
+ 				
+ 			}else{
+ 				
+ 				$("#pzan_num").attr("class","zan_num"); 
+ 				$("#pzan_img").attr("zan",0); 
+ 				$("#pzan_img").attr("src","../../../img/post/zan1.png");
+ 			}
+ 			
+ 			page_num = data[0].page_num;
+  			page_count = data[0].page_count;
+  			
+  			if(page_num >= page_count){
+  				$("#jia_page").hide();
+  			}else{
+  				$("#jia_page").show();
+  			}
+  			
+  			if(data[0].post_log != null && data[0].post_log.length > 0 ){
+  				
+  				var list =  data[0].post_log; 
+  				var html =""; 
+  				for(var i=0;i<list.length;i++){
+  					
+  					var img = "../../../img/post/head.png"; 
+  					if(list[i].head != null && list[i].head !=""){
+  						img =list[i].head; 
+  					}
+  					
+  					 var z_c ="zan_num";
+  					 var z_i ="../../../img/post/zan1.png";
+  					 
+  					 if(list[i].zan_state == 1){
+  						  z_c ="zan_green";
+  	  					  z_i ="../../../img/post/zan2.png";
+  					 }
+  					
+  					var p ="<div class='post_area' style='margin-top: 0px;'><div class='area_page'>" 
+			  			+"<div class='area_head'><img  src='"+img+"'></div>"
+			  			+" <div class='area_text'> <div class='text1'>"+list[i].name+"</div> <div class='text2'>"+list[i].ctime+"</div> </div> "
+			  			+" </div>  <div class='log_page'> <div class='log_text'>"+list[i].context+"</div> "
+				  	  	+"<div class='log_clear'></div> </div>  <div class='area_zan' style='pardding-bottom: 10px;'>"
+			  			+"<img class='zan_img' pid='"+list[i]._id+"' code='"+i+"' onclick='zan(this);' zan='"+list[i].zan_state+"' src='"+z_i+"'> &nbsp;"
+			  			+"<span class='"+z_c+"' id='zan_num"+i+"'>"+list[i].zan+"</span> </div> </div>";
+			  			
+			  			
+  					html = html + p;
+  				}
+  				
+  				$("#all_log").append(html);
+  			}
+ 			
+ 			$("#myload").hide();
+ 		}
+	 });
+}
+
+function jia_zai(){
+	
+	var p = Number(page_num) + 1;
+	
+	if(p <= page_count){
+		get_log(p);
+	}
+}
+
+function zan_p(){
+	
+	var zan = $("#pzan_img").attr("zan");  
+	var num = $("#pzan_num").text();
+	var kind = 1;
+	
+	if(zan == 0){ 
+		kind = 1;
+		
+		var n = Number(num)+1; 
+		$("#pzan_num").text(n); 
+		$("#pzan_num").attr("class","zan_green");
+		
+		$("#pzan_img").attr("zan",1); 
+		$("#pzan_img").attr("src","../../../img/post/zan2.png");
+	}else{
+		
+		kind = 2;
+		
+		var n = Number(num)-1; 
+		$("#pzan_num").text(n); 
+		$("#pzan_num").attr("class","zan_num");
+		
+		$("#pzan_img").attr("zan",0); 
+		$("#pzan_img").attr("src","../../../img/post/zan1.png");
+	}
+	
+	var post_id = localStorage.getItem("post_id");
+	
+	$.ajax({
+ 		type:"post",
+ 		url: pt_path +"/area/zan_post.do",
+ 		dataType:"json",
+ 		data:{"post_id":post_id,"kind":kind,"openid":openid},
+ 		success: function(data){
+ 			 
+ 		}
+	});
+}
+
+function zan(obj) {
+	
+	var zan = $(obj).attr("zan"); 
+	var code = $(obj).attr("code"); 
+	
+	var pid = $(obj).attr("pid"); 
+	
+	var num = $("#zan_num"+code).text();
+	var kind = 1;
+	
+	if(zan == 0){ 
+		kind = 1;
+		
+		var n = Number(num)+1; 
+		$("#zan_num"+code).text(n); 
+		$("#zan_num"+code).attr("class","zan_green");
+		
+		$(obj).attr("zan",1); 
+		$(obj).attr("src","../../../img/post/zan2.png");
+	}else{
+		
+		kind = 2;
+		
+		var n = Number(num)-1; 
+		$("#zan_num"+code).text(n); 
+		$("#zan_num"+code).attr("class","zan_num");
+		
+		$(obj).attr("zan",0); 
+		$(obj).attr("src","../../../img/post/zan1.png");
+	}
+	
+	$.ajax({
+ 		type:"post",
+ 		url: pt_path +"/area/zan_post_log.do",
+ 		dataType:"json",
+ 		data:{"log_id":pid,"kind":kind,"openid":openid},
+ 		success: function(data){
+ 			 
+ 		}
+	});
+}
+
+function send_info(){
+	
+	var context = $("#add_context").val();
+	
+	if(context == ""){
+		$("#add_context").tips({
+			side : 1,
+			msg : "请输入评论内容！",
+			bg : '#2CC159',
+			time : 1
+		});
+		
+		return false;
+	}
+	var post_id = localStorage.getItem("post_id");
+	
+	$("#myload").show();
+	
+	 $.ajax({
+		type:"post",
+		url: pt_path +"/area/add_post_log.do",
+		dataType:"json",
+		data:{"openid":openid,"post_id":post_id,"context":context},
+		success: function(data){
+			
+			if(data[0].back_code == 200){
+				$("#myload").hide();
+				
+				location.href = pt_path +"/jsp/wx/post/post_log.html"; 
+			}
+		}
+	 });
+	
+}
+
+</script> 
+</html>

@@ -1,0 +1,40 @@
+::-webkit-scrollbar{width:0px;height:0px; display:none;}
+ 
+ .my_body {
+ 	margin: 0;
+ 	padding: 0; 
+ 	font-family: 微软雅黑;
+ 	overflow-y:scroll;
+ }
+ 
+ .full_img{
+ 	width: 100%;
+ }
+ 
+ .shang{
+ 	margin-top: 10px; width: 96%;margin-left: 2%; margin-right: 2%;
+ }
+ 
+ .mar_top{
+ 	margin-top: 10px;
+ }
+ 
+ .my_title{
+ 	width: 33%; margin-left: 33.5%;margin-right: 33.5%; 
+ }
+ 
+ .my_title_content{
+ 	text-align: center; font-size: 18px;margin-top: -32px;
+ }
+ 
+ .main_img{
+ 	width:70%; margin-left: 15%;margin-right: 15%;
+ }
+ 
+ .rigth_content{
+ 	width: 52%; height: 80px;  margin-left: 48%; margin-top: -70px; font-size: 10px;
+ }
+ 
+ .rigth_content div{
+ 	height: 25px; line-height: 25px;
+ }

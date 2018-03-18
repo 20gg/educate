@@ -1,0 +1,64 @@
+::-webkit-scrollbar{width:0px;height:0px; display:none;}
+ 
+ .my_body {
+ 	margin: 0;
+ 	padding: 0; 
+ 	font-family: Î¢ÈíÑÅºÚ;
+ 	overflow-y:scroll;
+ }
+ 
+ .full_img{
+ 	width: 100%;
+ }
+ 
+ .shang{
+ 	margin-top: 10px; width: 96%;margin-left: 2%; margin-right: 2%;
+ }
+ 
+ .mar_top{
+ 	margin-top: 10px;
+ }
+ 
+ .my_title{
+ 	width: 33%; margin-left: 33.5%;margin-right: 33.5%; 
+ }
+ 
+ .my_title_content{
+ 	text-align: center; font-size: 18px;margin-top: -32px;font-family: Î¢ÈíÑÅºÚ;
+ }
+ 
+ .pic_rigth{
+ 	text-align: right;margin-top: 20px; padding-right: 10px;
+ }
+ 
+ .pic_img{
+ 	width: 10%;
+ }
+ 
+ .pic_left{
+ 	text-align: left;margin-top: 20px; padding-left: 10px;
+ }
+ 
+ .pic_text{
+ 	line-height: 20px; font-size: 14px; padding-left: 8%;padding-right: 8%; margin-top: -60px; font-family: Î¢ÈíÑÅºÚ;
+ }
+ 
+ .msg_page{
+ 	margin-top: 30px;
+ }
+ 
+ .msg_div{
+ 	margin-top: 20px; width: 76%;height: 40px; line-height: 40px; margin-left: 12%; margin-right: 12%;
+ }
+ 
+ .msg_div_num{
+ 		width: 40px; height: 40px;text-align: center;line-height: 40px;position:relative;left:0px; z-index:100;font-family: Î¢ÈíÑÅºÚ;
+	    	  border-radius: 21px ;border: 2px solid #fff; color: #fff;background-color: #FFBD33; font-size: 20px;
+ }
+ 
+ .msg_div_content {
+ 	width: 90%;height: 28px; background-color: #C046BD; position:relative;left:20px;margin-top:-36px;font-family: Î¢ÈíÑÅºÚ;
+	    	  line-height: 28px;border-radius: 14px ;text-align: center;color: #fff;font-size: 13px;z-index:1;
+ }
+ 
+ 

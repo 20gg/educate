@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		
+		 <link rel="stylesheet" href="../../../css/wx_menu.css">
+		 
+		<link rel="stylesheet" href="../../../css/wx/burse/burse_list.css" type="text/css">
+	</head>
+	<body>
+		<div class="top_box">
+			<div class="top">奖学金排行榜</div>			
+		</div>
+		<div class="top_box" id="all_list">
+			<!-- <div class="a_top">
+				<div class="head">
+					<img src="../../images/burse/touxiang.png">
+					<div class="icon1">01</div>
+				</div>
+				<div class="right">
+					<div class="name">小不点要读书</div>
+					<div class="price">22545元</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div> -->
+			 
+		</div>
+		
+		<div class="more" id="more" onclick="get_more();">加载更多</div>	
+		 
+		<br><br><br><br><br><br>
+		
+	<!-- 菜单 -->
+	<div class="wx_menu_page">
+		<div class="wx_menu_one">
+			<div class="menu_s"><img src="../../../img/wx_menu/home1.png"></div>
+			<div class="menu_x">首页</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_taolun();">
+			<div class="menu_s"><img src="../../../img/wx_menu/tl1.png"></div>
+			<div class="menu_x ">讨论区</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_my_order();">
+			<div class="menu_c"><img src="../../../img/wx_menu/dy1.png"></div>
+			<div class="menu_cx  ">我已订阅</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_scholarship();">
+			<div class="menu_s"><img src="../../../img/wx_menu/money2.png"></div>
+			<div class="menu_x menu_green">奖学金</div>
+		</div>
+		<div class="wx_menu_one" onclick="go_personal();">
+			<div class="menu_s"><img src="../../../img/wx_menu/me1.png"></div>
+			<div class="menu_x ">我的</div>
+		</div>
+	</div>
+			
+	</body>
+	
+<script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+<script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+<script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+<script type="text/javascript" src="../../../js/wx/share_wx.js"></script>
+<script type="text/javascript" src="../../../js/wx/tan_c.js"></script>
+
+<script type="text/javascript">
+//var openid ="oLir8jsyBKP6NESv7PpnqEYSd4Bw";
+var page_num =1;
+var page_count =1;
+	
+	
+	
+$(function(){
+	 
+	wx_page_init()
+});
+
+  
+function wx_page_init(){
+	 
+	if(openid != null && openid!="null" && openid!=""){
+		  
+		get_data(1);
+	}
+	 
+}
+	
+ 
+
+function get_more(){
+	
+	var page = page_num+1;
+	
+	get_data(page);
+}
+
+function get_data(page){
+	
+	$.ajax({
+  		type:"post",
+  		url: pt_path +'/top/shcolarship_sort.do',
+  		dataType:"json",
+  		data:{"page":page},
+  		success: function(data){
+  			
+  			page_num =data[0].page_num;
+  			page_count =data[0].page_num;
+  			
+  			if(page_num >= page_count){
+  				$("#more").hide();
+  			}else{
+  				$("#more").show();
+  			}
+  			
+  			var list = data[0].list;
+  			
+  			var html ="";
+  			for(var i=0;i<list.length;i++){
+  				
+  				var img = "../../../images/burse/touxiang.png";
+  				
+  				if(list[i].head != null ){
+  					img = list[i].head;
+  				}
+  				
+  				var c = (page_num -1)*20+i+1; 
+  				var m  = list[i].count_scholarship/100;
+  				
+  				var icon ="icon1";
+  				
+  				if(c > 3){
+  					icon ="icon2";
+  				}
+  				
+  				var a="<div class='a_top'> <div class='head'> <img src='"+img+"'> <div class='"+icon+"'>"+c+"</div> </div>"
+				+"<div class='right'> <div class='name'>"+list[i].name+"</div> <div class='price'>"+m+"元</div>"
+				+"<div class='clearfix'></div> </div> <div class='clearfix'></div> </div>";
+				
+  				html = html+a;
+  			}
+  			
+  			$("#all_list").append(html);
+  			
+  		}
+	});
+}
+
+function go_scholarship(){
+	
+	window.location.href=pt_path+'jsp/wx/Scholarship/Scholarship.html';
+}
+
+function go_taolun(){
+	window.location.href=pt_path+'jsp/wx/post/post_area.html';
+	
+}
+
+
+function go_personal(){
+	
+	window.location.href=pt_path+'jsp/wx/Person_Center/Personal.html';
+}
+function go_my_order(){
+ 
+	window.location.href=pt_path+'jsp/wx/Course_Order/Course_Order.html';
+
+}
+</script>  
+</html>

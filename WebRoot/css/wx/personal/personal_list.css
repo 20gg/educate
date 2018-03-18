@@ -1,0 +1,27 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;padding-bottom:20px;}
+
+.banner1{width:100%;margin:auto auto;height:0;padding-bottom:44%;background:url(../../images/personal/p_bg.jpg)no-repeat;background-size:100% 100%;position:relative;}
+.banner1 .b_con{width:92%;opacity:0.8;margin-left:4%;position:absolute;top:36%;}
+.banner1 .b_con .left{width:16%;float:left;border:1px solid #fff;border-radius:50%;}
+.banner1 .b_con .left img{width:100%;display:block;border-radius:50%;}
+.banner1 .b_con .middle{float:left;width:68%;margin-left:5%;}
+.banner1 .b_con .middle h1{font-size:20px;text-align:left;line-height:20px;color:#fff;position:absolute;top:0px;}
+.banner1 .b_con .middle span{display:block;text-align:center;font-size:12px;line-height:12px;background:#299546;border-radius:14px;padding:4px;color:#fff;position:absolute;bottom:0px;}
+.banner1 .b_con .right{float:right;width:4%;margin-top:4%;}
+.banner1 .b_con .right img{width:100%;display:block;}
+
+.a_link{width:100%;background:#fff;margin:auto auto;padding-top:10px;padding-bottom:10px;border-bottom:1px solid #eee;}
+.a_link .title{width:92%;margin:auto auto;}
+.a_link .title .a_icon{float:left;width:20px;height:20px;margin-top:5px;}
+.a_link .title .a_icon img{width:100%;display:block;}
+.a_link .title h1{float:left;margin-left:3%;line-height:30px;font-size:15px;color:#323232;}
+.a_link .arrow{float:right;width:2.6%;margin-top:2px;}
+.a_link .arrow img{width:100%;display:block;}
+
+

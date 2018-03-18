@@ -1,0 +1,21 @@
+body,h1,h2,h3,h4,h5{padding:0;margin:0;font-weight:normal;font-family:"微软雅黑";}
+:-webkit-scrollbar{width:0px;height:0px}
+body{margin:0;padding:0;}
+.clearfix{clear:both;}
+.box{width:100%;}
+
+body{background:#f6f7f9;}
+.top_box{width:100%;background:#fff;margin:auto auto;margin-bottom:10px;}
+.top_box .top{width:92%;height:60px;margin:auto auto;}
+.top .head{width:14%;float:left;height:40px;margin-top:10px;}
+.top .head img{width:40px;height:40px;border-radius:20px;}
+.top .name{width:40%;float:left;margin-left:2%;text-align:left;line-height:60px;color:#323232;font-size:17px;}
+.top span{display:block;float:right;width:26%;height:30px;margin-top:10px;margin-top:15px;border-radius:15px;text-align:center;line-height:30px;font-size:14px;color:#fff;background:#2dc158;}
+.top_box .title{width:100%;margin:auto auto;border-bottom:1px solid #eeeeee;}
+.top_box .title span{width:6%;height:1px;background:#2dc158;float:left;margin-top:29px;margin-left:27%;}
+.top_box .title h1{width:30%;float:left;color:#323232;line-height:56px;text-align:center;font-size:16px;}
+.top_box .row{width:96%;margin-left:4%;border-bottom:1px solid #eeeeee;}
+.top_box .row .col1{float:left;width:30%;line-height:50px;color:#323232;text-align:left;font-size:15px;}
+.top_box .row .col2{float:left;width:50%;line-height:50px;color:#323232;text-align:left;font-size:15px;}
+.button{width:100%;margin:auto auto;background:#fff;padding-top:30px;padding-bottom:30px;}
+.button span{display:block;background:#2dc158;border-radius:6px;width:40%;height:42px;margin:auto auto;font-size:16px;color:#fff;text-align:center;line-height:42px;}

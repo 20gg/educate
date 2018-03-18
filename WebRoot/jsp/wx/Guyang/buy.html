@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">	
+        <meta name="keywords" content="keyword1,keyword2,keyword3">
+		<title>到答课堂</title>
+		<link rel="stylesheet" href="../../../css/buy.css" type="text/css">
+	</head>
+	<style type="text/css">
+		.inpt_css{
+			border: none;
+		}
+	</style>
+	
+	<body>
+		<div class="top_box" id="top_div">
+			 
+		</div>
+		<div class="top_box"  id='shop_info'>
+			
+		</div>
+		<div class="top_box" style="border-bottom:1px solid #dcdcdc;margin-bottom:0px;" id="person_info">
+			
+		</div>
+		<div class="button" onclick="go_order();">
+			<span>确定</span>
+		</div>
+	</body>
+ <script type="text/javascript" src="../../../js/jquery-2.1.1.min.js"></script> 
+  <script type="text/javascript" src="../../../js/path.js?v=1.0"></script>
+  <script type="text/javascript" src="../../../js/jquery.tips.js"></script>
+ <script type="text/javascript" src="../../../js/wx/wx_public2.js"></script> 
+	<script type="text/javascript">
+	//var openid="oLir8jsziazLpKT0b6JSSbQ0icR4";
+	
+	//var c_no="1496752297232";
+	 var c_no=localStorage.getItem("c_no");
+	 var special_no=localStorage.getItem("special_no");
+	// var special_no="1496797687373";
+	  
+	 
+	 function go_order() {
+		 var company=$("#company").val();
+		 var job=$("#job").val();
+		 var phone=$("#phone").val();
+		 
+		 	if(company==null||company==""){
+		 		tip_error("company","请填写公司");
+		 		
+		 		return false;
+		 	}
+			if(job==null||job==""){
+		 		tip_error("job","请填写职称");
+		 		
+		 		return false;
+		 	}
+			if(phone==null||phone==""){
+		 		tip_error("phone","请填写手机");
+		 		
+		 		return false;
+		 	}
+		 
+		 
+ 			$.ajax({
+ 		  		type:"post",
+ 		  		url: pt_path +'/course/pay_money.do',
+ 		  		dataType:"json",
+ 		  		data:{"c_no":c_no,"open_id":openid,"company":company,"job":job,"phone":phone,"special_no":special_no},
+ 		  		
+ 		  		success: function(data){
+ 		  			if("success"==data[0].result) 	{
+ 	 
+ 		  				alert("购买成功");
+ 		  					 
+ 		  			       
+ 		  			}else if("is_have"==data[0].result){
+ 		  				
+ 		  				alert("已经购买过");
+ 		  			}	
+ 		  		}
+ 		  	});
+	}
+	 
+	 
+	 $(function(){
+		 
+			wx_page_init()
+		});
+
+		  
+		function wx_page_init(){
+			 
+			if(openid != null && openid!="null" && openid!=""){
+				  
+				  test_1(); 
+			}
+			 
+		}	 
+		
+function test_1(){
+	$.ajax({
+	 	type:"post",
+	 	dataTpye:"json",
+	 	url: pt_path +'/course/show_before_order.do',
+	 	data:{"c_no":c_no,"open_id":openid,"special_no":special_no},	
+	 		
+	 	success: function(data){
+	 		var user=data[0].user;
+	 		var course=data[0].course;
+	 		var special=data[0].special;
+	 		var html="";   var html2="";  var html3="";
+	 		
+	 		if(course!=null&&course!=""){
+	 			
+	 			if(user.role==0){
+	 			 	html+="<div class='top'>"
+	 					+"<div class='head'><img src='"+user.head+"'></div>"
+	 					+"<div class='name'>"+user.name+"</div><span>会员升级</span>"
+	 					+"<div class='clearfix'></div></div>";	
+	 				$("#top_div").html(html);	
+	 				
+	 					html2+="<div class='title'><span></span><h1>商品信息</h1>"
+	 							+"<span style='margin-left:0px'></span><div class='clearfix'></div></div>"
+	 							+"<div class='row'><div class='col1'>课程名称：</div>"
+	 							+"<div class='col2' style='color:#2dc158;'>"+course.c_name+"</div><div class='clearfix'></div></div>"
+	 							+"<div class='row' style='border:none;'>"			
+	 							+"<div class='col1'>课程价格：</div><div class='col2' style='color:#ffa42f;'>"+course.price/100+"元</div>"
+	 							+"<div class='clearfix'></div></div>";
+	 							
+	 					$("#shop_info").html(html2);
+	 				
+	 					html3+="<div class='title'><span></span><h1>购买信息</h1><span style='margin-left:0px'></span><div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>昵称</div>"
+	 							+"<div class='col2'>"+user.name+"</div>"
+	 							+"<div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>公司</div>"
+	 							+"<div class='col2'><input type='text' id='company' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>职称</div>"
+	 							+"<div class='col2'><input type='text' id='job' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>"
+	 							   +"<div class='row'>"
+	 							+"<div class='col1'>手机</div>"
+	 							+"<div class='col2'><input type='text' id='phone' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>";
+	 							
+	 						$("#person_info").html(html3);		
+	 						
+	 						if(user.company != null){
+	 							$("#company").val(user.company);
+	 					
+	 						}
+	 						if(user.job!=null){
+	 							$("#job").val(user.job);
+	 							
+	 						}
+	 						if(user.phone!=null){
+	 							$("#phone").val(user.phone);
+	 							
+	 						}
+	 			 		}
+	 		}else if(special!=null&&special!=""){
+	 			
+	 			if(user.role==0){
+	 			 	html+="<div class='top'>"
+	 					+"<div class='head'><img src='"+user.head+"'></div>"
+	 					+"<div class='name'>"+user.name+"</div><span>会员升级</span>"
+	 					+"<div class='clearfix'></div></div>";	
+	 				$("#top_div").html(html);	
+	 				
+	 					html2+="<div class='title'><span></span><h1>商品信息</h1>"
+	 							+"<span style='margin-left:0px'></span><div class='clearfix'></div></div>"
+	 							+"<div class='row'><div class='col1'>专题名称：</div>"
+	 							+"<div class='col2' style='color:#2dc158;'>"+special.special_name+"</div><div class='clearfix'></div></div>"
+	 							+"<div class='row' style='border:none;'>"			
+	 							+"<div class='col1'>专题价格：</div><div class='col2' style='color:#ffa42f;'>"+special.price/100+"元</div>"
+	 							+"<div class='clearfix'></div></div>";
+	 							
+	 					$("#shop_info").html(html2);
+	 				
+	 					html3+="<div class='title'><span></span><h1>购买信息</h1><span style='margin-left:0px'></span><div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>昵称</div>"
+	 							+"<div class='col2'>"+user.name+"</div>"
+	 							+"<div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>公司</div>"
+	 							+"<div class='col2'><input type='text' id='company' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>"
+	 								+"<div class='row'>"
+	 							+"<div class='col1'>职称</div>"
+	 							+"<div class='col2'><input type='text' id='job' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>"
+	 							   +"<div class='row'>"
+	 							+"<div class='col1'>手机</div>"
+	 							+"<div class='col2'><input type='text' id='phone' class='inpt_css'></div>"
+	 							+"<div class='clearfix'></div></div>";
+	 							
+	 						$("#person_info").html(html3);		
+	 						
+	 						if(user.company != null){
+	 							$("#company").val(user.company);
+	 					
+	 						}
+	 						if(user.job!=null){
+	 							$("#job").val(user.job);
+	 							
+	 						}
+	 						if(user.phone!=null){
+	 							$("#phone").val(user.phone);
+	 							
+	 						}
+	 			 		}
+	 		}
+	 		
+	 		
+	 	}
+	 	
+	 	});
+	
+	
+}
+	 
+	  
+	 	
+	 	function tip_error(id_name,msg) {
+	  		
+	  		$("#"+id_name).tips({
+	  			side : 1,
+	  			msg :msg,
+	  			bg : '#ff0000',
+	  			time : 3
+	  		});
+	  	}
+	</script>
+</html>
